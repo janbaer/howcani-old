@@ -1,2 +1,2 @@
-let g:syntastic_javascript_checkers = ['tshint']
+let g:syntastic_javascript_checkers = ['tslint']
 
