@@ -1,9 +1,9 @@
 {
-  "name": "angular2-seed",
+  "name": "howcani",
   "version": "0.0.0",
-  "description": "Seed for Angular 2 apps",
+  "description": "A webapp for questions and answers",
   "repository": {
-    "url": "https://github.com/mgechev/angular2-seed"
+    "url": "https://github.com/howcani-project/howcani.git"
   },
   "scripts": {
     "build.dev": "gulp build.dev",
@@ -29,7 +29,11 @@
     "webdriver-start": "webdriver-manager start",
     "webdriver-update": "webdriver-manager update"
   },
-  "author": "Minko Gechev <mgechev>",
+  "author": "Jan Baer",
+  "contributors": [
+    {"name": "Omar Diego Vera Ustariz", "email": ""},
+    {"name": "Dejan Ranisavljevic", "email": ""}
+  ],
   "license": "MIT",
   "devDependencies": {
     "async": "^1.4.2",
