@@ -1,0 +1,6 @@
+build
+deploy
+.idea
+.vs_code
+node_modules
+npm-debug.log
