@@ -15,8 +15,14 @@
     "email": "jan@janbaer.de"
   },
   "contributors": [
-    {"name": "Omar Diego Vera Ustariz", "email": ""},
-    {"name": "Dejan Ranisavljevic", "email": ""}
+    {
+      "name": "Omar Diego Vera Ustariz",
+      "email": ""
+    },
+    {
+      "name": "Dejan Ranisavljevic",
+      "email": ""
+    }
   ],
   "license": "ISC",
   "keywords": [
