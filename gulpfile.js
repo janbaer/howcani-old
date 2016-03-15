@@ -84,6 +84,8 @@ gulp.task('copy', () => {
 gulp.task('copy:assets', () => {
   gulp.src(['assets/CNAME'])
     .pipe(gulp.dest(destinationFolder));
+  gulp.src(['assets/images/**/*.*'])
+    .pipe(gulp.dest(destinationFolder + '/images'));
 });
 
 gulp.task('build:prod', (callback) => {
