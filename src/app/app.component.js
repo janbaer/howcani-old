@@ -1,11 +1,12 @@
 'use strict';
 
 import { Component } from 'angular2/core';
+import { Navbar } from './components/navbar/navbar.component.js';
 
 @Component({
-  selector: 'my-app',
-  //template: '<h1>{{ title }}</h1>',
-  templateUrl: 'app/app.tpl.html'
+  selector: 'howcani-app',
+  templateUrl: 'app/app.tpl.html',
+  directives: [Navbar]
 })
 export class AppComponent {
   constructor() {
