@@ -175,16 +175,23 @@ gulp.task('watch', () => {
   gulp.watch([sourceFolder + '/**/*.less'], ['styles']);
 });
 
-gulp.task('test', (done) => {
+// Testing with Karma
+function runTests(singleRun, done) {
   const configPath = path.resolve(__dirname, './karma.conf.js');
-  const singleRun = true;
-
-  let KarmaServer = require('karma').Server;
-
-  let server = new KarmaServer({
+  const KarmaServer = require('karma').Server;
+  const server = new KarmaServer({
     configFile: configPath,
     singleRun: singleRun,
     autoWatch: !singleRun
   }, done);
+
   server.start();
+}
+
+gulp.task('clientTest', (done) => {
+ runTests(false, done);
+});
+
+gulp.task('test', (done) => {
+  runSequence('clientTest', done);
 });

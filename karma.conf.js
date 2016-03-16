@@ -15,7 +15,12 @@ module.exports = function(config) {
     preprocessors: {
       'src/setup.spec.js': ['webpack', 'sourcemap']
     },
-    reporters: ['dots'],
+    reporters: ['spec'],
+    specReporter : {
+      suppressPassed: true,
+      suppressFailed: false,
+      suppressSkipped: true
+    },
     webpack: webpackConfig,
     webpackServer: { noInfo: true },
     port: 9876,
