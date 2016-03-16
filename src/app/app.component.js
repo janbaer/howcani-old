@@ -3,7 +3,7 @@
 import { Component } from 'angular2/core';
 import { RouteConfig } from 'angular2/router';
 import { Navbar } from './components/navbar/navbar.component.js';
-import { router } from './router.component.js';
+import { router } from './router.js';
 
 @Component({
   selector: 'howcani-app',
