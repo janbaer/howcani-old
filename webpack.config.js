@@ -6,7 +6,7 @@ const webpack = require('webpack');
 module.exports = {
   entry: {
     boot: './src/boot.js',
-    vendor: ['es6-promise', 'es6-shim', 'reflect-metadata', 'angular2/core', 'angular2/platform/browser']
+    vendor: ['rxjs/Rx', 'core-js', 'zone.js/dist/zone-microtask', 'angular2/core', 'angular2/platform/browser', 'angular2/common', 'angular2/router', 'angular2/http']
   },
   output: {
     path: path.resolve(__dirname, './build/scripts'),
@@ -19,19 +19,18 @@ module.exports = {
     loaders: [
       {
         test: /\.js$/,
-        loader: 'babel-loader',
+        loader: 'babel',
         exclude: /node_modules/,
         query: {
           presets: ['es2015'],
           plugins: [
-            'angular2-annotations',
             'transform-decorators-legacy',
             'transform-class-properties',
-            'transform-flow-strip-types'
           ]
         }
       }
-    ]
+    ],
+    noParse: [ /.+zone\.js\/dist\/.+/, /.+angular2\/bundles\/.+/ ]
   },
 
   resolve: {
