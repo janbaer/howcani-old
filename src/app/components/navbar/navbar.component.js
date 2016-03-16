@@ -11,14 +11,10 @@ export class Navbar {
   }
 
   loginUsingGithub() {
-    console.log('Logging using github!!!');
-
     var github = new Provider({
       id: 'github',
       authorization_url: 'https://github.com/login/oauth/authorize'
     });
-
-    console.log('Requesting the token');
 
     var request = new Request({
       client_id: '22b411052b6b16a65c8d',
