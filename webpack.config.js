@@ -6,7 +6,7 @@ const webpack = require('webpack');
 module.exports = {
   entry: {
     boot: './src/boot.js',
-    vendor: ['rxjs/Rx', 'core-js', 'zone.js/dist/zone-microtask', 'angular2/core', 'angular2/platform/browser', 'angular2/common', 'angular2/router', 'angular2/http']
+    vendor: ['rxjs/Rx', 'core-js', 'zone.js/dist/zone', 'zone.js/dist/long-stack-trace-zone', 'angular2/core', 'angular2/platform/browser', 'angular2/common', 'angular2/router', 'angular2/http']
   },
   output: {
     path: path.resolve(__dirname, './build/scripts'),
