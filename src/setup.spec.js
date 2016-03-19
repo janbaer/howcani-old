@@ -30,5 +30,6 @@ global.afterEach = afterEach;
 global.fakeAsync = fakeAsync;
 global.tick = tick;
 
-let testContext = require.context('./app', true, /\.spec\.js/);
+const testContext = require.context('./app', true, /\.spec\.js/);
 testContext.keys().forEach(testContext);
+

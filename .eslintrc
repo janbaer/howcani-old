@@ -27,7 +27,8 @@
     "because": false,
     "establish": false,
     "inject": false,
-    "spyOn": false
+    "spyOn": false,
+    "ENVIRONMENT": true
   },
 
   "ecmaFeatures": {
@@ -102,7 +103,6 @@
     "no-caller": 2,
     "no-div-regex": 2,
     "no-else-return": 0,
-    "no-empty-label": 2,
     "no-eq-null": 2,
     "no-eval": 2,
     "no-extend-native": 2,
@@ -202,7 +202,7 @@
     "space-before-function-paren": 0,
     "space-in-parens": [0, "never"],
     "space-infix-ops": [2, { "int32Hint": false }],
-    "space-return-throw-case": 2,
+    "keyword-spacing": 2,
     "space-unary-ops": 2,
     "spaced-comment": 0,
     "wrap-regex": 0,
