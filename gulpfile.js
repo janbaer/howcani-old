@@ -25,6 +25,7 @@ const port = 3000;
 
 const liveReload = miniLr();
 
+
 function notifyChanged(files) {
   liveReload.changed({
     body: {
@@ -195,3 +196,5 @@ gulp.task('clientTest', (done) => {
 gulp.task('test', (done) => {
   runSequence('clientTest', done);
 });
+
+gulp.task('default', ['serve']);
