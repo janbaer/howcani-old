@@ -25,10 +25,16 @@ module.exports = {
         query: {
           presets: ['es2015'],
           plugins: [
+            'angular2-annotations',
             'transform-decorators-legacy',
             'transform-class-properties',
+            'transform-flow-strip-types'
           ]
         }
+      },
+      {
+        test: /\.html$/,
+        loader: 'raw?minimize=false'
       }
     ],
     noParse: [ /.+zone\.js\/dist\/.+/, /.+angular2\/bundles\/.+/ ]
