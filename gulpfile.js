@@ -17,7 +17,9 @@ const size = require('gulp-size');
 const del = require('del');
 const miniLr = require('mini-lr');
 const path = require('path');
+
 const karma = require('./tasks/karma.js');
+require('./tasks/deploy.js');
 
 const sourceFolder = 'src';
 const source = ['src/**/*.html', 'src/**/*.tpl.html'];
@@ -25,7 +27,6 @@ const destinationFolder = 'build';
 const port = 3000;
 
 const liveReload = miniLr();
-
 
 function notifyChanged(files) {
   liveReload.changed({
@@ -137,20 +138,29 @@ gulp.task('clean', () => {
   return del([destinationFolder]);
 });
 
-gulp.task('serve:dev', (callback) => {
+gulp.task('serve:dev', (done) => {
   runSequence(
     ['build:dev', 'copy', 'copy:assets', 'styles'],
     'live-server',
     'watch',
-    callback
+    done
   );
 });
 
-gulp.task('serve:prod', (callback) => {
+gulp.task('serve:prod', (done) => {
   runSequence(
     ['build:prod', 'copy', 'copy:assets', 'styles'],
     'live-server',
-    callback
+    done
+  );
+});
+
+gulp.task('buildAndDeploy', (done) => {
+  runSequence(
+    'clean',
+    ['build:prod', 'copy', 'copy:assets', 'styles'],
+    'deploy',
+    done
   );
 });
 
