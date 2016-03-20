@@ -17,6 +17,7 @@ const size = require('gulp-size');
 const del = require('del');
 const miniLr = require('mini-lr');
 const path = require('path');
+const karma = require('./tasks/karma.js');
 
 const sourceFolder = 'src';
 const source = ['src/**/*.html', 'src/**/*.tpl.html'];
@@ -176,25 +177,15 @@ gulp.task('watch', () => {
   gulp.watch([sourceFolder + '/**/*.less'], ['styles']);
 });
 
-// Testing with Karma
-function runTests(singleRun, done) {
-  const configPath = path.resolve(__dirname, './karma.conf.js');
-  const KarmaServer = require('karma').Server;
-  const server = new KarmaServer({
-    configFile: configPath,
-    singleRun: singleRun,
-    autoWatch: !singleRun
-  }, done);
+gulp.task('test-once', karma(true));
+gulp.task('test-watch', karma(false));
 
-  server.start();
-}
-
-gulp.task('clientTest', (done) => {
- runTests(false, done);
+gulp.task('test-ci', function(done) {
+  runSequence('lint', 'test-once', done);
 });
 
 gulp.task('test', (done) => {
-  runSequence('clientTest', done);
+  runSequence('lint', 'test-watch', done);
 });
 
 gulp.task('default', ['serve']);
