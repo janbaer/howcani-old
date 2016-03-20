@@ -14,6 +14,7 @@ module.exports = {
   },
   plugins: [
     new webpack.optimize.CommonsChunkPlugin(/* chunkName= */"vendor", /* filename= */"vendor.js"),
+    new webpack.DefinePlugin({ ENVIRONMENT: JSON.stringify('development') })
   ],
   module: {
     loaders: [
