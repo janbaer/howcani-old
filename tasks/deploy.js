@@ -59,7 +59,7 @@ gulp.task('clone', (done) => {
 
 gulp.task('removeAll', () => {
   return gulp.src(distFolder + '/**/*')
-    .pipe(git.rm(gitOptions));
+    .pipe(git.rm(Object.assign({ args: ' -r' }, gitOptions)));
 });
 
 gulp.task('addAll', (done) => {
@@ -69,7 +69,7 @@ gulp.task('addAll', (done) => {
 
 gulp.task('commit', (done) => {
   return gulp.src(distFolder + '/**/*')
-    .pipe(git.commit(`New version ${tag}`, { cwd: distFolder, disableAppendPaths: true }));
+    .pipe(git.commit(`New version ${tag}`, Object.assign({ disableAppendPaths: true }, gitOptions)));
 });
 
 gulp.task('tag', (done) => {
