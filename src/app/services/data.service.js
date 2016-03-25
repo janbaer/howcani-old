@@ -12,7 +12,7 @@ export class DataService {
     return new Promise((resolve) => {
       // TODO: Verify that the github user and repository exists
       setTimeout(() => {
-        const isValid = false;//project !== undefined;
+        const isValid = project !== undefined;
         resolve(isValid);
       }, 1000);
     });
