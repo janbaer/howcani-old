@@ -17,6 +17,7 @@ const size = require('gulp-size');
 const del = require('del');
 const miniLr = require('mini-lr');
 const path = require('path');
+const minimist = require('minimist');
 
 const karma = require('./tasks/karma.js');
 require('./tasks/deploy.js');
@@ -24,8 +25,11 @@ require('./tasks/deploy.js');
 const sourceFolder = 'src';
 const source = ['src/**/*.html', 'src/**/*.tpl.html'];
 const destinationFolder = 'build';
-const port = 3000;
 
+const args = minimist(process.argv.slice(2));
+console.log('args', args);
+const port = args.port || 3000;
+const liveReloadPort = args.lrport || 35729;
 const liveReload = miniLr();
 
 function notifyChanged(files) {
@@ -71,7 +75,7 @@ function buildWithWebPack(configFile, callback) {
 gulp.task('serve', ['serve:dev']);
 
 gulp.task('livereload', () => {
-  liveReload.listen(35729);
+  liveReload.listen(liveReloadPort);
 });
 
 gulp.task('copy', () => {
@@ -167,7 +171,7 @@ gulp.task('buildAndDeploy', (done) => {
 gulp.task('live-server', () => {
   const gls = require('gulp-live-server');
 
-  const server = gls.static(destinationFolder, port);
+  const server = gls([gls.script, destinationFolder, port], undefined, liveReloadPort);
   server.start();
 
   gulp.watch([destinationFolder + '/**/*.**'], function (file) {
