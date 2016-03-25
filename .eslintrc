@@ -29,6 +29,7 @@
     "establish": false,
     "inject": false,
     "spyOn": false,
+    "Materialize": false,
     "ENVIRONMENT": true
   },
 
