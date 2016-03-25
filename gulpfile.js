@@ -26,7 +26,8 @@ const sourceFolder = 'src';
 const source = ['src/**/*.html', 'src/**/*.tpl.html'];
 const destinationFolder = 'build';
 
-const args = minimist(process.argv.slice(2), { string: ['port', 'lrport'] });
+const args = minimist(process.argv.slice(2));
+console.log('args', args);
 const port = args.port || 3000;
 const liveReloadPort = args.lrport || 35729;
 const liveReload = miniLr();
