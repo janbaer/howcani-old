@@ -12,9 +12,10 @@ For chatting about the project you can goto [howcani.slack.com](https://howcani.
 ## Gulp tasks
 
 - serve (default) - starts the local webserver on port 3000
+- serve --port=3001 --lrport=123456 - starts the local webserver on the given port and listen on the give livereloadport
 - test - starts the karma server and stays in a watch mode
 - test-ci - starts the karma server, executes the tests and finish
-- buildAndDeploy -tag=1.0 - builds the app with the production settings and
+- buildAndDeploy --tag=1.0 - builds the app with the production settings and
 deploys the build to github with the given tag as version number in the commit
 message.
 
