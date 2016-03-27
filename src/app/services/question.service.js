@@ -3,7 +3,7 @@ import { Injectable } from 'angular2/core';
 import { Configuration } from './configuration.service.js';
 
 @Injectable()
-export class DataService {
+export class QuestionService {
   constructor(configuration: Configuration) {
     this.configuration = configuration;
   }

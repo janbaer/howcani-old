@@ -2,7 +2,7 @@ import { Component } from 'angular2/core';
 import { Router } from 'angular2/router';
 import { FORM_DIRECTIVES, FormBuilder, Validators } from 'angular2/common';
 import { Configuration } from './../../services/configuration.service.js';
-import { DataService } from './../../services/data.service.js';
+import { QuestionService } from './../../services/question.service.js';
 
 @Component({
   selector: 'connect',
@@ -14,10 +14,10 @@ export class ConnectComponent {
               router: Router,
               formBuilder: FormBuilder,
               configuration: Configuration,
-              dataService: DataService
+              questionService: QuestionService
              ) {
     this.router = router;
-    this.dataService = dataService;
+    this.questionService = questionService;
     this.configuration = configuration;
 
     this.connectForm = formBuilder.group({
@@ -35,7 +35,7 @@ export class ConnectComponent {
   }
 
   validateUser(control) {
-    return this.dataService.validate(control.value)
+    return this.questionService.validate(control.value)
       .then((isValid) => {
         // The validation result have to be in a positive case null
         return isValid ? null : { isValid: false };
@@ -45,7 +45,7 @@ export class ConnectComponent {
   validateRepository(control) {
     const user = this.connectForm ? this.connectForm.controls['user'].value : undefined;
 
-    return this.dataService.validate(user, control.value)
+    return this.questionService.validate(user, control.value)
       .then((isValid) => {
         return isValid ? null : { isValid: false };
       });

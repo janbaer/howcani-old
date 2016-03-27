@@ -9,7 +9,7 @@ import { HTTP_PROVIDERS } from 'angular2/http';
 import { AppComponent } from './app/app.component';
 import { Configuration } from './app/services/configuration.service.js';
 import { Storage } from './app/services/storage.service.js';
-import { DataService } from './app/services/data.service.js';
+import { QuestionService } from './app/services/question.service.js';
 import { ToastService } from './app/services/toast.service.js';
 
 if (ENVIRONMENT === 'production') {
@@ -22,7 +22,7 @@ bootstrap(AppComponent, [
   provide(LocationStrategy, { useClass: HashLocationStrategy }),
   Storage,
   Configuration,
-  DataService,
+  QuestionService,
   ToastService
 ]);
 
