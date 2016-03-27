@@ -9,6 +9,8 @@ It's a simple Webapplication for frequently asqed questions.
 
 For chatting about the project you can goto [howcani.slack.com](https://howcani.slack.com)
 
+This project is based on the [angular-es6-starter](https://github.com/blacksonic/angular2-es6-starter) project from [@blacksonic](https://github.com/blacksonic).
+
 ## Gulp tasks
 
 - serve (default) - starts the local webserver on port 3000

@@ -2,34 +2,27 @@ import 'phantomjs-polyfill';
 import './shim';
 import 'zone.js/dist/jasmine-patch';
 
-import { TEST_BROWSER_PLATFORM_PROVIDERS, TEST_BROWSER_APPLICATION_PROVIDERS } from 'angular2/platform/testing/browser';
-import { setBaseTestProviders } from 'angular2/testing';
-setBaseTestProviders(TEST_BROWSER_PLATFORM_PROVIDERS, TEST_BROWSER_APPLICATION_PROVIDERS);
-
 import {
-  afterEach,
-  beforeEach,
-  beforeEachProviders,
-  describe,
-  expect,
-  inject,
-  injectAsync,
-  it,
-  fakeAsync,
-  tick
+  TEST_BROWSER_PLATFORM_PROVIDERS, TEST_BROWSER_APPLICATION_PROVIDERS
+} from 'angular2/platform/testing/browser';
+import {
+  setBaseTestProviders,
+  afterEach, beforeEach, beforeEachProviders,
+  describe, it, expect,
+  inject, injectAsync,
+  fakeAsync, tick
 } from 'angular2/testing';
 
-global.expect = expect;
-global.inject = inject;
-global.injectAsync = injectAsync;
-global.describe = describe;
-global.it = it;
-global.beforeEach = beforeEach;
-global.beforeEachProviders = beforeEachProviders;
-global.afterEach = afterEach;
-global.fakeAsync = fakeAsync;
-global.tick = tick;
+setBaseTestProviders(TEST_BROWSER_PLATFORM_PROVIDERS, TEST_BROWSER_APPLICATION_PROVIDERS);
 
-const testContext = require.context('./app', true, /\.spec\.js/);
+Object.assign(global, {
+  afterEach, beforeEach, beforeEachProviders,
+  describe, it, expect,
+  inject, injectAsync,
+  fakeAsync, tick
+});
+
+Error.stackTraceLimit = Infinity;
+
+let testContext = require.context('./app', true, /\.spec\.js/);
 testContext.keys().forEach(testContext);
-
