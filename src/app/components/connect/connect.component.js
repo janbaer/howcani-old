@@ -43,7 +43,8 @@ export class ConnectComponent {
   }
 
   validateRepository(control) {
-    const user = this.connectForm ? this.connectForm.controls['user'].value : undefined;
+    const user = this.connectForm ? this.connectForm.controls['user'].value :
+                                    this.configuration.project.user;
 
     return this.questionService.validate(user, control.value)
       .then((isValid) => {

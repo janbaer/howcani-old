@@ -1,4 +1,6 @@
 import { Injectable } from 'angular2/core';
+//import { Github } from 'github-api';
+const Github = require('github-api');
 
 import { Configuration } from './configuration.service.js';
 
@@ -8,16 +10,21 @@ export class QuestionService {
     this.configuration = configuration;
   }
 
-  validate(user, repository) {
+  validate(username, repository) {
     return new Promise((resolve) => {
-      // TODO: Verify that the github user and repository exists
-      setTimeout(() => {
-        let isValid = user === 'howcani-project';
-        if (repository) {
-          isValid = isValid && repository === 'howcani-data';
-        }
-        resolve(isValid);
-      }, 1000);
+      const github = new Github({});
+
+      if (repository) {
+        const repo = github.getRepo(username, repository);
+        repo.show((err) => {
+          resolve(err === null);
+        });
+      } else {
+        const user = github.getUser();
+        user.show(username, (err) => {
+          resolve(err === null );
+        });
+      }
     });
   }
 }
