@@ -1,10 +1,10 @@
 <div class="Connect-container container">
   <div class="row">
-    <form class="col s12" [ngFormModel]="connectForm" (ngSubmit)="onSubmit($event)">
+    <form class="col s12" #connectForm="ngForm" (ngSubmit)="onSubmit($event)">
       <div class="row">
         <div class="input-field col s6">
           <input type="text" class="validate" name="user"
-                 [ngFormControl]="connectForm.controls['user']" #user="ngForm"
+                 ngControl="user" [(ngModel)]="project.user" required
                  placeholder="Enter the name of the Github user">
           <label for="user" class="active" data-error="Please enter the name of a valid Github user">Github username</label>
         </div>
@@ -12,7 +12,7 @@
       <div class="row">
         <div class="input-field col s6">
           <input type="text" class="validate" name="repository"
-                 [ngFormControl]="connectForm.controls['repository']" #repository="ngForm"
+                 ngControl="repository" [(ngModel)]="project.repository" required
                  placeholder="Enter the name of the Github repository">
           <label for="repository" class="active" data-error="Please enter the name of a valid Github repository">Github repository</label>
         </div>
