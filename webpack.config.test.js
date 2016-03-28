@@ -6,6 +6,6 @@ const webpackConfig = require('./webpack.config.js');
 webpackConfig.plugins = [
   new webpack.DefinePlugin({ ENVIRONMENT: JSON.stringify('test') })
 ];
-webpackConfig.devtool = 'inline-eval';
+webpackConfig.devtool = 'inline-cheap-source-map';
 
 module.exports = webpackConfig;

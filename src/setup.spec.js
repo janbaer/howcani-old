@@ -24,5 +24,5 @@ Object.assign(global, {
 
 Error.stackTraceLimit = Infinity;
 
-let testContext = require.context('./app', true, /\.spec\.js/);
+const testContext = require.context('./app', true, /\.spec\.js/);
 testContext.keys().forEach(testContext);
