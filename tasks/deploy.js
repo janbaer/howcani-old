@@ -46,7 +46,7 @@ gulp.task('deleteDistFolder', () => {
 });
 
 gulp.task('copyBuild', () => {
-  return gulp.src('./build/**/*')
+  return gulp.src(['./build/**/*', '!./build/**/*.*.map'])
     .pipe(gulp.dest(distFolder));
 });
 
