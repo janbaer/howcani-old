@@ -6,7 +6,7 @@ const webpackConfig = require('./webpack.config.js');
 
 webpackConfig.plugins = [
   new webpack.optimize.CommonsChunkPlugin("vendor", "vendor.js"),
-  //new webpack.optimize.UglifyJsPlugin({ compress: { warnings: false }}),
+  new webpack.optimize.UglifyJsPlugin({ minimize: true, mangle: false, comments: false }),
   new webpack.DefinePlugin({ ENVIRONMENT: JSON.stringify('production') })
 ];
 
