@@ -1,6 +1,7 @@
 import { Component } from 'angular2/core';
 import { Configuration } from './../../services/configuration.service.js';
 import { QuestionService } from './../../services/question.service.js';
+//import $ from 'jquery';
 
 @Component({
   selector: 'questions',
@@ -11,7 +12,7 @@ export class QuestionsComponent {
     this.project = configuration.project;
     this.questionService = questionService;
 
-    //this.questions = [];
+    this.questions = [];
 
   }
 
@@ -19,17 +20,19 @@ export class QuestionsComponent {
     return this.questionService.getAllQuestions();
   }
 
+  renderQuestions() {
+    this.questionService.fetchQuestions()
+      .then((questions) => {
+        this.questions = questions;
+        $('.collapsible').collapsible({ accordion: false });
+      })
+      .catch((err) => {
+        console.log('Error while fetching issues', err);
+      });
+  }
+
   ngOnInit() {
-    console.log('ngOnInit');
-    this.questions = this.questionService.fetchQuestions();
-    //this.questionService.fetchQuestions()
-      //.then((questions) => {
-        //console.log('Questions', questions);
-        //this.questions = questions;
-      //})
-      //.catch((err) => {
-        //console.log('Error while fetching issues', err);
-      //});
+    this.renderQuestions();
   }
 
   ngOnDestroy() {
