@@ -10,17 +10,35 @@ export class QuestionService {
     this.configuration = configuration;
   }
 
+  github() {
+    return new Github({
+    });
+  }
+
+  fetchQuestions() {
+    return new Promise((resolve, reject) => {
+      const options = {};
+      const issues = this.github().getIssues(this.configuration.project.user, this.configuration.project.repository);
+
+      issues.list(options, (err, response) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(response);
+        }
+      });
+    });
+  }
+
   validate(username, repository) {
     return new Promise((resolve) => {
-      const github = new Github({});
-
       if (repository) {
-        const repo = github.getRepo(username, repository);
+        const repo = this.github().getRepo(username, repository);
         repo.show((err) => {
           resolve(err === null);
         });
       } else {
-        const user = github.getUser();
+        const user = this.github().getUser();
         user.show(username, (err) => {
           resolve(err === null );
         });
