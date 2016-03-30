@@ -1,5 +1,11 @@
 <div class="Searchbar-container">
 </div>
 <div class="QuestionsList-container">
+  <ul class="collapsible" data-collapsible="accordion">
+    <li *ngFor="#question of questions | async">
+      <div class="collapsible-header"><i class="material-icons">filter_drama</i>{{ question.title }}</div>
+      <div class="collapsible-body"><p>{{ question.body }}</p></div>
+    </li>
+  </ul>
 </div>
 
