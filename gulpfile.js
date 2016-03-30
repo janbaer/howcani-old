@@ -17,12 +17,19 @@ const size = require('gulp-size');
 const del = require('del');
 const miniLr = require('mini-lr');
 const path = require('path');
+const minimist = require('minimist');
+
+const karma = require('./tasks/karma.js');
+require('./tasks/deploy.js');
 
 const sourceFolder = 'src';
 const source = ['src/**/*.html', 'src/**/*.tpl.html'];
 const destinationFolder = 'build';
-const port = 3000;
 
+const args = minimist(process.argv.slice(2));
+console.log('args', args);
+const port = args.port || 3000;
+const liveReloadPort = args.lrport || 35729;
 const liveReload = miniLr();
 
 function notifyChanged(files) {
@@ -68,7 +75,7 @@ function buildWithWebPack(configFile, callback) {
 gulp.task('serve', ['serve:dev']);
 
 gulp.task('livereload', () => {
-  liveReload.listen(35729);
+  liveReload.listen(liveReloadPort);
 });
 
 gulp.task('copy', () => {
@@ -135,27 +142,36 @@ gulp.task('clean', () => {
   return del([destinationFolder]);
 });
 
-gulp.task('serve:dev', (callback) => {
+gulp.task('serve:dev', (done) => {
   runSequence(
     ['build:dev', 'copy', 'copy:assets', 'styles'],
     'live-server',
     'watch',
-    callback
+    done
   );
 });
 
-gulp.task('serve:prod', (callback) => {
+gulp.task('serve:prod', (done) => {
   runSequence(
     ['build:prod', 'copy', 'copy:assets', 'styles'],
     'live-server',
-    callback
+    done
+  );
+});
+
+gulp.task('buildAndDeploy', (done) => {
+  runSequence(
+    'clean',
+    ['build:prod', 'copy', 'copy:assets', 'styles'],
+    'deploy',
+    done
   );
 });
 
 gulp.task('live-server', () => {
   const gls = require('gulp-live-server');
 
-  const server = gls.static(destinationFolder, port);
+  const server = gls([gls.script, destinationFolder, port], undefined, liveReloadPort);
   server.start();
 
   gulp.watch([destinationFolder + '/**/*.**'], function (file) {
@@ -175,16 +191,15 @@ gulp.task('watch', () => {
   gulp.watch([sourceFolder + '/**/*.less'], ['styles']);
 });
 
-gulp.task('test', (done) => {
-  const configPath = path.resolve(__dirname, './karma.conf.js');
-  const singleRun = true;
+gulp.task('test-once', karma(true));
+gulp.task('test-watch', karma(false));
 
-  let KarmaServer = require('karma').Server;
-
-  let server = new KarmaServer({
-    configFile: configPath,
-    singleRun: singleRun,
-    autoWatch: !singleRun
-  }, done);
-  server.start();
+gulp.task('test-ci', function(done) {
+  runSequence('lint', 'test-once', done);
 });
+
+gulp.task('test', (done) => {
+  runSequence('lint', 'test-watch', done);
+});
+
+gulp.task('default', ['serve']);

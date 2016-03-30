@@ -6,7 +6,7 @@ const webpack = require('webpack');
 module.exports = {
   entry: {
     boot: './src/boot.js',
-    vendor: ['rxjs/Rx', 'core-js', 'zone.js/dist/zone-microtask', 'angular2/core', 'angular2/platform/browser', 'angular2/common', 'angular2/router', 'angular2/http']
+    vendor: './src/vendor.js'
   },
   output: {
     path: path.resolve(__dirname, './build/scripts'),
@@ -14,6 +14,7 @@ module.exports = {
   },
   plugins: [
     new webpack.optimize.CommonsChunkPlugin(/* chunkName= */"vendor", /* filename= */"vendor.js"),
+    new webpack.DefinePlugin({ ENVIRONMENT: JSON.stringify('development') })
   ],
   module: {
     loaders: [
@@ -24,10 +25,16 @@ module.exports = {
         query: {
           presets: ['es2015'],
           plugins: [
+            'angular2-annotations',
             'transform-decorators-legacy',
             'transform-class-properties',
+            'transform-flow-strip-types'
           ]
         }
+      },
+      {
+        test: /\.html$/,
+        loader: 'raw?minimize=false'
       }
     ],
     noParse: [ /.+zone\.js\/dist\/.+/, /.+angular2\/bundles\/.+/ ]
