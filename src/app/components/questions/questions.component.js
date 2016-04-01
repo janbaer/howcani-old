@@ -1,11 +1,12 @@
 import { Component } from 'angular2/core';
 import { Configuration } from './../../services/configuration.service.js';
 import { QuestionService } from './../../services/question.service.js';
-//import $ from 'jquery';
+import { QuestionComponent } from './../question/question.component.js';
 
 @Component({
   selector: 'questions',
-  templateUrl: './app/components/questions/questions.tpl.html'
+  templateUrl: './app/components/questions/questions.tpl.html',
+  directives: [QuestionComponent]
 })
 export class QuestionsComponent {
   constructor(configuration: Configuration, questionService: QuestionService) {
@@ -20,10 +21,14 @@ export class QuestionsComponent {
     return this.questionService.getAllQuestions();
   }
 
+  isClosed(question) {
+    return question && question.state === 'closed';
+  }
+
   renderQuestions() {
     this.questionService.fetchQuestions()
-      .then((questions) => {
-        this.questions = questions;
+      .then((response) => {
+        this.questions = response.items;
         $('.collapsible').collapsible({ accordion: false });
       })
       .catch((err) => {
@@ -36,6 +41,5 @@ export class QuestionsComponent {
   }
 
   ngOnDestroy() {
-    console.log('ngOnDestroy');
   }
 }

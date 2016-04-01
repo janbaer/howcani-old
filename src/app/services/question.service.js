@@ -18,9 +18,10 @@ export class QuestionService {
   fetchQuestions() {
     return new Promise((resolve, reject) => {
       const options = {};
-      const issues = this.github().getIssues(this.configuration.project.user, this.configuration.project.repository);
+      const searchString = `repo:${this.configuration.project.user}/${this.configuration.project.repository}`;
+      const search = this.github().getSearch(searchString);
 
-      issues.list(options, (err, response) => {
+      search.issues(options, (err, response) => {
         if (err) {
           reject(err);
         } else {
