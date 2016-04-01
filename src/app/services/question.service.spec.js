@@ -11,7 +11,10 @@ describe('Question service spec', function() {
 
   class ConfigurationMock {
     constructor() {
-      this.project = {};
+      this.project = {
+        user: 'howcani-project',
+        repository: 'howcani-data'
+      };
     }
   }
 
@@ -25,13 +28,13 @@ describe('Question service spec', function() {
     questionService = injector.get(QuestionService);
 
     const issuesMock = {
-      list: (options, callback) => {
+      issues: (options, callback) => {
         callback(null, [{ title: 'Issue1' }]);
       }
     };
 
     const github = new Github({});
-    github.getIssues = () => issuesMock;
+    github.getSearch = () => issuesMock;
   }));
 
   describe('When service was created', function() {
