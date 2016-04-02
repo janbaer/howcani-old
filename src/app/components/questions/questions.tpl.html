@@ -1,15 +1,8 @@
 <div class="Searchbar-container">
 </div>
 <div class="QuestionsList-container">
-  <ul class="collapsible" data-collapsible="accordion">
-    <li *ngFor="#question of questions">
-      <div class="collapsible-header">
-        <i class="material-icons QuestionState" [ngClass]="{isClosed: question.state === 'closed'}">done</i>{{ question.title }}
-      </div>
-      <div class="collapsible-body">
-        <question [question]="question"></question>
-      </div>
-    </li>
-  </ul>
+  <div class="row" *ngFor="#question of questions">
+    <question [question]="question"></question>
+  </div>
 </div>
 
