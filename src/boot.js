@@ -7,8 +7,8 @@ import { ROUTER_PROVIDERS, LocationStrategy, HashLocationStrategy } from 'angula
 import { HTTP_PROVIDERS } from 'angular2/http';
 
 import { AppComponent } from './app/app.component';
-import { Configuration } from './app/services/configuration.service.js';
-import { Storage } from './app/services/storage.service.js';
+import { ConfigurationService } from './app/services/configuration.service.js';
+import { StorageService } from './app/services/storage.service.js';
 import { QuestionService } from './app/services/question.service.js';
 import { ToastService } from './app/services/toast.service.js';
 
@@ -20,8 +20,8 @@ bootstrap(AppComponent, [
   HTTP_PROVIDERS,
   ROUTER_PROVIDERS,
   provide(LocationStrategy, { useClass: HashLocationStrategy }),
-  Storage,
-  Configuration,
+  StorageService,
+  ConfigurationService,
   QuestionService,
   ToastService
 ]);

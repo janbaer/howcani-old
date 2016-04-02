@@ -2,11 +2,11 @@ import { Injectable } from 'angular2/core';
 //import { Github } from 'github-api';
 const Github = require('github-api');
 
-import { Configuration } from './configuration.service.js';
+import { ConfigurationService } from './configuration.service.js';
 
 @Injectable()
 export class QuestionService {
-  constructor(configuration: Configuration) {
+  constructor(configuration: ConfigurationService) {
     this.configuration = configuration;
   }
 

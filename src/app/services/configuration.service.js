@@ -1,9 +1,9 @@
 import { Injectable } from 'angular2/core';
-import { Storage } from './storage.service.js';
+import { StorageService } from './storage.service.js';
 
 @Injectable()
-export class Configuration {
-  constructor(storage: Storage) {
+export class ConfigurationService {
+  constructor(storage: StorageService) {
     this.storage = storage;
 
     this.defaultProject = {

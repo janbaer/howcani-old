@@ -6,9 +6,6 @@ import { Component, Input } from 'angular2/core';
   directives: []
 })
 export class QuestionComponent {
-  constructor() {
-  }
-
   @Input() question;
 
   isClosed(question) {

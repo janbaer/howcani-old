@@ -1,5 +1,4 @@
 import { Component } from 'angular2/core';
-import { Configuration } from './../../services/configuration.service.js';
 import { QuestionService } from './../../services/question.service.js';
 import { QuestionComponent } from './../question/question.component.js';
 
@@ -9,12 +8,11 @@ import { QuestionComponent } from './../question/question.component.js';
   directives: [QuestionComponent]
 })
 export class QuestionsComponent {
-  constructor(configuration: Configuration, questionService: QuestionService) {
-    this.project = configuration.project;
+  constructor(questionService: QuestionService) {
     this.questionService = questionService;
   }
 
-  renderQuestions(question) {
+  renderQuestions() {
     this.questions = this.questionService.fetchQuestions();
   }
 
