@@ -12,28 +12,10 @@ export class QuestionsComponent {
   constructor(configuration: Configuration, questionService: QuestionService) {
     this.project = configuration.project;
     this.questionService = questionService;
-
-    this.questions = [];
-
   }
 
-  getQuestions() {
-    return this.questionService.getAllQuestions();
-  }
-
-  isClosed(question) {
-    return question && question.state === 'closed';
-  }
-
-  renderQuestions() {
-    this.questionService.fetchQuestions()
-      .then((response) => {
-        this.questions = response.items;
-        $('.collapsible').collapsible({ accordion: false });
-      })
-      .catch((err) => {
-        console.log('Error while fetching issues', err);
-      });
+  renderQuestions(question) {
+    this.questions = this.questionService.fetchQuestions();
   }
 
   ngOnInit() {

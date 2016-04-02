@@ -11,6 +11,7 @@ export class QuestionComponent {
 
   @Input() question;
 
-  isClosed() {
+  isClosed(question) {
+    return question && question.state === 'closed';
   }
 }

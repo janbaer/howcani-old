@@ -1,7 +1,7 @@
 <div class="Searchbar-container">
 </div>
 <div class="QuestionsList-container">
-  <div class="row" *ngFor="#question of questions">
+  <div class="row" *ngFor="#question of questions | async">
     <question [question]="question"></question>
   </div>
 </div>
