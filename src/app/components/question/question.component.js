@@ -1,9 +1,12 @@
 import { Component, Input } from 'angular2/core';
 
+import { MarkdownPipe } from './../../pipes/markdown.pipe.js';
+
 @Component({
   selector: 'question',
   templateUrl: './app/components/question/question.tpl.html',
-  directives: []
+  directives: [],
+  pipes: [MarkdownPipe]
 })
 export class QuestionComponent {
   @Input() question;

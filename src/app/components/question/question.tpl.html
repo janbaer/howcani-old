@@ -5,7 +5,7 @@
         <i class="material-icons QuestionState" [ngClass]="{isClosed: isClosed(question)}">done</i>
         {{ question.title }}
       </span>
-      <p>{{ question.body }}</p>
+      <p [innerHTML]="question.body | markdown"></p>
     </div>
     <div class="card-action">
       <a href="#">This is a link</a>
