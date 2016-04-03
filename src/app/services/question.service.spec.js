@@ -1,7 +1,7 @@
 'use strict';
 
 import { Injector, provide } from 'angular2/core';
-import { Configuration } from './configuration.service.js';
+import { ConfigurationService } from './configuration.service.js';
 import { QuestionService } from './question.service.js';
 
 const Github = require('github-api');
@@ -9,7 +9,7 @@ const Github = require('github-api');
 describe('Question service spec', function() {
   let questionService;
 
-  class ConfigurationMock {
+  class ConfigurationServiceMock {
     constructor() {
       this.project = {
         user: 'howcani-project',
@@ -20,16 +20,15 @@ describe('Question service spec', function() {
 
   beforeEachProviders(() => [
     QuestionService,
-    provide(Configuration, { useClass: ConfigurationMock })
+    provide(ConfigurationService, { useClass: ConfigurationServiceMock })
   ]);
 
   beforeEach(inject([Injector], (injector) => {
-    const configuration = injector.get(Configuration);
     questionService = injector.get(QuestionService);
 
     const issuesMock = {
       issues: (options, callback) => {
-        callback(null, [{ title: 'Issue1' }]);
+        callback(null, {items: [{ title: 'Issue1' }] });
       }
     };
 
