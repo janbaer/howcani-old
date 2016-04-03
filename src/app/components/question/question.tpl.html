@@ -6,7 +6,7 @@
       </i>
       {{ question.title }}
     </div>
-    <div class="Question-body" [innerHTML]="question.body | markdown"></div>
+    <div class="Question-body markdown-body" [innerHTML]="question.body | markdown"></div>
   </div>
   <div class="card-action QuestionProperties">
     <div class="QuestionCreatedBy-name"><i class="material-icons">account_circle</i>{{question.user.login}}</div>
