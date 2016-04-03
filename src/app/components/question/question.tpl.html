@@ -1,15 +1,22 @@
-<div class="col s12 m6">
-  <div class="card">
-    <div class="card-content">
-      <span class="card-title Question-title">
-        <i class="material-icons QuestionState" [ngClass]="{isClosed: isClosed(question)}">done</i>
-        {{ question.title }}
-      </span>
-      <p [innerHTML]="question.body | markdown"></p>
+<div class="card">
+  <div class="card-content">
+    <div class="Question-title">
+      <i class="material-icons QuestionState" [ngClass]="{isClosed: isClosed(question), isOpen: !isClosed(question)}">
+        {{isClosed(question) ? 'check_circle' : 'help_outline' }}
+      </i>
+      {{ question.title }}
     </div>
-    <div class="card-action">
-      <a href="#">This is a link</a>
-      <a href="#">This is a link</a>
+    <div class="Question-body" [innerHTML]="question.body | markdown"></div>
+  </div>
+  <div class="card-action QuestionProperties">
+    <div class="QuestionCreatedBy-name"><i class="material-icons">account_circle</i>{{question.user.login}}</div>
+    <div class="QuestionCreatedBy-created">
+      <i class="material-icons">alarm</i>{{question.created_at | parsedate}}
+    </div>
+    <div class="QuestionLabels-container">
+      <div class="QuestionLabel-title" *ngFor="#label of question.labels">
+        <span [ngStyle]="{'color': '#' + label.color}">{{label.name}}</span>
+      </div>
     </div>
   </div>
 </div>
