@@ -18,30 +18,39 @@
 
 .Question-body {
   border-top: 1px solid rgba(160, 160, 160, 0.2);
-  padding-top: 10px;
+  padding-top: @space-large;
   overflow: auto;
   height: 300px;
 }
 
-.QuestionProperties {
+.QuestionProperties-container {
   display: flex;
 }
 
-.QuestionCreatedBy-name {
+.User-element {
   flex: 25%;
 }
 
-.QuestionLabels-container {
+.User-text {
+  margin-left: @space-small;
+}
+
+.Date-element {
+  flex: 25%;
+}
+
+.Date-text {
+  margin-left: @space-small;
+}
+
+.Labels-container {
   flex: 50%;
   display: flex;
+  align-items: flex-end;
 }
 
-.QuestionCreatedBy-created {
-  flex: 25%;
-}
-
-.QuestionLabel-title {
-  flex: 1;
+.Label-element {
+  margin-right: @space-normal;
 }
 
 

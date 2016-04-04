@@ -8,13 +8,18 @@
     </div>
     <div class="Question-body markdown-body" [innerHTML]="question.body | markdown"></div>
   </div>
-  <div class="card-action QuestionProperties">
-    <div class="QuestionCreatedBy-name"><i class="material-icons">account_circle</i>{{question.user.login}}</div>
-    <div class="QuestionCreatedBy-created">
-      <i class="material-icons">alarm</i>{{question.created_at | parsedate}}
+  <div class="card-action QuestionProperties-container">
+    <div class="User-element">
+      <i class="material-icons tooltipped" data-position="bottom" data-delay="50" data-tooltip="Created from">account_circle</i>
+      <span class="User-text">{{question.user.login}}</span>
     </div>
-    <div class="QuestionLabels-container">
-      <div class="QuestionLabel-title" *ngFor="#label of question.labels">
+    <div class="Date-element">
+      <i class="material-icons">alarm</i>
+      <span class="Date-text">{{question.created_at | parsedate}}</span>
+    </div>
+    <div class="Labels-container">
+      <i class="material-icons">class</i>
+      <div class="Label-element" *ngFor="#label of question.labels">
         <span [ngStyle]="{'color': '#' + label.color}">{{label.name}}</span>
       </div>
     </div>
