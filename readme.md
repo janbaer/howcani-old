@@ -28,3 +28,4 @@ message.
 - [Google Material Icons](https://design.google.com/icons/)
 - [Materialize.css](http://materializecss.com/)
 - [Github API for issues](https://developer.github.com/v3/issues/)
+- [Github Client for JavaScript](https://github.com/michael/github)
