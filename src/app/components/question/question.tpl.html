@@ -1,7 +1,8 @@
 <div class="card">
   <div class="card-content">
     <div class="Question-title">
-      <i class="material-icons QuestionState" [ngClass]="{isClosed: isClosed(question), isOpen: !isClosed(question)}">
+      <i class="material-icons QuestionState"
+        [ngClass]="{isClosed: isClosed(question), isOpen: !isClosed(question)}">
         {{isClosed(question) ? 'check_circle' : 'help_outline' }}
       </i>
       {{ question.title }}
@@ -10,7 +11,7 @@
   </div>
   <div class="card-action QuestionProperties-container">
     <div class="User-element">
-      <i class="material-icons tooltipped" data-position="bottom" data-delay="50" data-tooltip="Created from">account_circle</i>
+      <i class="material-icons tooltipped">account_circle</i>
       <span class="User-text">{{question.user.login}}</span>
     </div>
     <div class="Date-element">
