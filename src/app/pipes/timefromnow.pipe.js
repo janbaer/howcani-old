@@ -2,9 +2,9 @@ import { Pipe } from 'angular2/core';
 import moment from 'moment';
 
 @Pipe({
-  name: 'parsedate'
+  name: 'timeFromNow'
 })
-export class ParseDatePipe {
+export class TimeFromNowPipe {
   transform(value) {
     return moment(value).fromNow();
   }
