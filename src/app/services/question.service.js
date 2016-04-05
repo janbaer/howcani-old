@@ -25,7 +25,7 @@ export class QuestionService {
         if (err) {
           reject(err);
         } else {
-          resolve(response.items);
+          resolve(response);
         }
       });
     });

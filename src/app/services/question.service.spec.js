@@ -28,7 +28,7 @@ describe('Question service spec', function() {
 
     const issuesMock = {
       issues: (options, callback) => {
-        callback(null, {items: [{ title: 'Issue1' }] });
+        callback(null, { items: [{ title: 'Issue1' }] });
       }
     };
 
@@ -48,7 +48,7 @@ describe('Question service spec', function() {
     beforeEach(function(done) {
       questionService.fetchQuestions()
         .then((result) => {
-          questions = result;
+          questions = result.items;
           done();
         });
     });

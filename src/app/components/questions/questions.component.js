@@ -13,7 +13,17 @@ export class QuestionsComponent {
   }
 
   renderQuestions() {
-    this.questions = this.questionService.fetchQuestions();
+    this.questionService.fetchQuestions()
+      .then((response) => {
+        this.questions = response.items;
+        this.materializeNewElements();
+      });
+  }
+
+  materializeNewElements() {
+    setTimeout(() => {
+      $('.tooltipped').tooltip({ delay: 50 });
+    }, 50);
   }
 
   ngOnInit() {
