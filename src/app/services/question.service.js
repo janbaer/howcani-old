@@ -11,8 +11,14 @@ export class QuestionService {
   }
 
   github() {
-    return new Github({
-    });
+    const options = {};
+
+    if (this.configuration.githubToken) {
+      options.auth = 'oauth';
+      options.token = this.configuration.githubToken;
+    }
+
+    return new Github(options);
   }
 
   fetchQuestions() {
