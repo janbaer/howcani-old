@@ -1,13 +1,25 @@
-questions {
-  display: flex;
-  flex: 1;
-}
-
-.Searchbar-container {
-  flex: 30;
-  background-color: blue;
-}
-
 .QuestionsList-container {
-  flex: 70;
+  flex: 1;
+  padding: 10px;
+  overflow: auto;
+  display: flex;
+  flex-wrap: wrap;
 }
+
+.Question-container {
+  width: 100%;
+
+  @media @screen-desktops {
+    width: 50%;
+
+    &:nth-child(odd) {
+      padding-right: 5px;
+    }
+
+    &:nth-child(2n) {
+      padding-left: 5px;
+    }
+  }
+}
+
+

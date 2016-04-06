@@ -1,7 +1,7 @@
 import { Component } from 'angular2/core';
 import { Router } from 'angular2/router';
 import { FORM_DIRECTIVES, FormBuilder } from 'angular2/common';
-import { Configuration } from './../../services/configuration.service.js';
+import { ConfigurationService } from './../../services/configuration.service.js';
 import { QuestionService } from './../../services/question.service.js';
 import { ToastService } from './../../services/toast.service.js';
 
@@ -14,7 +14,7 @@ export class ConnectComponent {
   constructor(
               router: Router,
               formBuilder: FormBuilder,
-              configuration: Configuration,
+              configuration: ConfigurationService,
               questionService: QuestionService,
               toastService: ToastService
              ) {

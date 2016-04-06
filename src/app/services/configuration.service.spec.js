@@ -1,20 +1,20 @@
 'use strict';
 
 import { Injector } from 'angular2/core';
-import { Configuration } from './configuration.service.js';
-import { Storage } from './storage.service.js';
+import { ConfigurationService } from './configuration.service.js';
+import { StorageService } from './storage.service.js';
 
 describe('Configuration service spec', function() {
   let configuration;
   let storage = {};
 
   beforeEachProviders(() => [
-    Configuration, Storage
+    ConfigurationService, StorageService
   ]);
 
   beforeEach(inject([Injector], (injector) => {
-    configuration = injector.get(Configuration);
-    storage = injector.get(Storage);
+    configuration = injector.get(ConfigurationService);
+    storage = injector.get(StorageService);
   }));
 
   describe('When no settings are saved in localstorage', function() {

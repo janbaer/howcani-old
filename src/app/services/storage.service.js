@@ -1,7 +1,7 @@
 import { Injectable } from 'angular2/core';
 
 @Injectable()
-export class Storage {
+export class StorageService {
   constructor() {
     this.db = window.localStorage;
   }
