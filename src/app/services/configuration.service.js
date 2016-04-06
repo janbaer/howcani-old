@@ -28,4 +28,21 @@ export class ConfigurationService {
     this.storage.setProject(project);
     this._project = project;
   }
+
+  get githubToken() {
+    if (this._githubToken === undefined) {
+      this._githubToken = this.storage.getGithubToken();
+    }
+    return this._githubToken;
+  }
+
+  set githubToken(githubToken) {
+    this.storage.setGithubToken(githubToken);
+    this._githubToken = githubToken;
+  }
+
+  removeGithubToken() {
+    this.storage.removeGithubToken();
+    this._githubToken = undefined;
+  }
 }

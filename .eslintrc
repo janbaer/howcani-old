@@ -105,6 +105,7 @@
     "no-caller": 2,
     "no-div-regex": 2,
     "no-else-return": 0,
+    "no-empty-label": 0,
     "no-eq-null": 2,
     "no-eval": 2,
     "no-extend-native": 2,
@@ -160,7 +161,7 @@
     // Stylistic Issues
     // "array-bracket-spacing": 2, // Not supported in current version
     "brace-style": [2, "1tbs", { "allowSingleLine": true }],
-    "camelcase": [2, { "properties": "always" }],
+    "camelcase": [2, { "properties": "never" }],
     "comma-spacing": [1, { "before": false, "after": true }],
     "comma-style": [2, "last"],
     "computed-property-spacing": [2, "never"],
