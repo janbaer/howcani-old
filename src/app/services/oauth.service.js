@@ -1,12 +1,12 @@
 import { Injectable } from 'angular2/core';
 import { Provider, Request } from '@zalando/oauth2-client-js';
-import { Configuration } from './configuration.service.js';
+import { ConfigurationService } from './configuration.service.js';
 import { Router } from 'angular2/router';
 
 @Injectable()
 export class OAuth {
-  constructor(configuration: Configuration, router: Router) {
-    this.configuration = configuration; 
+  constructor(configuration: ConfigurationService, router: Router) {
+    this.configuration = configuration;
     this.router = router;
   }
 

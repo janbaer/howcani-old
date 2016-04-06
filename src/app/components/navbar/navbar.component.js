@@ -1,7 +1,7 @@
 import { Component } from 'angular2/core';
 import { OAuth } from '../../services/oauth.service.js';
 import { ROUTER_DIRECTIVES, Router } from 'angular2/router';
-import { Configuration } from '../../services/configuration.service.js';
+import { ConfigurationService } from '../../services/configuration.service.js';
 
 @Component({
   selector: 'navbar',
@@ -11,7 +11,7 @@ import { Configuration } from '../../services/configuration.service.js';
 })
 
 export class NavbarComponent {
-  constructor(router: Router, oauth: OAuth, configuration: Configuration) {
+  constructor(router: Router, oauth: OAuth, configuration: ConfigurationService) {
     this.router = router;
     this.oauth = oauth;
     this.configuration = configuration;
