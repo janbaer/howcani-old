@@ -1,4 +1,6 @@
 import { Injectable } from 'angular2/core';
+import { Http, Response } from 'angular2/http';
+import { Observable } from 'rxjs/Observable';
 //import { Github } from 'github-api';
 const Github = require('github-api');
 
@@ -6,8 +8,9 @@ import { ConfigurationService } from './configuration.service.js';
 
 @Injectable()
 export class QuestionService {
-  constructor(configuration: ConfigurationService) {
+  constructor(configuration: ConfigurationService, http: Http) {
     this.configuration = configuration;
+    this.http = http;
   }
 
   github() {
@@ -35,6 +38,26 @@ export class QuestionService {
         }
       });
     });
+  }
+
+  buildUrl(path) {
+    let url = `https://api.github.com//repos/${this.configuration.user}/${this.configuration.repository}/${path}`;
+    if (this.configuration.oauthToken) {
+      const separator = url.lastIndexOf('?') >= 0 ? '&' : '?';
+      url += `${separator}access_token=${this.configuration.oauthToken}`;
+    }
+    return url;
+  }
+
+  handleError(error) {
+    console.log('Error while featching data');
+    return Observable.throw(error.json().error || 'Github error');
+  }
+
+  fetchComments(issueId) {
+    return this.http.get(this.buildUrl(`issues/${issueId}/comments`))
+                    .map((response) => response.json().data)
+                    .catch(this.handleError);
   }
 
   validate(username, repository) {

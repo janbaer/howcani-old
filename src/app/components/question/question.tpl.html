@@ -7,7 +7,7 @@
          [ngClass]="{isClosed: isClosed(question), isOpen: !isClosed(question)}">
         {{isClosed(question) ? 'check_circle' : 'help_outline' }}
       </i>
-      <span class="QuestionTitle-label" (click)="showDetails(question.id)">{{ question.title }}</span>
+      <span class="QuestionTitle-label" (click)="showDetails(question)">{{ question.title }}</span>
     </div>
     <div class="Question-body markdown-body" [innerHTML]="question.body | markdown"></div>
   </div>
@@ -29,12 +29,4 @@
   </div>
 </div>
 
-<div id="modal{{question.id}}" class="modal">
-  <div class="modal-content">
-    <question-details [question]="question"></question-details>
-  </div>
-  <div class="modal-footer">
-    <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Ok</a>
-  </div>
-</div>
 
