@@ -6,4 +6,6 @@ import 'zone.js/dist/zone';
 import 'zone.js/dist/long-stack-trace-zone';
 
 import 'github-api';
+import 'jquery';
+import 'moment';
 
