@@ -1,8 +1,17 @@
 /* Colors */
 @error-color: #F44336;
 
+/* Spaces */
+@space-small: 3px;
+@space-normal: 5px;
+@space-large: 10px;
+
 /* Screen-Sizes */
 @screen-desktop: 993px;
+
+@screen-mobiles: ~"(min-width: 360px)";
+@screen-small-tablets: ~"(min-width: 600px)";
+@screen-desktops: ~"(min-width: 993px)";
 
 /* Common styles */
 .input-field input[type=text].ng-invalid {
@@ -10,7 +19,16 @@
   box-shadow: 0 1px 0 0 @error-color !important;
 }
 
+html, body {
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+}
+
 .AppContent-container {
-  padding-top: 20px;
+  height: 100%;
+  display: flex;
 }
 

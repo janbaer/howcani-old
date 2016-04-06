@@ -12,6 +12,7 @@ const webpack = require('webpack');
 const autoprefixer = require('gulp-autoprefixer');
 const cssnano = require('gulp-cssnano');
 const plumber = require('gulp-plumber');
+const gulpif = require('gulp-if');
 const runSequence = require('run-sequence');
 const size = require('gulp-size');
 const del = require('del');
@@ -25,9 +26,9 @@ require('./tasks/deploy.js');
 const sourceFolder = 'src';
 const source = ['src/**/*.html', 'src/**/*.tpl.html'];
 const destinationFolder = 'build';
+let isProduction = false;
 
 const args = minimist(process.argv.slice(2));
-console.log('args', args);
 const port = args.port || 3000;
 const liveReloadPort = args.lrport || 35729;
 const liveReload = miniLr();
@@ -131,7 +132,7 @@ gulp.task('styles', function () {
     .pipe(inject(injectFiles, injectOptions))
     .pipe(sourcemaps.init({loadMaps: true}))
     .pipe(less())
-    .pipe(autoprefixer({browsers: [ '> 5%', 'last 2 versions', 'ie 8', 'ie 9' ]}))
+    .pipe(gulpif(isProduction, autoprefixer({browsers: [ '> 5%', 'last 2 versions' ]})))
     .pipe(cssnano())
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(destinationFolder + '/styles'))
@@ -143,6 +144,8 @@ gulp.task('clean', () => {
 });
 
 gulp.task('serve:dev', (done) => {
+  isProduction = false;
+
   runSequence(
     ['build:dev', 'copy', 'copy:assets', 'styles'],
     'live-server',
@@ -152,6 +155,7 @@ gulp.task('serve:dev', (done) => {
 });
 
 gulp.task('serve:prod', (done) => {
+  isProduction = true;
   runSequence(
     ['build:prod', 'copy', 'copy:assets', 'styles'],
     'live-server',
@@ -160,6 +164,7 @@ gulp.task('serve:prod', (done) => {
 });
 
 gulp.task('buildAndDeploy', (done) => {
+  isProduction = true;
   runSequence(
     'clean',
     ['build:prod', 'copy', 'copy:assets', 'styles'],

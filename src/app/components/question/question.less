@@ -1,0 +1,63 @@
+.QuestionState {
+  &.isClosed {
+    color: green;
+  }
+  &.isOpen {
+    color: lightblue;
+  }
+}
+
+.Question-title {
+  font-size: 16px;
+  font-weight: 300;
+  margin-bottom: 10px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.QuestionTitle-label {
+  cursor: pointer;
+}
+
+.Question-body {
+  border-top: 1px solid rgba(160, 160, 160, 0.2);
+  padding-top: @space-large;
+  overflow: auto;
+  height: 300px;
+}
+
+.QuestionProperties-container {
+  display: flex;
+}
+
+.User-element {
+  flex: 25%;
+}
+
+.User-text {
+  margin-left: @space-small;
+  vertical-align: super;
+}
+
+.Date-element {
+  flex: 25%;
+}
+
+.Date-text {
+  margin-left: @space-small;
+  vertical-align: super;
+}
+
+.Labels-container {
+  flex: 50%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.Label-element {
+  margin-right: @space-normal;
+  vertical-align: super;
+}
+
+

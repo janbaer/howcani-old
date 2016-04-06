@@ -1,0 +1,40 @@
+<div class="card">
+  <div class="card-content">
+    <div class="Question-title">
+      <i class="material-icons tooltipped QuestionState"
+         data-position="bottom" data-delay="50"
+         [attr.data-tooltip]="isClosed(question) ? 'is answered' : 'open'"
+         [ngClass]="{isClosed: isClosed(question), isOpen: !isClosed(question)}">
+        {{isClosed(question) ? 'check_circle' : 'help_outline' }}
+      </i>
+      <span class="QuestionTitle-label" (click)="showDetails(question.id)">{{ question.title }}</span>
+    </div>
+    <div class="Question-body markdown-body" [innerHTML]="question.body | markdown"></div>
+  </div>
+  <div class="card-action QuestionProperties-container">
+    <div class="User-element">
+      <i class="material-icons tooltipped">account_circle</i>
+      <span class="User-text">{{question.user.login}}</span>
+    </div>
+    <div class="Date-element">
+      <i class="material-icons">alarm</i>
+      <span class="Date-text">{{question.created_at | timeFromNow}}</span>
+    </div>
+    <div class="Labels-container">
+      <i class="material-icons">class</i>
+      <div class="Label-element" *ngFor="#label of question.labels">
+        <span [ngStyle]="{'color': '#' + label.color}">{{label.name}}</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modal{{question.id}}" class="modal">
+  <div class="modal-content">
+    <question-details [question]="question"></question-details>
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Ok</a>
+  </div>
+</div>
+
