@@ -15,24 +15,31 @@ export class OAuth {
     this.router.navigate(['Questions']);
   }
 
-  loginUsingGithub() {
-    /*eslint-disable camelcase*/
-    const github = new Provider({
+  createProvider() {
+    return new Provider({
       id: 'github',
       authorization_url: 'https://github.com/login/oauth/authorize'
     });
+  }
 
-    let client_id = '22b411052b6b16a65c8d';
-    if (this.configuration.isProduction) {
-      client_id = 'a2e8b31d5208fcd22172';
+  loginUsingGithub() {
+    const github = this.createProvider();
+
+    let clientid = '22b411052b6b16a65c8d';
+    if (this.configuration.isProduction()) {
+      clientid = 'a2e8b31d5208fcd22172';
     }
 
-    const request = new Request({
-      client_id
-    });
-
+    /*eslint-disable camelcase*/
+    const request = new Request({ client_id: clientid });
     /*eslint-enable camelcase*/
 
-    github.requestToken(request);
+    const requestUri = github.requestToken(request);
+    window.location.href = requestUri;
+  }
+
+  parse(uri) {
+    const github = this.createProvider();
+    return github.parse(uri);
   }
 }
