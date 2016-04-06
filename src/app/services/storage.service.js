@@ -35,5 +35,17 @@ export class Storage {
   setProject(project) {
     this.storeObject('project', project);
   }
+
+  removeGithubToken() {
+    this.db.removeItem('githubToken');
+  }
+
+  getGithubToken() {
+    return this.loadValue('githubToken');
+  }
+
+  setGithubToken(githubToken) {
+    this.storeValue('githubToken', githubToken);
+  }
 }
 

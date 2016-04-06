@@ -3,7 +3,8 @@
     <div class="nav-wrapper">
       <a [routerLink]="['Questions']" class="brand-logo">HowCanI</a>
       <ul class="right">
-        <li><a (click)="loginUsingGithub()"><i class="material-icons">account_circle</i></a></li>
+        <li *ngIf="!isLoggedIn()"><a (click)="loginUsingGithub()"><i class="material-icons left">account_circle</i><span class="NavbarMenu-label"> Login </span></a></li>
+        <li *ngIf="isLoggedIn()"><a (click)="logout()"><i class="material-icons left">account_box</i><span class="NavbarMenu-label"> Logout </span> </a></li>
         <li><a [routerLink]="['Connect']"><i class="material-icons left">cloud_download</i><span class="NavbarMenu-label">Connect</span></a></li>
       </ul>
     </div>

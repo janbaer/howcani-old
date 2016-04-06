@@ -1,33 +1,31 @@
 import { Component } from 'angular2/core';
-import { Provider, Request } from '@zalando/oauth2-client-js'
+import { OAuth } from '../../services/oauth.service.js';
 import { ROUTER_DIRECTIVES, Router } from 'angular2/router';
+import { Configuration } from '../../services/configuration.service.js';
 
 @Component({
   selector: 'navbar',
   templateUrl: './app/components/navbar/navbar.tpl.html',
-  directives: [ROUTER_DIRECTIVES]
+  directives: [ROUTER_DIRECTIVES],
+  providers: [OAuth]
 })
 
 export class NavbarComponent {
-  constructor(router: Router) {
+  constructor(router: Router, oauth: OAuth, configuration: Configuration) {
     this.router = router;
+    this.oauth = oauth;
+    this.configuration = configuration;
+  }
+
+  isLoggedIn() {
+    return this.configuration.githubToken !== null;
+  }
+
+  logout() {
+    this.oauth.logout();
   }
 
   loginUsingGithub() {
-    var github = new Provider({
-      id: 'github',
-      authorization_url: 'https://github.com/login/oauth/authorize'
-    });
-
-    var request = new Request({
-      client_id: '22b411052b6b16a65c8d',
-      redirect_uri: 'http://localhost:3000/'
-    });
-
-    var uri = github.requestToken(request);
-
-    github.remember(request);
-
-    window.location.href = uri;
+    this.oauth.loginUsingGithub();
   }
 }
