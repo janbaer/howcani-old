@@ -23,7 +23,12 @@ export class QuestionsComponent {
 
   showQuestionDetails(question) {
     this.selectedQuestion = question;
-    $('questionDetailsDialog').openModal();
+    $('#questionDetailsDialog').openModal();
+  }
+
+
+  closeQuestionDetailsDialog() {
+    $('#questionDetailsDialog').closeModal();
   }
 
   materializeNewElements() {
