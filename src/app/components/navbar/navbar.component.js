@@ -17,6 +17,13 @@ export class NavbarComponent {
     this.configuration = configuration;
   }
 
+  ngOnInit() {
+    window.setTimeout(() => {
+      $('.button-collapse').sideNav();
+      $('.tooltipped').tooltip({ delay: 50 });
+    }, 50);
+  }
+
   isLoggedIn() {
     return this.configuration.githubToken !== null;
   }
