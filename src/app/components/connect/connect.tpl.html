@@ -1,7 +1,7 @@
 <div class="row">
   <form class="col s12" #connectForm="ngForm" (ngSubmit)="onSubmit($event)">
     <div class="row">
-      <div class="input-field col s6">
+      <div class="input-field col s12">
         <input type="text" class="validate" name="user"
                 ngControl="user" [(ngModel)]="project.user" required
                 placeholder="Enter the name of the Github user">
@@ -9,7 +9,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="input-field col s6">
+      <div class="input-field col s12">
         <input type="text" class="validate" name="repository"
                 ngControl="repository" [(ngModel)]="project.repository" required
                 placeholder="Enter the name of the Github repository">
@@ -17,7 +17,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col s6">
+      <div class="col s12">
         <button type="submit" class="btn waves-effect waves-light"
           [disabled]="!connectForm.valid">
           Ok<i class="material-icons right">send</i>
@@ -27,7 +27,7 @@
   </form>
 </div>
 <div class="row">
-  <div class="col s6 progress" *ngIf="isBusy">
+  <div class="col s12 progress" *ngIf="isBusy">
     <div class="indeterminate"></div>
   </div>
 </div>
