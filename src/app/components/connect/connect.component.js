@@ -4,10 +4,11 @@ import { FORM_DIRECTIVES, FormBuilder } from 'angular2/common';
 import { ConfigurationService } from './../../services/configuration.service.js';
 import { QuestionService } from './../../services/question.service.js';
 import { ToastService } from './../../services/toast.service.js';
+import template from './connect.tpl.html';
 
 @Component({
   selector: 'connect',
-  templateUrl: './app/components/connect/connect.tpl.html',
+  template: template,
   directives: [FORM_DIRECTIVES]
 })
 export class ConnectComponent {

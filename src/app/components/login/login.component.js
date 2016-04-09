@@ -2,10 +2,11 @@ import { Component } from 'angular2/core';
 import { OAuth } from '../../services/oauth.service.js';
 import { ConfigurationService } from '../../services/configuration.service.js';
 import { RouteParams, Router } from 'angular2/router';
+import template from './login.tpl.html';
 
 @Component({
   selector: 'login',
-  templateUrl: './app/components/login/login.tpl.html',
+  template: template,
   providers: [OAuth]
 })
 export class LoginComponent {

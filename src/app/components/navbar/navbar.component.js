@@ -2,10 +2,11 @@ import { Component } from 'angular2/core';
 import { OAuth } from '../../services/oauth.service.js';
 import { ROUTER_DIRECTIVES, Router } from 'angular2/router';
 import { ConfigurationService } from '../../services/configuration.service.js';
+import template from './navbar.tpl.html';
 
 @Component({
   selector: 'navbar',
-  templateUrl: './app/components/navbar/navbar.tpl.html',
+  template: template,
   directives: [ROUTER_DIRECTIVES],
   providers: [OAuth]
 })

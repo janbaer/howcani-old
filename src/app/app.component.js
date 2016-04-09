@@ -7,9 +7,11 @@ import { NavbarComponent } from './components/navbar/navbar.component.js';
 import { SidebarComponent } from './components/sidebar/sidebar.component.js';
 import { router } from './router.js';
 
+import template from './app.tpl.html';
+
 @Component({
   selector: 'howcani-app',
-  templateUrl: './app/app.tpl.html',
+  template: template,
   directives: [ROUTER_DIRECTIVES, NavbarComponent, SidebarComponent]
 })
 @RouteConfig(router.config)

@@ -1,13 +1,12 @@
 import { Component, Input } from 'angular2/core';
-
 import { MarkdownPipe } from './../../pipes/markdown.pipe';
 import { TimeFromNowPipe } from './../../pipes/timefromnow.pipe';
-
 import { QuestionDetailsComponent } from './../question-details/question-details.component';
+import template from './question.tpl.html';
 
 @Component({
   selector: 'question',
-  templateUrl: './app/components/question/question.tpl.html',
+  template: template,
   directives: [QuestionDetailsComponent],
   pipes: [MarkdownPipe, TimeFromNowPipe]
 })
