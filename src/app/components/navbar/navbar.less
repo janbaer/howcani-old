@@ -1,5 +1,5 @@
 .nav-wrapper {
-  @media (min-width: @screen-desktop) {
+  @media @screen-desktops {
     padding-left: 10px;
   }
 }
@@ -11,7 +11,15 @@
 
 .NavbarMenu-label {
   display: none;
-  @media (min-width: @screen-desktop) {
+  @media @screen-desktops {
     display: inline;
+  }
+}
+
+nav ul a {
+  padding: 0;
+
+  @media @screen-tablets {
+    padding: 0 15px;
   }
 }

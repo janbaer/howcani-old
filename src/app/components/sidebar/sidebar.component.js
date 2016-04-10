@@ -1,8 +1,9 @@
 import { Component } from 'angular2/core';
+import template from './sidebar.tpl.html';
 
 @Component({
   selector: 'sidebar',
-  templateUrl: './app/components/sidebar/sidebar.tpl.html',
+  template: template,
   directives: []
 })
 export class SidebarComponent {

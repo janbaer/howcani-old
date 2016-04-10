@@ -24,7 +24,7 @@ const karma = require('./tasks/karma.js');
 require('./tasks/deploy.js');
 
 const sourceFolder = 'src';
-const source = ['src/**/*.html', 'src/**/*.tpl.html'];
+const source = ['src/**/*.html', '!src/**/*.tpl.html'];
 const destinationFolder = 'build';
 let isProduction = false;
 

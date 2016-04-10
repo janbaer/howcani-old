@@ -1,9 +1,10 @@
 import { Component, Input } from 'angular2/core';
+import template from './question-details.tpl.html';
 
 import { QuestionService } from './../../services/question.service';
 @Component({
   selector: 'question-details',
-  templateUrl: './app/components/question-details/question-details.tpl.html',
+  template: template,
   directives: [],
   pipes: []
 })

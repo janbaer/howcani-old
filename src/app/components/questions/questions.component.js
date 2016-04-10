@@ -2,10 +2,11 @@ import { Component } from 'angular2/core';
 import { QuestionService } from './../../services/question.service.js';
 import { QuestionComponent } from './../question/question.component.js';
 import { QuestionDetailsComponent } from './../question-details/question-details.component';
+import template from './questions.tpl.html';
 
 @Component({
   selector: 'questions',
-  templateUrl: './app/components/questions/questions.tpl.html',
+  template: template,
   directives: [QuestionComponent, QuestionDetailsComponent]
 })
 export class QuestionsComponent {
@@ -25,7 +26,6 @@ export class QuestionsComponent {
     this.selectedQuestion = question;
     $('#questionDetailsDialog').openModal();
   }
-
 
   closeQuestionDetailsDialog() {
     $('#questionDetailsDialog').closeModal();
