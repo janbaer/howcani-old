@@ -1,6 +1,6 @@
-'use strict';
-
 import { Injector, provide } from 'angular2/core';
+import { Http, BaseRequestOptions, Response, ResponseOptions } from 'angular2/http';
+import { MockBackend } from 'angular2/http/testing';
 import { ConfigurationService } from './configuration.service.js';
 import { QuestionService } from './question.service.js';
 
@@ -8,6 +8,7 @@ const Github = require('github-api');
 
 describe('Question service spec', function() {
   let questionService;
+  let backend;
 
   class ConfigurationServiceMock {
     constructor() {
@@ -20,7 +21,15 @@ describe('Question service spec', function() {
 
   beforeEachProviders(() => [
     QuestionService,
-    provide(ConfigurationService, { useClass: ConfigurationServiceMock })
+    provide(ConfigurationService, { useClass: ConfigurationServiceMock }),
+    MockBackend,
+    BaseRequestOptions,
+    provide(Http, {
+      useFactory: (backendInstance, defaultOptions) => {
+        return new Http(backendInstance, defaultOptions);
+      },
+      deps: [MockBackend, BaseRequestOptions]
+    })
   ]);
 
   beforeEach(inject([Injector], (injector) => {
@@ -34,6 +43,8 @@ describe('Question service spec', function() {
 
     const github = new Github({});
     github.getSearch = () => issuesMock;
+
+    backend = injector.get(MockBackend);
   }));
 
   describe('When service was created', function() {
