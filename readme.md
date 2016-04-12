@@ -25,6 +25,7 @@ message.
 
 - [Angular.io](https://angular.io)
 - [Angular 2 changelog](https://github.com/angular/angular/blob/master/CHANGELOG.md)
+- [Angular 2 style guide](https://github.com/mgechev/angular2-style-guide)
 - [Google Material Icons](https://design.google.com/icons/)
 - [Materialize.css](http://materializecss.com/)
 - [Github API for issues](https://developer.github.com/v3/issues/)
