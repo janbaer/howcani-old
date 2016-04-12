@@ -1,5 +1,5 @@
 import { Injector, provide } from 'angular2/core';
-import { Http, BaseRequestOptions, Response, ResponseOptions } from 'angular2/http';
+import { Http, BaseRequestOptions } from 'angular2/http';
 import { MockBackend } from 'angular2/http/testing';
 import { ConfigurationService } from './configuration.service.js';
 import { QuestionService } from './question.service.js';
@@ -8,7 +8,7 @@ const Github = require('github-api');
 
 describe('Question service spec', function() {
   let questionService;
-  let backend;
+  //let backend;
 
   class ConfigurationServiceMock {
     constructor() {
@@ -44,7 +44,7 @@ describe('Question service spec', function() {
     const github = new Github({});
     github.getSearch = () => issuesMock;
 
-    backend = injector.get(MockBackend);
+    //backend = injector.get(MockBackend);
   }));
 
   describe('When service was created', function() {

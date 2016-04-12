@@ -1,9 +1,7 @@
 import { Injectable } from 'angular2/core';
-import { Http, Response, RequestOptions, URLSearchParams } from 'angular2/http';
+import { Http, RequestOptions, URLSearchParams } from 'angular2/http';
 import { Observable } from 'rxjs/Observable';
-//import { Github } from 'github-api';
 const Github = require('github-api');
-
 import { ConfigurationService } from './configuration.service.js';
 
 @Injectable()
@@ -52,7 +50,11 @@ export class QuestionService {
   buildRequestOptions(page) {
     const searchParams = new URLSearchParams();
 
-    //searchParams.set('sort', 'ascending');
+    searchParams.set('sort', 'created');
+    searchParams.set('order', 'desc');
+    if (page) {
+      searchParams.set('page', page);
+    }
     if (this.configuration.oauthToken) {
       searchParams.set('access_token', this.configuration.oauthToken);
     }
