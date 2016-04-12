@@ -1,0 +1,9 @@
+<div class="card">
+  <div class="card-content">
+    <div class="Comment-body markdown-body" [innerHTML]="comment.body | markdown"></div>
+  </div>
+  <div class="card-action CommentProperties-container">
+    <user [user]="comment.user"></user>
+    <date [date]="comment.created_at"></date>
+  </div>
+</div>

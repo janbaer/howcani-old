@@ -12,20 +12,14 @@
     <div class="Question-body markdown-body" [innerHTML]="question.body | markdown"></div>
   </div>
   <div class="card-action QuestionProperties-container">
-    <div class="User-element">
-      <i class="material-icons tooltipped">account_circle</i>
-      <span class="User-text">{{question.user.login}}</span>
+    <user [user]="question.user" tooltipText="Created from"></user>
+    <date [date]="question.created_at" tooltipText="Created on"></date>
+    <div class="QuestionComments-container">
+      <i class="material-icons tooltipped"
+         data-position="bottom" data-delay="50" data-tooltip="Comments">chat_bubble_outline</i>
+      <span class="QuestionCommentsCount-text">{{ question.comments }}</span>
     </div>
-    <div class="Date-element">
-      <i class="material-icons">alarm</i>
-      <span class="Date-text">{{question.created_at | timeFromNow}}</span>
-    </div>
-    <div class="Labels-container">
-      <i class="material-icons">class</i>
-      <div class="Label-element" *ngFor="#label of question.labels">
-        <span [ngStyle]="{'color': '#' + label.color}">{{label.name}}</span>
-      </div>
-    </div>
+    <labels [labels]="question.labels"></labels>
   </div>
 </div>
 

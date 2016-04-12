@@ -28,13 +28,14 @@ export class QuestionsComponent {
   }
 
   closeQuestionDetailsDialog() {
+    this.selectedQuestion = undefined;
     $('#questionDetailsDialog').closeModal();
   }
 
   materializeNewElements() {
     setTimeout(() => {
       $('.tooltipped').tooltip({ delay: 50 });
-    }, 50);
+    }, 100);
   }
 
   ngOnInit() {
