@@ -1,7 +1,8 @@
 import { Component } from 'angular2/core';
 import { OAuth } from '../../services/oauth.service.js';
 import { ROUTER_DIRECTIVES, Router } from 'angular2/router';
-import { ConfigurationService } from '../../services/configuration.service.js';
+import { ConfigurationService } from './../../services/configuration.service';
+import { MaterializeService } from './../../services/materialize.service';
 import template from './navbar.tpl.html';
 
 @Component({
@@ -12,17 +13,19 @@ import template from './navbar.tpl.html';
 })
 
 export class NavbarComponent {
-  constructor(router: Router, oauth: OAuth, configuration: ConfigurationService) {
+  constructor(router: Router,
+              oauth: OAuth,
+              configuration: ConfigurationService,
+              materializeService: MaterializeService) {
     this.router = router;
     this.oauth = oauth;
     this.configuration = configuration;
+    this.materialize = materializeService;
   }
 
   ngOnInit() {
-    window.setTimeout(() => {
-      $('.button-collapse').sideNav();
-      $('.tooltipped').tooltip({ delay: 50 });
-    }, 50);
+    this.materialize.updateTooltips();
+    this.materialize.initSideNav();
   }
 
   isLoggedIn() {

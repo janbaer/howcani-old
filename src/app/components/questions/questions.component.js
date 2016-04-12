@@ -1,6 +1,7 @@
 import { Component } from 'angular2/core';
-import { QuestionService } from './../../services/question.service.js';
-import { QuestionComponent } from './../question/question.component.js';
+import { MaterializeService } from './../../services/materialize.service';
+import { QuestionService } from './../../services/question.service';
+import { QuestionComponent } from './../question/question.component';
 import { QuestionDetailsComponent } from './../question-details/question-details.component';
 import template from './questions.tpl.html';
 
@@ -10,38 +11,30 @@ import template from './questions.tpl.html';
   directives: [QuestionComponent, QuestionDetailsComponent]
 })
 export class QuestionsComponent {
-  constructor(questionService: QuestionService) {
+  constructor(questionService: QuestionService, materializeService: MaterializeService) {
     this.questionService = questionService;
+    this.materialize = materializeService;
   }
 
   renderQuestions() {
     this.questionService.fetchQuestions()
       .then((response) => {
         this.questions = response.items;
-        this.materializeNewElements();
+        this.materialize.updateTooltips();
       });
   }
 
   showQuestionDetails(question) {
     this.selectedQuestion = question;
-    $('#questionDetailsDialog').openModal();
+    this.materialize.showDialog('questionDetailsDialog');
   }
 
   closeQuestionDetailsDialog() {
     this.selectedQuestion = undefined;
-    $('#questionDetailsDialog').closeModal();
-  }
-
-  materializeNewElements() {
-    setTimeout(() => {
-      $('.tooltipped').tooltip({ delay: 50 });
-    }, 100);
+    this.materialize.closeDialog('questionDetailsDialog');
   }
 
   ngOnInit() {
     this.renderQuestions();
-  }
-
-  ngOnDestroy() {
   }
 }
