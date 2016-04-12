@@ -1,5 +1,5 @@
 import { Component } from 'angular2/core';
-import { OAuth } from '../../services/oauth.service.js';
+import { OAuthService } from '../../services/oauth.service';
 import { ROUTER_DIRECTIVES, Router } from 'angular2/router';
 import { ConfigurationService } from './../../services/configuration.service';
 import { MaterializeService } from './../../services/materialize.service';
@@ -9,12 +9,12 @@ import template from './navbar.tpl.html';
   selector: 'navbar',
   template: template,
   directives: [ROUTER_DIRECTIVES],
-  providers: [OAuth]
+  providers: [OAuthService]
 })
 
 export class NavbarComponent {
   constructor(router: Router,
-              oauth: OAuth,
+              oauth: OAuthService,
               configuration: ConfigurationService,
               materializeService: MaterializeService) {
     this.router = router;

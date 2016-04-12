@@ -4,7 +4,7 @@ import { ConfigurationService } from './configuration.service.js';
 import { Router } from 'angular2/router';
 
 @Injectable()
-export class OAuth {
+export class OAuthService {
   constructor(configuration: ConfigurationService, router: Router) {
     this.configuration = configuration;
     this.router = router;
