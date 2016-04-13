@@ -13,7 +13,7 @@ import { AppComponent } from './app/app.component';
 import { ConfigurationService } from './app/services/configuration.service.js';
 import { StorageService } from './app/services/storage.service.js';
 import { QuestionService } from './app/services/question.service.js';
-import { ToastService } from './app/services/toast.service.js';
+import { MaterializeService } from './app/services/materialize.service';
 
 if (ENVIRONMENT === 'production') {
   enableProdMode();
@@ -26,6 +26,6 @@ bootstrap(AppComponent, [
   StorageService,
   ConfigurationService,
   QuestionService,
-  ToastService
+  MaterializeService
 ]);
 

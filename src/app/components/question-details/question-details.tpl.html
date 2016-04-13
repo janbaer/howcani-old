@@ -1,3 +1,7 @@
 <div class="QuestionDetails-container">
-  {{question.title}} 
+  {{question?.title}}
+
+  <div  class="Comments-container" *ngFor="#comment of comments">
+    <comment [comment]="comment"></comment>
+  </div>
 </div>

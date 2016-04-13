@@ -1,13 +1,14 @@
 import { Injectable } from 'angular2/core';
-//import { Github } from 'github-api';
+import { Http, RequestOptions, URLSearchParams } from 'angular2/http';
+import { Observable } from 'rxjs/Observable';
 const Github = require('github-api');
-
 import { ConfigurationService } from './configuration.service.js';
 
 @Injectable()
 export class QuestionService {
-  constructor(configuration: ConfigurationService) {
+  constructor(configuration: ConfigurationService, http: Http) {
     this.configuration = configuration;
+    this.http = http;
   }
 
   github() {
@@ -35,6 +36,42 @@ export class QuestionService {
         }
       });
     });
+  }
+
+  buildUrl(path) {
+    let url = `https://api.github.com/repos/${this.configuration.project.user}/${this.configuration.project.repository}/${path}`;
+    if (this.configuration.oauthToken) {
+      const separator = url.lastIndexOf('?') >= 0 ? '&' : '?';
+      url += `${separator}access_token=${this.configuration.oauthToken}`;
+    }
+    return url;
+  }
+
+  buildRequestOptions(page) {
+    const searchParams = new URLSearchParams();
+
+    searchParams.set('sort', 'created');
+    searchParams.set('order', 'desc');
+    if (page) {
+      searchParams.set('page', page);
+    }
+    if (this.configuration.oauthToken) {
+      searchParams.set('access_token', this.configuration.oauthToken);
+    }
+
+    const requestOptions = new RequestOptions({ search: searchParams });
+    return requestOptions;
+  }
+
+  handleError(error) {
+    console.log('Error while featching data');
+    return Observable.throw(error.json().error || 'Github error');
+  }
+
+  fetchComments(issueNumber) {
+    return this.http.get(this.buildUrl(`issues/${issueNumber}/comments`), this.buildRequestOptions())
+                    .map((response) => response.json())
+                    .catch(this.handleError);
   }
 
   validate(username, repository) {

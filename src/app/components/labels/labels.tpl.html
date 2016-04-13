@@ -1,0 +1,6 @@
+<i class="material-icons tooltipped" data-position="bottom" data-delay="50" data-tooltip="Labels">label</i>
+<div class="Label-element" *ngFor="#label of labels">
+  <span [ngStyle]="{'color': '#' + label.color}">{{label.name}}</span>
+</div>
+
+

@@ -3,7 +3,7 @@ import { Router } from 'angular2/router';
 import { FORM_DIRECTIVES, FormBuilder } from 'angular2/common';
 import { ConfigurationService } from './../../services/configuration.service.js';
 import { QuestionService } from './../../services/question.service.js';
-import { ToastService } from './../../services/toast.service.js';
+import { MaterializeService } from './../../services/materialize.service';
 import template from './connect.tpl.html';
 
 @Component({
@@ -12,17 +12,15 @@ import template from './connect.tpl.html';
   directives: [FORM_DIRECTIVES]
 })
 export class ConnectComponent {
-  constructor(
-              router: Router,
+  constructor(router: Router,
               formBuilder: FormBuilder,
               configuration: ConfigurationService,
               questionService: QuestionService,
-              toastService: ToastService
-             ) {
+              materializeService: MaterializeService) {
     this.router = router;
     this.questionService = questionService;
     this.configuration = configuration;
-    this.toastService = toastService;
+    this.materialize = materializeService;
 
     this.project = Object.assign({}, this.configuration.project);
   }
@@ -37,7 +35,7 @@ export class ConnectComponent {
           this.configuration.project = this.project;
           this.router.navigate(['Questions']);
         } else {
-          this.toastService.show('The given Github user or project does not exists! Please verify your input!');
+          this.materialize.showToastMessage('The given Github user or project does not exists! Please verify your input!');
         }
       });
 

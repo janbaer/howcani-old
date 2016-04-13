@@ -1,6 +1,16 @@
 <div class="QuestionsList-container">
   <div class="Question-container" *ngFor="#question of questions">
-    <question [question]="question"></question>
+    <question (onSelectQuestion)="showQuestionDetails($event)" [question]="question"></question>
   </div>
 </div>
+
+<div id="questionDetailsDialog" class="modal modal-fixed-footer">
+  <div class="modal-content">
+    <question-details [question]="selectedQuestion"></question-details>
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class="modal-action waves-effect waves-green btn-flat" (click)="closeQuestionDetailsDialog()">Ok</a>
+  </div>
+</div>
+
 
