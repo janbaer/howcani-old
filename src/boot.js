@@ -13,6 +13,7 @@ import { AppComponent } from './app/app.component';
 import { ConfigurationService } from './app/services/configuration.service.js';
 import { StorageService } from './app/services/storage.service.js';
 import { QuestionService } from './app/services/question.service.js';
+import { LabelService } from './app/services/label.service.js';
 import { MaterializeService } from './app/services/materialize.service';
 
 if (ENVIRONMENT === 'production') {
@@ -26,6 +27,7 @@ bootstrap(AppComponent, [
   StorageService,
   ConfigurationService,
   QuestionService,
+  LabelService,
   MaterializeService
 ]);
 

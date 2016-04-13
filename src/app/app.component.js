@@ -16,5 +16,8 @@ import template from './app.tpl.html';
 })
 @RouteConfig(router.config)
 export class AppComponent {
+  onFilterChanged(event) {
+    console.log(event);
+  }
 }
 

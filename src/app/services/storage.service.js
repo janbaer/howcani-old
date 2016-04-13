@@ -36,6 +36,14 @@ export class StorageService {
     this.storeObject('project', project);
   }
 
+  getLabels() {
+    return this.loadObject('labels');
+  }
+
+  setLabels(labels) {
+    this.storeObject('labels', labels);
+  }
+
   removeGithubToken() {
     this.db.removeItem('githubToken');
   }

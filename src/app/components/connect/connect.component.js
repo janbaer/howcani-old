@@ -1,8 +1,9 @@
 import { Component } from 'angular2/core';
 import { Router } from 'angular2/router';
 import { FORM_DIRECTIVES, FormBuilder } from 'angular2/common';
-import { ConfigurationService } from './../../services/configuration.service.js';
-import { QuestionService } from './../../services/question.service.js';
+import { ConfigurationService } from './../../services/configuration.service';
+import { QuestionService } from './../../services/question.service';
+import { LabelService } from './../../services/label.service';
 import { MaterializeService } from './../../services/materialize.service';
 import template from './connect.tpl.html';
 
@@ -16,9 +17,11 @@ export class ConnectComponent {
               formBuilder: FormBuilder,
               configuration: ConfigurationService,
               questionService: QuestionService,
+              labelService: LabelService,
               materializeService: MaterializeService) {
     this.router = router;
     this.questionService = questionService;
+    this.labelService = labelService;
     this.configuration = configuration;
     this.materialize = materializeService;
 
@@ -33,11 +36,11 @@ export class ConnectComponent {
         this.isBusy = false;
         if (isValid) {
           this.configuration.project = this.project;
+          this.labelService.fetchLabels();
           this.router.navigate(['Questions']);
         } else {
           this.materialize.showToastMessage('The given Github user or project does not exists! Please verify your input!');
         }
       });
-
   }
 }

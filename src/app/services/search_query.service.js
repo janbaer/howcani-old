@@ -3,6 +3,11 @@ import { ConfigurationService } from './configuration.service.js';
 
 @Injectable()
 export class SearchQueryService {
+  query = '';
+  labels = [];
+  sort = '';
+  order = '';
+
   constructor(configuration: ConfigurationService) {
     this.configuration = configuration;
   }
@@ -18,30 +23,26 @@ export class SearchQueryService {
    * @param String  order   The sort order if sort parameter is provided. One of asc or desc. Default: desc
    * @return String
    */
-  build({ q = '', repo = '', labels = [], sort = '', order = '' } = {}) {
+  getSearchQuery() {
     const query = [];
 
-    if (q) {
-      query.push(q.replace(/\s/g, '+'));
+    if (this.query) {
+      query.push(this.query.replace(/\s/g, '+'));
     }
 
-    if (labels.length > 0) {
-      query.push(labels.map((label) => `label:${label}`).join('+'));
+    if (this.labels.length > 0) {
+      query.push(this.labels.map((label) => `label:${label}`).join('+'));
     }
 
-    if (sort) {
-      query.push(`sort:${sort}`);
+    if (this.sort) {
+      query.push(`sort:${this.sort}`);
     }
 
-    if (order) {
-      query.push(`order:${order}`);
+    if (this.order) {
+      query.push(`order:${this.order}`);
     }
 
-    if (repo) {
-      query.push(`repo:${repo}`);
-    } else {
-      query.push(`repo:${this.configuration.project.user}/${this.configuration.project.repository}`);
-    }
+    query.push(`repo:${this.configuration.project.user}/${this.configuration.project.repository}`);
 
     return query.join('+');
   }

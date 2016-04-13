@@ -31,29 +31,32 @@ describe('Search Query service spec', () => {
     });
   });
 
-  describe('#build', () => {
-    describe('When called with defaults', () => {
-      it('should return search query for user/repo issues', () => {
-        expect(searchQueryService.build()).toBe('repo:howcani-project/howcani-data');
-      });
+  describe('#getSearchQuery', () => {
+    it('should return search query for user/repo issues', () => {
+      expect(searchQueryService.getSearchQuery()).toBe('repo:howcani-project/howcani-data');
     });
 
-    describe('When called with custom query, labels and repo', () => {
+    describe('when query, labels and repo are set', () => {
+      beforeEach(() => {
+        searchQueryService.query = 'angular2 user:janbaer';
+        searchQueryService.labels = ['important', 'critical'];
+      });
+
       it('should return search query with specified repo, labels and custom query', () => {
-        expect(searchQueryService.build({
-          q: 'angular2 user:janbaer',
-          labels: ['important', 'critical'],
-          repo: 'janbaer/ask-me-anything'
-        })).toBe('angular2+user:janbaer+label:important+label:critical+repo:janbaer/ask-me-anything');
+        expect(searchQueryService.getSearchQuery()).toBe('angular2+user:janbaer+label:important+label:critical+repo:howcani-project/howcani-data');
       });
     });
 
-    describe('When called with sort and order', () => {
+    describe('when sort and order are set', () => {
+      beforeEach(() => {
+        searchQueryService.query = 'angular2 user:janbaer';
+        searchQueryService.labels = ['important', 'critical'];
+        searchQueryService.sort = 'comments';
+        searchQueryService.order = 'asc';
+      });
+
       it('should contain sort and order query params', () => {
-        expect(searchQueryService.build({
-          sort: 'comments',
-          order: 'asc'
-        })).toBe('sort:comments+order:asc+repo:howcani-project/howcani-data');
+        expect(searchQueryService.getSearchQuery()).toBe('angular2+user:janbaer+label:important+label:critical+sort:comments+order:asc+repo:howcani-project/howcani-data');
       });
     });
   });

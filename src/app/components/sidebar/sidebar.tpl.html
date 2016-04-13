@@ -1,9 +1,17 @@
 <ul id="slide-out" class="side-nav fixed">
   <li id="Sidebar-search">
     <div class="card">
-      <input id="Sidebar-searchInput"><i id="Sidebar-searchIcon" class="material-icons">search</i>
+      <form  (ngSubmit)="onSubmitSearchValue($event, searchInput.value)" #searchForm="ngForm">
+        <input #searchInput id="Sidebar-searchInput" />
+        <i id="Sidebar-searchIcon" class="material-icons" (click)="onSubmitSearchValue($event, searchInput.value)">search</i>
+      </form>
     </div>
   </li>
-  <li class="Sidebar-tag bold"><a href="" class="waves-effect waves-teal">Label 1</a></li>
-  <li class="Sidebar-tag Sidebar-tag--selected bold"><a href="" class="waves-effect waves-teal">Label 2</a></li>
+  <li *ngFor="#label of labelService.labels">
+    <a
+      href=""
+      class="Sidebar-tag waves-effect waves-teal"
+      [ngClass]="{'Sidebar-tag--selected': isSelected(label)}"
+      (click)="toggleLabel($event, label)">{{ label }}</a>
+  </li>
 </ul>
