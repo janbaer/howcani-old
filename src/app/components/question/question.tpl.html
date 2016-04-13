@@ -1,12 +1,7 @@
 <div class="card">
   <div class="card-content">
     <div class="Question-title">
-      <i class="material-icons tooltipped QuestionState"
-         data-position="bottom" data-delay="50"
-         [attr.data-tooltip]="isClosed(question) ? 'is answered' : 'open'"
-         [ngClass]="{isClosed: isClosed(question), isOpen: !isClosed(question)}">
-        {{isClosed(question) ? 'check_circle' : 'help_outline' }}
-      </i>
+      <question-state [question]="question"></question-state>
       <span class="QuestionTitle-label" (click)="showDetails(question)">{{ question.title }}</span>
     </div>
     <div class="Question-body markdown-body" [innerHTML]="question.body | markdown"></div>
