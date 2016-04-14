@@ -17,6 +17,6 @@ marked.setOptions({
 })
 export class MarkdownPipe {
   transform(value) {
-    return marked(value);
+    return value ? marked(value) : '';
   }
 }
