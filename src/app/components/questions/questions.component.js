@@ -29,7 +29,8 @@ export class QuestionsComponent {
     this.materialize.showDialog('questionDetailsDialog');
   }
 
-  closeQuestionDetailsDialog() {
+  closeQuestionDetailsDialog($event) {
+    $event.preventDefault();
     this.selectedQuestion = undefined;
     this.materialize.closeDialog('questionDetailsDialog');
   }
