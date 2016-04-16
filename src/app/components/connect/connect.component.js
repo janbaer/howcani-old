@@ -1,8 +1,8 @@
 import { Component } from 'angular2/core';
 import { Router } from 'angular2/router';
-import { FORM_DIRECTIVES, FormBuilder } from 'angular2/common';
-import { ConfigurationService } from './../../services/configuration.service.js';
-import { QuestionService } from './../../services/question.service.js';
+import { FORM_DIRECTIVES } from 'angular2/common';
+import { ConfigurationService } from './../../services/configuration.service';
+import { GithubService } from './../../services/github.service';
 import { MaterializeService } from './../../services/materialize.service';
 import template from './connect.tpl.html';
 
@@ -13,13 +13,12 @@ import template from './connect.tpl.html';
 })
 export class ConnectComponent {
   constructor(router: Router,
-              formBuilder: FormBuilder,
               configuration: ConfigurationService,
-              questionService: QuestionService,
+              githubService: GithubService,
               materializeService: MaterializeService) {
     this.router = router;
-    this.questionService = questionService;
     this.configuration = configuration;
+    this.githubService = githubService;
     this.materialize = materializeService;
 
     this.project = Object.assign({}, this.configuration.project);
@@ -28,7 +27,7 @@ export class ConnectComponent {
   onSubmit() {
     this.isBusy = true;
 
-    this.questionService.validate(this.project.user, this.project.repository)
+    this.validate(this.project.user, this.project.repository)
       .then((isValid) => {
         this.isBusy = false;
         if (isValid) {
@@ -38,6 +37,17 @@ export class ConnectComponent {
           this.materialize.showToastMessage('The given Github user or project does not exists! Please verify your input!');
         }
       });
+  }
 
+  validate(username, repository) {
+    return new Promise((resolve) => {
+      if (repository) {
+        this.githubService.getRepo(username, repository)
+          .subscribe(() => resolve(true), () => resolve(false));
+      } else {
+        this.githubService.getUser(username)
+          .subscribe(() => resolve(true), () => resolve(false));
+      }
+    });
   }
 }

@@ -48,7 +48,7 @@ export class GithubService {
   }
 
   handleError(error) {
-    console.log('Error while featching data');
+    console.log('Error while fetching data', error);
     return Observable.throw(error.json().error || 'Github error');
   }
 

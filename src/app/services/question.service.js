@@ -18,15 +18,4 @@ export class QuestionService {
     return this.githubService.getComments(issueNumber);
   }
 
-  validate(username, repository) {
-    return new Promise((resolve) => {
-      if (repository) {
-        this.githubService.getRepo(username, repository)
-          .subscribe(() => resolve(true), () => resolve(false));
-      } else {
-        this.githubService.getUser(username)
-          .subscribe(() => resolve(true), () => resolve(false));
-      }
-    });
-  }
 }
