@@ -23,7 +23,7 @@ export class SidebarComponent {
     }
 
     this.searchValue = searchValue;
-    this.onFilterChanged.emit({ searchValue: this.searchValue, selectedLabels: this.selectedLabels });
+    this.updateSearch();
   }
 
   toggleLabel(event, label) {
@@ -32,8 +32,11 @@ export class SidebarComponent {
     } else {
       this.selectedLabels.push(label);
     }
+    this.updateSearch();
+  }
 
-    this.onFilterChanged.emit({ searchValue: this.searchValue, selectedLabels: this.selectedLabels });
+  updateSearch() {
+    this.onFilterChanged.emit({ searchValue: this.searchValue, selectedLabels: this.selectedLabels.map((label) => label.name) });
   }
 
   ngOnInit() {

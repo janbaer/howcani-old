@@ -16,6 +16,7 @@ import { GithubService } from './app/services/github.service';
 import { QuestionService } from './app/services/question.service';
 import { LabelService } from './app/services/label.service';
 import { MaterializeService } from './app/services/materialize.service';
+import { SearchQueryService } from './app/services/search_query.service';
 
 if (ENVIRONMENT === 'production') {
   enableProdMode();
@@ -30,6 +31,7 @@ bootstrap(AppComponent, [
   GithubService,
   QuestionService,
   LabelService,
-  MaterializeService
+  MaterializeService,
+  SearchQueryService
 ]);
 

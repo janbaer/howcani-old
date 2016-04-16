@@ -16,10 +16,13 @@ export class QuestionsComponent {
     this.materialize = materializeService;
   }
 
+  getQuestions() {
+    return this.questionService.questions;
+  }
+
   renderQuestions() {
     this.questionService.fetchQuestions()
-      .subscribe((response) => {
-        this.questions = response.items;
+      .subscribe(() => {
         this.materialize.updateTooltips();
       });
   }
