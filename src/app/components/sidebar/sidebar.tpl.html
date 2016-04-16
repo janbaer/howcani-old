@@ -7,13 +7,10 @@
       </form>
     </div>
   </li>
-  <li *ngFor="#label of labelService.labels">
-    <a
-      href=""
-      class="Sidebar-tag waves-effect waves-teal"
-      [ngClass]="{'Sidebar-tag--selected': isSelected(label)}"
-      (click)="toggleLabel($event, label)">
-      <span [ngStyle]="{'color': '#' + label.color}">{{label.name}}</span>
-    </a>
+  <li *ngFor="#label of labelService.labels; #i = index">
+    <div class="Label-container">
+      <input type="checkbox" id="label{{i}}" (click)="toggleLabel($event, label)" />
+      <label attr.for="label{{i}}" [ngStyle]="{'color': '#' + label.color}">{{ label.name  }}</label>
+    </div>
   </li>
 </ul>

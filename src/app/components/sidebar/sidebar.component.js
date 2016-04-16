@@ -27,8 +27,6 @@ export class SidebarComponent {
   }
 
   toggleLabel(event, label) {
-    event.preventDefault();
-
     if (this.selectedLabels.indexOf(label) >= 0) {
       this.selectedLabels = this.selectedLabels.filter((selectedLabel) => selectedLabel !== label);
     } else {
@@ -36,10 +34,6 @@ export class SidebarComponent {
     }
 
     this.onFilterChanged.emit({ searchValue: this.searchValue, selectedLabels: this.selectedLabels });
-  }
-
-  isSelected(label) {
-    return this.selectedLabels.indexOf(label) >= 0;
   }
 
   ngOnInit() {
