@@ -18,7 +18,7 @@ export class QuestionsComponent {
 
   renderQuestions() {
     this.questionService.fetchQuestions()
-      .then((response) => {
+      .subscribe((response) => {
         this.questions = response.items;
         this.materialize.updateTooltips();
       });
@@ -29,7 +29,8 @@ export class QuestionsComponent {
     this.materialize.showDialog('questionDetailsDialog');
   }
 
-  closeQuestionDetailsDialog() {
+  closeQuestionDetailsDialog($event) {
+    $event.preventDefault();
     this.selectedQuestion = undefined;
     this.materialize.closeDialog('questionDetailsDialog');
   }

@@ -1,0 +1,7 @@
+<i class="material-icons tooltipped QuestionState"
+    data-position="bottom" data-delay="50"
+    [attr.data-tooltip]="isClosed(question) ? 'is answered' : 'open'"
+    [ngClass]="{isClosed: isClosed(question), isOpen: !isClosed(question)}">
+  {{isClosed(question) ? 'check_circle' : 'help_outline' }}
+</i>
+

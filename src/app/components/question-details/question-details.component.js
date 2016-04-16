@@ -1,13 +1,18 @@
 import { Component, Input } from 'angular2/core';
 import { QuestionService } from './../../services/question.service';
+import { MarkdownPipe } from './../../pipes/markdown.pipe';
+import { QuestionStateComponent } from './../question-state/question-state.component';
+import { UserComponent } from './../user/user.component';
+import { DateComponent } from './../date/date.component';
+import { LabelsComponent } from './../labels/labels.component';
 import { CommentComponent } from './../comment/comment.component';
 import template from './question-details.tpl.html';
 
 @Component({
   selector: 'question-details',
   template: template,
-  directives: [CommentComponent],
-  pipes: []
+  directives: [CommentComponent, QuestionStateComponent, UserComponent, DateComponent, LabelsComponent],
+  pipes: [MarkdownPipe]
 })
 export class QuestionDetailsComponent {
   constructor(questionService: QuestionService) {
