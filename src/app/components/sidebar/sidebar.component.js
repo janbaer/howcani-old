@@ -43,7 +43,6 @@ export class SidebarComponent {
   }
 
   ngOnInit() {
-    console.log('here');
-    //this.labelService.fetchLabels();
+    this.labelService.fetchLabels();
   }
 }

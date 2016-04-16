@@ -12,6 +12,8 @@
       href=""
       class="Sidebar-tag waves-effect waves-teal"
       [ngClass]="{'Sidebar-tag--selected': isSelected(label)}"
-      (click)="toggleLabel($event, label)">{{ label }}</a>
+      (click)="toggleLabel($event, label)">
+      <span [ngStyle]="{'color': '#' + label.color}">{{label.name}}</span>
+    </a>
   </li>
 </ul>
