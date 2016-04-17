@@ -1,5 +1,6 @@
 import './shim';
-import 'rxjs/Rx';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
 
 import 'angular2/core';
 import 'angular2/common';

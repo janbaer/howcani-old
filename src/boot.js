@@ -1,5 +1,6 @@
 import './shim';
-import 'rxjs/Rx';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
 import jquery from 'jquery';
 
 window.$ = jquery;
