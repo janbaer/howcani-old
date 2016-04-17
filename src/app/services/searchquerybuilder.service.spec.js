@@ -16,7 +16,7 @@ describe('Search Query service spec', () => {
       };
       this.user = {
         login: 'janbaer'
-      }
+      };
     }
   }
 
@@ -37,7 +37,7 @@ describe('Search Query service spec', () => {
   });
 
   describe('#getSearchQuery', () => {
-    const repoQueryString = 'repo:howcani-project/howcani-data';
+    const repoQueryString = 'repo:howcani-project/howcani-data+type:issue';
 
     it('should return search query for user/repo issues', () => {
       expect(searchQueryBuilder.getSearchQuery()).toBe(repoQueryString);

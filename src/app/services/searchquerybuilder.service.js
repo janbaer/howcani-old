@@ -54,6 +54,7 @@ export class SearchQueryBuilderService {
     }
 
     query.push(`repo:${this.configuration.project.user}/${this.configuration.project.repository}`);
+    query.push('type:issue');
 
     return query.join('+');
   }
