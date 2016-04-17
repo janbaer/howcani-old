@@ -98,17 +98,5 @@ describe('Search Query service spec', () => {
       });
     });
 
-    describe('when sort and order are set', () => {
-      beforeEach(() => {
-        searchQueryBuilder.query = 'angular2 user:janbaer';
-        searchQueryBuilder.labels = ['important', 'critical'];
-        searchQueryBuilder.sort = 'comments';
-        searchQueryBuilder.order = 'asc';
-      });
-
-      it('should contain sort and order query params', () => {
-        expect(searchQueryBuilder.getSearchQuery()).toBe('angular2+user:janbaer+label:important+label:critical+sort:comments+order:asc+' + repoQueryString);
-      });
-    });
   });
 });

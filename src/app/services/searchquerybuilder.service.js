@@ -21,9 +21,6 @@ export class SearchQueryBuilderService {
    * @param String  state   The state of the issue (open or closed)
    * @param Boolean onlyMyQuestions - Filter the issues by the name of the
    * current logged in user
-   * @param String  sort    Enrich query string with sort option, by default results are sorted by best match
-   *                        Additionally it could be: comments, created or updated
-   * @param String  order   The sort order if sort parameter is provided. One of asc or desc. Default: desc
    * @return String
    */
   getSearchQuery() {
@@ -35,14 +32,6 @@ export class SearchQueryBuilderService {
 
     if (this.labels.length > 0) {
       query.push(this.labels.map((label) => `label:${label}`).join('+'));
-    }
-
-    if (this.sort) {
-      query.push(`sort:${this.sort}`);
-    }
-
-    if (this.order) {
-      query.push(`order:${this.order}`);
     }
 
     if (this.state) {
