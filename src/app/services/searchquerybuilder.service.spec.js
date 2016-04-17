@@ -36,54 +36,60 @@ describe('Search Query service spec', () => {
     });
   });
 
-  describe('#getSearchQuery', () => {
+  describe('#buildQueryString', () => {
     const repoQueryString = 'repo:howcani-project/howcani-data+type:issue';
 
     it('should return search query for user/repo issues', () => {
-      expect(searchQueryBuilder.getSearchQuery()).toBe(repoQueryString);
+      expect(searchQueryBuilder.buildQueryString({})).toBe(repoQueryString);
     });
 
     describe('when query, labels and repo are set', () => {
+      const searchQuery = {};
+
       beforeEach(() => {
-        searchQueryBuilder.query = 'angular2 user:janbaer';
-        searchQueryBuilder.labels = ['important', 'critical'];
+        searchQuery.query = 'angular2 user:janbaer';
+        searchQuery.labels = ['important', 'critical'];
       });
 
       it('should return search query with specified repo, labels and custom query', () => {
-        expect(searchQueryBuilder.getSearchQuery()).toBe('angular2+user:janbaer+label:important+label:critical+' + repoQueryString);
+        expect(searchQueryBuilder.buildQueryString(searchQuery)).toBe('angular2+user:janbaer+label:important+label:critical+' + repoQueryString);
       });
     });
 
     describe('State', () => {
+      const searchQuery = {};
+
       describe('When State is set', () => {
         beforeEach(() => {
-          searchQueryBuilder.state = 'open';
+          searchQuery.state = 'open';
         });
 
         it('Should contain the given state', () => {
-          expect(searchQueryBuilder.getSearchQuery()).toBe('state:open+' + repoQueryString);
+          expect(searchQueryBuilder.buildQueryString(searchQuery)).toBe('state:open+' + repoQueryString);
         });
       });
 
       describe('When state is empty', () => {
         beforeEach(() => {
-          searchQueryBuilder.state = '';
+          searchQuery.state = '';
         });
 
         it('Should not contain the state', () => {
-          expect(searchQueryBuilder.getSearchQuery()).toBe(repoQueryString);
+          expect(searchQueryBuilder.buildQueryString(searchQuery)).toBe(repoQueryString);
         });
       });
     });
 
     describe('Only my questions', () => {
+      const searchQuery = {};
+
       describe('When user wants to see only his questions', () => {
         beforeEach(() => {
-          searchQueryBuilder.onlyMyQuestions = true;
+          searchQuery.onlyMyQuestions = true;
         });
 
         it('Should contain the user filter', () => {
-          expect(searchQueryBuilder.getSearchQuery()).toBe('user:janbaer+' + repoQueryString);
+          expect(searchQueryBuilder.buildQueryString(searchQuery)).toBe('user:janbaer+' + repoQueryString);
         });
 
         describe('When no user is logged in', () => {
@@ -92,7 +98,7 @@ describe('Search Query service spec', () => {
           });
 
           it('Should not contain the user filter', () => {
-            expect(searchQueryBuilder.getSearchQuery()).toBe(repoQueryString);
+            expect(searchQueryBuilder.buildQueryString(searchQuery)).toBe(repoQueryString);
           });
         });
       });

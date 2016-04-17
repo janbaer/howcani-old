@@ -3,11 +3,6 @@ import { ConfigurationService } from './configuration.service.js';
 
 @Injectable()
 export class SearchQueryBuilderService {
-  query = '';
-  labels = [];
-  sort = '';
-  order = '';
-
   constructor(configuration: ConfigurationService) {
     this.configuration = configuration;
   }
@@ -23,22 +18,22 @@ export class SearchQueryBuilderService {
    * current logged in user
    * @return String
    */
-  getSearchQuery() {
+  buildQueryString(searchQuery = {}) {
     const query = [];
 
-    if (this.query) {
-      query.push(this.query.replace(/\s/g, '+'));
+    if (searchQuery.query) {
+      query.push(searchQuery.query.replace(/\s/g, '+'));
     }
 
-    if (this.labels.length > 0) {
-      query.push(this.labels.map((label) => `label:${label}`).join('+'));
+    if (searchQuery.labels && searchQuery.labels.length > 0) {
+      query.push(searchQuery.labels.map((label) => `label:${label}`).join('+'));
     }
 
-    if (this.state) {
-      query.push(`state:${this.state}`);
+    if (searchQuery.state) {
+      query.push(`state:${searchQuery.state}`);
     }
 
-    if (this.onlyMyQuestions && this.configuration.user) {
+    if (searchQuery.onlyMyQuestions && this.configuration.user) {
       query.push(`user:${this.configuration.user.login}`);
     }
 

@@ -15,14 +15,7 @@ export class QuestionService {
   }
 
   fetchQuestions(searchQuery) {
-    if (searchQuery) {
-      this.searchQueryBuilder.query = searchQuery.query;
-      this.searchQueryBuilder.labels = searchQuery.labels;
-      this.searchQueryBuilder.state = searchQuery.state;
-      this.searchQueryBuilder.onlyMyQuestions = searchQuery.onlyMyQuestions;
-    }
-
-    const searchString = this.searchQueryBuilder.getSearchQuery();
+    const searchString = this.searchQueryBuilder.buildQueryString(searchQuery);
     const questionsResponse = this.githubService.searchIssues(searchString);
 
     questionsResponse.subscribe((response) => {
