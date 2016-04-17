@@ -2,10 +2,10 @@
 
 import { Injector, provide } from 'angular2/core';
 import { ConfigurationService } from './configuration.service.js';
-import { SearchQueryService } from './search_query.service.js';
+import { SearchQueryBuilderService } from './searchquerybuilder.service.js';
 
 describe('Search Query service spec', () => {
-  let searchQueryService;
+  let searchQueryBuilder;
 
   class ConfigurationServiceMock {
     constructor() {
@@ -17,46 +17,46 @@ describe('Search Query service spec', () => {
   }
 
   beforeEachProviders(() => [
-    SearchQueryService,
+    SearchQueryBuilderService,
     provide(ConfigurationService, { useClass: ConfigurationServiceMock })
   ]);
 
   beforeEach(inject([Injector], (injector) => {
-    searchQueryService = injector.get(SearchQueryService);
+    searchQueryBuilder = injector.get(SearchQueryBuilderService);
   }));
 
   describe('When service was created', () => {
     it('Should not be null', () => {
-      expect(searchQueryService).toBeDefined();
+      expect(searchQueryBuilder).toBeDefined();
     });
   });
 
   describe('#getSearchQuery', () => {
     it('should return search query for user/repo issues', () => {
-      expect(searchQueryService.getSearchQuery()).toBe('repo:howcani-project/howcani-data');
+      expect(searchQueryBuilder.getSearchQuery()).toBe('repo:howcani-project/howcani-data');
     });
 
     describe('when query, labels and repo are set', () => {
       beforeEach(() => {
-        searchQueryService.query = 'angular2 user:janbaer';
-        searchQueryService.labels = ['important', 'critical'];
+        searchQueryBuilder.query = 'angular2 user:janbaer';
+        searchQueryBuilder.labels = ['important', 'critical'];
       });
 
       it('should return search query with specified repo, labels and custom query', () => {
-        expect(searchQueryService.getSearchQuery()).toBe('angular2+user:janbaer+label:important+label:critical+repo:howcani-project/howcani-data');
+        expect(searchQueryBuilder.getSearchQuery()).toBe('angular2+user:janbaer+label:important+label:critical+repo:howcani-project/howcani-data');
       });
     });
 
     describe('when sort and order are set', () => {
       beforeEach(() => {
-        searchQueryService.query = 'angular2 user:janbaer';
-        searchQueryService.labels = ['important', 'critical'];
-        searchQueryService.sort = 'comments';
-        searchQueryService.order = 'asc';
+        searchQueryBuilder.query = 'angular2 user:janbaer';
+        searchQueryBuilder.labels = ['important', 'critical'];
+        searchQueryBuilder.sort = 'comments';
+        searchQueryBuilder.order = 'asc';
       });
 
       it('should contain sort and order query params', () => {
-        expect(searchQueryService.getSearchQuery()).toBe('angular2+user:janbaer+label:important+label:critical+sort:comments+order:asc+repo:howcani-project/howcani-data');
+        expect(searchQueryBuilder.getSearchQuery()).toBe('angular2+user:janbaer+label:important+label:critical+sort:comments+order:asc+repo:howcani-project/howcani-data');
       });
     });
   });

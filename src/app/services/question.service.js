@@ -2,25 +2,25 @@ import { Injectable } from 'angular2/core';
 import { BehaviorSubject } from 'rxjs/subject/BehaviorSubject';
 import { ConfigurationService } from './configuration.service';
 import { GithubService } from './github.service';
-import { SearchQueryService } from './search_query.service';
+import { SearchQueryBuilderService } from './searchquerybuilder.service';
 
 @Injectable()
 export class QuestionService {
-  constructor(configuration: ConfigurationService, githubService: GithubService, searchQueryService: SearchQueryService) {
+  constructor(configuration: ConfigurationService, githubService: GithubService, searchQueryBuilderService: SearchQueryBuilderService) {
     this.configuration = configuration;
     this.githubService = githubService;
-    this.searchQueryService = searchQueryService;
+    this.searchQueryBuilder = searchQueryBuilderService;
 
     this.questions = new BehaviorSubject([]);
   }
 
   fetchQuestions(searchQuery) {
     if (searchQuery) {
-      this.searchQueryService.query = searchQuery.searchValue;
-      this.searchQueryService.labels = searchQuery.selectedLabels;
+      this.searchQueryBuilder.query = searchQuery.searchValue;
+      this.searchQueryBuilder.labels = searchQuery.selectedLabels;
     }
 
-    const searchString = this.searchQueryService.getSearchQuery();
+    const searchString = this.searchQueryBuilder.getSearchQuery();
     const questionsResponse = this.githubService.searchIssues(searchString);
 
     questionsResponse.subscribe((response) => {

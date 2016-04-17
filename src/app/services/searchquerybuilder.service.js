@@ -2,7 +2,7 @@ import { Injectable } from 'angular2/core';
 import { ConfigurationService } from './configuration.service.js';
 
 @Injectable()
-export class SearchQueryService {
+export class SearchQueryBuilderService {
   query = '';
   labels = [];
   sort = '';
