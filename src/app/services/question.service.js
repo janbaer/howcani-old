@@ -18,6 +18,8 @@ export class QuestionService {
     if (searchQuery) {
       this.searchQueryBuilder.query = searchQuery.searchValue;
       this.searchQueryBuilder.labels = searchQuery.selectedLabels;
+      this.searchQueryBuilder.state = searchQuery.state;
+      this.searchQueryBuilder.onlyMyQuestions = searchQuery.onlyMyQuestions;
     }
 
     const searchString = this.searchQueryBuilder.getSearchQuery();
