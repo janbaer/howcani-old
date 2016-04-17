@@ -18,6 +18,9 @@ export class SearchQueryBuilderService {
    * @param String  q       The search term https://help.github.com/articles/searching-issues/
    * @param Array   labels  Limits searches to a specific user or repository. Could be user/repository.
    * @param Array   labels  Enrich query string with labels when specified
+   * @param String  state   The state of the issue (open or closed)
+   * @param Boolean onlyMyQuestions - Filter the issues by the name of the
+   * current logged in user
    * @param String  sort    Enrich query string with sort option, by default results are sorted by best match
    *                        Additionally it could be: comments, created or updated
    * @param String  order   The sort order if sort parameter is provided. One of asc or desc. Default: desc
@@ -40,6 +43,14 @@ export class SearchQueryBuilderService {
 
     if (this.order) {
       query.push(`order:${this.order}`);
+    }
+
+    if (this.state) {
+      query.push(`state:${this.state}`);
+    }
+
+    if (this.onlyMyQuestions && this.configuration.user) {
+      query.push(`user:${this.configuration.user.login}`);
     }
 
     query.push(`repo:${this.configuration.project.user}/${this.configuration.project.repository}`);
