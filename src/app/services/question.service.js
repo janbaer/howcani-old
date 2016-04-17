@@ -16,8 +16,8 @@ export class QuestionService {
 
   fetchQuestions(searchQuery) {
     if (searchQuery) {
-      this.searchQueryBuilder.query = searchQuery.searchValue;
-      this.searchQueryBuilder.labels = searchQuery.selectedLabels;
+      this.searchQueryBuilder.query = searchQuery.query;
+      this.searchQueryBuilder.labels = searchQuery.labels;
       this.searchQueryBuilder.state = searchQuery.state;
       this.searchQueryBuilder.onlyMyQuestions = searchQuery.onlyMyQuestions;
     }

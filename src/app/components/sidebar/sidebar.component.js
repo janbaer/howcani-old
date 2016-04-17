@@ -49,8 +49,8 @@ export class SidebarComponent {
 
   updateSearch() {
     const searchQuery = {
-      searchValue: this.searchValue,
-      selectedLabels: this.selectedLabels.map((label) => label.name),
+      query: this.searchValue,
+      labels: this.selectedLabels.map((label) => label.name),
       state: this.state,
       onlyMyQuestions: this.onlyMyQuestions
     };
