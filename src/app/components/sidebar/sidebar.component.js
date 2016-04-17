@@ -9,12 +9,14 @@ import template from './sidebar.tpl.html';
 })
 export class SidebarComponent {
   @Input() searchValue = '';
+  @Input() onlyMyQuestions = false;
   @Output() onFilterChanged = new EventEmitter();
 
   selectedLabels = [];
 
   constructor(labelService: LabelService) {
     this.labelService = labelService;
+    this.state = '';
   }
 
   onSubmitSearchValue(event, searchValue) {
@@ -35,8 +37,25 @@ export class SidebarComponent {
     this.updateSearch();
   }
 
+  showOnlyMyQuestions(onlyMyQuestions) {
+    this.onlyMyQuestions = onlyMyQuestions;
+    this.updateSearch();
+  }
+
+  filterByState(state) {
+    this.state = state;
+    this.updateSearch();
+  }
+
   updateSearch() {
-    this.onFilterChanged.emit({ searchValue: this.searchValue, selectedLabels: this.selectedLabels.map((label) => label.name) });
+    const searchQuery = {
+      searchValue: this.searchValue,
+      selectedLabels: this.selectedLabels.map((label) => label.name),
+      state: this.state,
+      onlyMyQuestions: this.onlyMyQuestions
+    };
+
+    this.onFilterChanged.emit(searchQuery);
   }
 
   ngOnInit() {

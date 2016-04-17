@@ -2,10 +2,34 @@
   <li id="Sidebar-search">
     <div class="card">
       <form  (ngSubmit)="onSubmitSearchValue($event, searchInput.value)" #searchForm="ngForm">
-        <input #searchInput id="Sidebar-searchInput" />
+        <input #searchInput id="Sidebar-searchInput" [(value)]="searchValue" />
         <i id="Sidebar-searchIcon" class="material-icons" (click)="onSubmitSearchValue($event, searchInput.value)">search</i>
       </form>
     </div>
+  </li>
+  <li>
+    <input type="checkbox" id="onlyMyQuestions" (click)="showOnlyMyQuestions($event.currentTarget.checked)" [(checked)]="onlyMyQuestions"/>
+    <label for="onlyMyQuestions" >Only my questions</label>
+  </li>
+  <li>
+    <hr>
+  </li>
+  <li>
+    <div class="StateFilter-container">
+      <input name="state" type="radio" id="state-all" [checked]="state===''" (click)="filterByState('')" />
+      <label for="state-all">All</label>
+    </div>
+    <div class="StateFilter-container">
+      <input name="state" type="radio" id="state-open" [checked]="state==='open'" (click)="filterByState('open')" />
+      <label for="state-open">Open</label>
+    </div>
+    <div class="StateFilter-container">
+      <input name="state" type="radio" id="state-closed" [checked]="state==='closed'" (click)="filterByState('closed')" />
+      <label for="state-closed">Closed</label>
+    </div>
+  </li>
+  <li>
+    <hr>
   </li>
   <li *ngFor="#label of labelService.labels; #i = index">
     <div class="Label-container">
