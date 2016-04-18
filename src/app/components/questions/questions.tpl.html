@@ -1,5 +1,5 @@
 <div class="QuestionsList-container">
-  <div class="Question-container" *ngFor="#question of questions">
+  <div class="Question-container" *ngFor="#question of getQuestions() | async">
     <question (onSelectQuestion)="showQuestionDetails($event)" [question]="question"></question>
   </div>
 </div>

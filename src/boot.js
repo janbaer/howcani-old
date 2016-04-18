@@ -1,5 +1,6 @@
 import './shim';
-import 'rxjs/Rx';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
 import jquery from 'jquery';
 
 window.$ = jquery;
@@ -14,7 +15,9 @@ import { ConfigurationService } from './app/services/configuration.service';
 import { StorageService } from './app/services/storage.service';
 import { GithubService } from './app/services/github.service';
 import { QuestionService } from './app/services/question.service';
+import { LabelService } from './app/services/label.service';
 import { MaterializeService } from './app/services/materialize.service';
+import { SearchQueryBuilderService } from './app/services/searchquerybuilder.service';
 
 if (ENVIRONMENT === 'production') {
   enableProdMode();
@@ -28,6 +31,8 @@ bootstrap(AppComponent, [
   ConfigurationService,
   GithubService,
   QuestionService,
-  MaterializeService
+  LabelService,
+  MaterializeService,
+  SearchQueryBuilderService
 ]);
 
