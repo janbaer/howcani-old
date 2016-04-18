@@ -1,13 +1,15 @@
 import { Injectable } from 'angular2/core';
 import { Http, RequestOptions, URLSearchParams, Headers } from 'angular2/http';
-import { Observable } from 'rxjs/Observable';
+//import { Observable } from 'rxjs/Observable';
 import { ConfigurationService } from './configuration.service.js';
+import { MaterializeService } from './materialize.service.js';
 
 @Injectable()
 export class GithubService {
-  constructor(http: Http, configuration: ConfigurationService) {
+  constructor(http: Http, configuration: ConfigurationService, materializeService: MaterializeService) {
     this.http = http;
     this.configuration = configuration;
+    this.materialize = materializeService;
     this.githubApiBaseUrl = 'https://api.github.com';
   }
 
@@ -49,7 +51,8 @@ export class GithubService {
 
   handleError(error) {
     console.log('Error while fetching data', error);
-    return Observable.throw(error.json().error || 'Github error');
+    this.materialize.showToastMessage('There was an unexpected while sending a request to Github');
+    //return Observable.throw(error.json().error || 'Github error');
   }
 
   get(path, searchParams) {
@@ -57,7 +60,7 @@ export class GithubService {
 
     return this.http.get(this.buildUrl(path), requestOptions)
                     .map((response) => response.json())
-                    .catch(this.handleError);
+                    .catch(this.handleError.bind(this));
   }
 
   getComments(issueNumber) {
