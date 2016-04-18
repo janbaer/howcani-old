@@ -1,11 +1,27 @@
-@max-height: 80%;
+@max-height-mobile: 88%;
+@max-height-tablet: 80%;
 
 .modal {
-  max-height: @max-height;
+  max-height: @max-height-mobile;
+
+  width: 95%;
+  @media @screen-tablets-landscape {
+    width: 80%;
+    max-height: @max-height-tablet;
+  }
 }
 
+.modal .modal-content {
+  padding: @space-large;
+  @media @screen-tablets-landscape {
+    padding: 24px;
+  }
+}
 .modal.modal-fixed-footer {
-  height: @max-height;
+  height: @max-height-mobile;
+  @media @screen-tablets-landscape {
+    height: @max-height-tablet;
+  }
 }
 
 .card .card-action {
