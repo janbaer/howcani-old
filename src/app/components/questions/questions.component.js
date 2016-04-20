@@ -3,12 +3,14 @@ import { MaterializeService } from './../../services/materialize.service';
 import { QuestionService } from './../../services/question.service';
 import { QuestionComponent } from './../question/question.component';
 import { QuestionDetailsComponent } from './../question-details/question-details.component';
+import { ScrollDetectComponent } from './../scroll-detect/scroll-detect.component';
+
 import template from './questions.tpl.html';
 
 @Component({
   selector: 'questions',
   template: template,
-  directives: [QuestionComponent, QuestionDetailsComponent]
+  directives: [QuestionComponent, QuestionDetailsComponent, ScrollDetectComponent]
 })
 export class QuestionsComponent {
   constructor(questionService: QuestionService, materializeService: MaterializeService) {
@@ -21,7 +23,7 @@ export class QuestionsComponent {
   }
 
   renderQuestions() {
-    this.questionService.fetchQuestions()
+    this.questionService.fetchQuestions({}, 1)
       .subscribe(() => {
         this.materialize.updateTooltips();
       });
@@ -36,6 +38,16 @@ export class QuestionsComponent {
     $event.preventDefault();
     this.selectedQuestion = undefined;
     this.materialize.closeDialog('questionDetailsDialog');
+  }
+
+  fetchMoreQuestions() {
+    const observable = this.questionService.fetchMoreQuestions();
+    if (observable) {
+      this.isBusy = true;
+      observable.subscribe(() => {
+        this.isBusy = false;
+      });
+    }
   }
 
   ngOnInit() {

@@ -10,7 +10,9 @@ export class MaterializeService {
 
   initSideNav() {
     setTimeout(() => {
-      $('.button-collapse').sideNav();
+      if ($('.button-collapse').sideNav) {
+        $('.button-collapse').sideNav();
+      }
     }, 100);
   }
 
