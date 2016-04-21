@@ -22,7 +22,7 @@ export class AppComponent {
     this.questionService = questionService;
   }
   onFilterChanged(searchQuery) {
-    this.questionService.fetchQuestions(searchQuery);
+    this.questionService.fetchQuestions(searchQuery, 1);
   }
 }
 

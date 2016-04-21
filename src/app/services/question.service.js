@@ -26,7 +26,7 @@ export class QuestionService {
 
     questionsResponse.subscribe((response) => {
       this.totalCountOfQuestions = response.total_count;
-      const items = page === 1 ? response.items : this.questions.value.concat(response.items);
+      const items = this.page === 1 ? response.items : this.questions.value.concat(response.items);
       this.questions.next(items);
     });
 
