@@ -15,6 +15,8 @@
 @screen-tablets-landscape: ~"(min-width: 1024px)";
 @screen-desktops: ~"(min-width: 1025px)";
 
+@screen-sidebar-break: ~"(min-width: 993px)";
+
 /* Common styles */
 .input-field input[type=text].ng-invalid {
   border-bottom: 1px solid @error-color !important;
@@ -32,7 +34,7 @@ body {
 .AppContent-container {
   height: 100%;
 
-  @media @screen-tablets-landscape {
+  @media @screen-sidebar-break {
     margin-left: 250px;
   }
 }
