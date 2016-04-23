@@ -22,12 +22,12 @@ export class QuestionsComponent {
     return this.questionService.questions;
   }
 
-  fetchQuestions() {
-    this.handleFetchResult(this.questionService.fetchQuestions({}, 1));
-  }
-
   get hasMoreQuestions() {
     return this.questionService.hasMoreQuestions();
+  }
+
+  fetchQuestions() {
+    this.handleFetchResult(this.questionService.fetchQuestions({}, 1));
   }
 
   fetchMoreQuestions() {

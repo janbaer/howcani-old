@@ -21,7 +21,9 @@ export class AppComponent {
   constructor(questionService: QuestionService) {
     this.questionService = questionService;
   }
+
   onFilterChanged(searchQuery) {
+    window.scrollTo(0, 0);
     this.questionService.fetchQuestions(searchQuery, 1);
   }
 }
