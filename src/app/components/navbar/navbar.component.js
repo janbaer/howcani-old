@@ -25,7 +25,6 @@ export class NavbarComponent {
 
   ngOnInit() {
     this.materialize.updateTooltips();
-    this.materialize.initSideNav();
   }
 
   isLoggedIn() {
