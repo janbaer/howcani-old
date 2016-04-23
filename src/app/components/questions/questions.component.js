@@ -18,15 +18,32 @@ export class QuestionsComponent {
     this.materialize = materializeService;
   }
 
-  getQuestions() {
+  get questions() {
     return this.questionService.questions;
   }
 
-  renderQuestions() {
-    this.questionService.fetchQuestions({}, 1)
-      .subscribe(() => {
+  fetchQuestions() {
+    this.handleFetchResult(this.questionService.fetchQuestions({}, 1));
+  }
+
+  get hasMoreQuestions() {
+    return this.questionService.hasMoreQuestions();
+  }
+
+  fetchMoreQuestions() {
+    this.handleFetchResult(this.questionService.fetchMoreQuestions());
+  }
+
+  handleFetchResult(observable) {
+    if (observable) {
+      this.isBusy = true;
+      observable.subscribe(() => {
         this.materialize.updateTooltips();
+        this.isBusy = false;
       });
+    } else {
+      this.busy = false;
+    }
   }
 
   showQuestionDetails(question) {
@@ -40,17 +57,8 @@ export class QuestionsComponent {
     this.materialize.closeDialog('questionDetailsDialog');
   }
 
-  fetchMoreQuestions() {
-    const observable = this.questionService.fetchMoreQuestions();
-    if (observable) {
-      this.isBusy = true;
-      observable.subscribe(() => {
-        this.isBusy = false;
-      });
-    }
-  }
-
   ngOnInit() {
-    this.renderQuestions();
+    this.isBusy = true;
+    this.fetchQuestions();
   }
 }

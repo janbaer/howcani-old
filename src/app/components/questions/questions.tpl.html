@@ -1,10 +1,13 @@
 <div class="QuestionsList-container">
-  <div class="Question-container" *ngFor="#question of getQuestions() | async">
+  <div class="Question-container" *ngFor="#question of questions | async">
     <question (onSelectQuestion)="showQuestionDetails($event)" [question]="question"></question>
   </div>
 </div>
 
-<scroll-detect (onScrollTo)="fetchMoreQuestions()"></scroll-detect>
+<!--<scroll-detect (onScrollTo)="fetchMoreQuestions()"></scroll-detect>-->
+<div *ngIf="hasMoreQuestions && !isBusy" class="LoadMoreLink-container">
+  <a (click)="fetchMoreQuestions()" class="waves-effect waves-light btn"><i class="material-icons left">cloud_download</i>More questions</a>
+</div>
 
 <div *ngIf="isBusy" class="Preloader-container">
   <div class="preloader-wrapper small active">

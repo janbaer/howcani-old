@@ -33,8 +33,15 @@ export class QuestionService {
     return questionsResponse;
   }
 
+  hasMoreQuestions() {
+    if (this.totalCountOfQuestions > 0 && this.questions.value) {
+      return this.totalCountOfQuestions > this.questions.value.length;
+    }
+    return false;
+  }
+
   fetchMoreQuestions() {
-    if (this.totalCountOfQuestions > 0 && this.questions.value && this.questions.value.length < this.totalCountOfQuestions) {
+    if (this.hasMoreQuestions()) {
       return this.fetchQuestions(this.lastSearchQuery, this.page + 1);
     }
     return undefined;
