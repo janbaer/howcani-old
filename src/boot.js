@@ -1,9 +1,6 @@
 import './shim';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-import jquery from 'jquery';
-
-window.$ = jquery;
 
 import { bootstrap } from 'angular2/platform/browser';
 import { enableProdMode, provide } from 'angular2/core';

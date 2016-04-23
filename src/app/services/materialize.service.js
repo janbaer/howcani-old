@@ -8,12 +8,6 @@ export class MaterializeService {
     }, 100);
   }
 
-  initSideNav() {
-    setTimeout(() => {
-      $('.button-collapse').sideNav();
-    }, 100);
-  }
-
   showDialog(dialogId) {
     $(`#${dialogId}`).openModal();
   }

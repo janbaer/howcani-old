@@ -27,8 +27,17 @@
 <body>
   <howcani-app>Loading...</howcani-app>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
   <script src="scripts/vendor.js"></script>
   <script src="scripts/bundle.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+  <script>
+    (function($) {
+      $(function() {
+        $('.button-collapse').sideNav();
+      });
+    })
+    (window.jQuery);
+  </script>
 </body>
 </html>
