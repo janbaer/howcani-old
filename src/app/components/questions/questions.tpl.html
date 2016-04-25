@@ -4,7 +4,6 @@
   </div>
 </div>
 
-<!--<scroll-detect (onScrollTo)="fetchMoreQuestions()"></scroll-detect>-->
 <div *ngIf="hasMoreQuestions && !isBusy" class="LoadMoreLink-container">
   <a (click)="fetchMoreQuestions()" class="waves-effect waves-light btn"><i class="material-icons left">cloud_download</i>More questions</a>
 </div>
