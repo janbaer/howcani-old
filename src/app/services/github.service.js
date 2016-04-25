@@ -10,7 +10,7 @@ export class GithubService {
     this.http = http;
     this.configuration = configuration;
     this.materialize = materializeService;
-    this.githubApiBaseUrl = 'https://api.github.com';
+    this.githubApiBaseUrl = 'https://howcani-api.herokuapp.com/api';
   }
 
   buildUrl(path) {
@@ -57,7 +57,6 @@ export class GithubService {
 
   get(path, searchParams) {
     const requestOptions = this.buildRequestOptions(searchParams);
-
     return this.http.get(this.buildUrl(path), requestOptions)
                     .map((response) => response.json())
                     .catch(this.handleError.bind(this));
