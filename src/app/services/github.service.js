@@ -10,11 +10,10 @@ export class GithubService {
     this.http = http;
     this.configuration = configuration;
     this.materialize = materializeService;
-    this.githubApiBaseUrl = 'https://howcani-api.herokuapp.com/api';
   }
 
   buildUrl(path) {
-    let url = `${this.githubApiBaseUrl}/${path}`;
+    let url = `${this.configuration.webApiBaseUrl}/api/${path}`;
     if (this.configuration.oauthToken) {
       const separator = url.lastIndexOf('?') >= 0 ? '&' : '?';
       url += `${separator}access_token=${this.configuration.oauthToken}`;
