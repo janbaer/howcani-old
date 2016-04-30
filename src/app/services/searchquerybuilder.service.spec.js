@@ -88,8 +88,8 @@ describe('Search Query service spec', () => {
           searchQuery.onlyMyQuestions = true;
         });
 
-        it('Should contain the user filter', () => {
-          expect(searchQueryBuilder.buildQueryString(searchQuery)).toBe('user:janbaer+' + repoQueryString);
+        it('Should contain the author filter', () => {
+          expect(searchQueryBuilder.buildQueryString(searchQuery)).toBe('author:janbaer+' + repoQueryString);
         });
 
         describe('When no user is logged in', () => {
@@ -97,7 +97,7 @@ describe('Search Query service spec', () => {
             configuration.user = undefined;
           });
 
-          it('Should not contain the user filter', () => {
+          it('Should not contain the author filter', () => {
             expect(searchQueryBuilder.buildQueryString(searchQuery)).toBe(repoQueryString);
           });
         });

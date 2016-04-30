@@ -34,7 +34,7 @@ export class SearchQueryBuilderService {
     }
 
     if (searchQuery.onlyMyQuestions && this.configuration.user) {
-      query.push(`user:${this.configuration.user.login}`);
+      query.push(`author:${this.configuration.user.login}`);
     }
 
     query.push(`repo:${this.configuration.project.user}/${this.configuration.project.repository}`);
