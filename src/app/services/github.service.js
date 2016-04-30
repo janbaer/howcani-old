@@ -77,8 +77,8 @@ export class GithubService {
     return this.get(`repos/${username}/${repo}`);
   }
 
-  searchIssues(searchString) {
-    const searchParams = this.buildSearchParams(searchString);
+  searchIssues(searchString, page) {
+    const searchParams = this.buildSearchParams(searchString, page);
 
     return this.get('search/issues', searchParams);
   }

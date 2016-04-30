@@ -33,8 +33,10 @@ export class AppComponent {
       this.authService.verifyUserToken(this.configuration.oauthToken);
     }
   }
+
   onFilterChanged(searchQuery) {
-    this.questionService.fetchQuestions(searchQuery);
+    window.scrollTo(0, 0);
+    this.questionService.fetchQuestions(searchQuery, 1);
   }
 }
 

@@ -3,6 +3,7 @@ import { MaterializeService } from './../../services/materialize.service';
 import { QuestionService } from './../../services/question.service';
 import { QuestionComponent } from './../question/question.component';
 import { QuestionDetailsComponent } from './../question-details/question-details.component';
+
 import template from './questions.tpl.html';
 
 @Component({
@@ -16,15 +17,32 @@ export class QuestionsComponent {
     this.materialize = materializeService;
   }
 
-  getQuestions() {
+  get questions() {
     return this.questionService.questions;
   }
 
-  renderQuestions() {
-    this.questionService.fetchQuestions()
-      .subscribe(() => {
+  get hasMoreQuestions() {
+    return this.questionService.hasMoreQuestions();
+  }
+
+  fetchQuestions() {
+    this.handleFetchResult(this.questionService.fetchQuestions({}, 1));
+  }
+
+  fetchMoreQuestions() {
+    this.handleFetchResult(this.questionService.fetchMoreQuestions());
+  }
+
+  handleFetchResult(observable) {
+    if (observable) {
+      this.isBusy = true;
+      observable.subscribe(() => {
         this.materialize.updateTooltips();
+        this.isBusy = false;
       });
+    } else {
+      this.busy = false;
+    }
   }
 
   showQuestionDetails(question) {
@@ -39,6 +57,7 @@ export class QuestionsComponent {
   }
 
   ngOnInit() {
-    this.renderQuestions();
+    this.isBusy = true;
+    this.fetchQuestions();
   }
 }
