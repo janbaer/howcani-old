@@ -7,7 +7,7 @@
       </form>
     </div>
   </li>
-  <li>
+  <li *ngIf="isUserLoggedIn()">
     <input type="checkbox" id="onlyMyQuestions" (click)="showOnlyMyQuestions($event.currentTarget.checked)" [(checked)]="onlyMyQuestions"/>
     <label for="onlyMyQuestions" >Only my questions</label>
   </li>
