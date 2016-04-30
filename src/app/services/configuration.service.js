@@ -15,7 +15,7 @@ export class ConfigurationService {
   isProduction = () => ENVIRONMENT === 'production';
 
   get webApiBaseUrl() {
-    return this.isProduction() ? 'http://howcani-api.herokuapp.com' : 'http://localhost:8080';
+    return this.isProduction() ? 'https://howcani-api.herokuapp.com' : 'http://localhost:8080';
   }
 
   get project() {
