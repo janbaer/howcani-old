@@ -12,17 +12,39 @@ export class QuestionService {
     this.searchQueryBuilder = searchQueryBuilderService;
 
     this.questions = new BehaviorSubject([]);
+    this.totalCountOfQuestions = 0;
+    this.page = 0;
+    this.lastSearchQuery = undefined;
   }
 
-  fetchQuestions(searchQuery) {
+  fetchQuestions(searchQuery, page) {
+    this.lastSearchQuery = searchQuery;
+    this.page = page || 1;
+
     const searchString = this.searchQueryBuilder.buildQueryString(searchQuery);
-    const questionsResponse = this.githubService.searchIssues(searchString);
+    const questionsResponse = this.githubService.searchIssues(searchString, this.page);
 
     questionsResponse.subscribe((response) => {
-      this.questions.next(response.items);
+      this.totalCountOfQuestions = response.total_count;
+      const items = this.page === 1 ? response.items : this.questions.value.concat(response.items);
+      this.questions.next(items);
     });
 
     return questionsResponse;
+  }
+
+  hasMoreQuestions() {
+    if (this.totalCountOfQuestions > 0 && this.questions.value) {
+      return this.totalCountOfQuestions > this.questions.value.length;
+    }
+    return false;
+  }
+
+  fetchMoreQuestions() {
+    if (this.hasMoreQuestions()) {
+      return this.fetchQuestions(this.lastSearchQuery, this.page + 1);
+    }
+    return undefined;
   }
 
   fetchComments(issueNumber) {

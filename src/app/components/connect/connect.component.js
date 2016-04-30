@@ -54,4 +54,8 @@ export class ConnectComponent {
       }
     });
   }
+
+  ngOnInit() {
+    window.scrollTo(0, 0);
+  }
 }
