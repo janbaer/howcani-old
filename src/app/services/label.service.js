@@ -3,18 +3,17 @@ import { GithubService } from './github.service';
 
 @Injectable()
 export class LabelService {
-  labels = [];
-
   constructor(githubService: GithubService) {
     this.githubService = githubService;
+    this.labels = [];
   }
 
   fetchLabels() {
     this.labels = [];
 
-    return this.githubService.getLabels()
-             .subscribe((labels) => {
-               this.labels = labels;
-             });
+    this.githubService.getLabels()
+      .subscribe((labels) => {
+        this.labels = labels;
+      });
   }
 }

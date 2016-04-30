@@ -1,5 +1,6 @@
 import { Injectable } from 'angular2/core';
 import { Http, RequestOptions, URLSearchParams, Headers } from 'angular2/http';
+import 'rxjs/add/observable/throw';
 import { Observable } from 'rxjs/Observable';
 import { ConfigurationService } from './configuration.service.js';
 import { MaterializeService } from './materialize.service.js';
@@ -45,8 +46,8 @@ export class GithubService {
 
   handleError(error) {
     console.log('Error while fetching data', error);
-    this.materialize.showToastMessage('There was an unexpected while sending a request to Github');
-    return Observable.throw(error.json().error || 'Github error');
+    this.materialize.showToastMessage('There was an unexpected while sending a request to our WebApi');
+    return Observable.throw(error.json().error || 'WebApi error');
   }
 
   get(path, searchParams) {
