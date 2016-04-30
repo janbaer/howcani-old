@@ -1,6 +1,6 @@
 import { Injectable } from 'angular2/core';
 import { Http, RequestOptions, URLSearchParams, Headers } from 'angular2/http';
-//import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs/Observable';
 import { ConfigurationService } from './configuration.service.js';
 import { MaterializeService } from './materialize.service.js';
 
@@ -13,12 +13,7 @@ export class GithubService {
   }
 
   buildUrl(path) {
-    let url = `${this.configuration.webApiBaseUrl}/api/${path}`;
-    if (this.configuration.oauthToken) {
-      const separator = url.lastIndexOf('?') >= 0 ? '&' : '?';
-      url += `${separator}access_token=${this.configuration.oauthToken}`;
-    }
-    return url;
+    return `${this.configuration.webApiBaseUrl}/api/${path}`;
   }
 
   buildSearchParams(searchTerm, page, sort = 'created', order = 'desc') {
@@ -38,7 +33,7 @@ export class GithubService {
     const headers = new Headers();
 
     if (this.configuration.oauthToken) {
-      headers.append('Authorization', `${this.configuration.oauthToken} OAUTH-TOKEN`);
+      headers.append('Authorization', `token ${this.configuration.oauthToken}`);
     }
 
     if (searchParams) {
@@ -51,7 +46,7 @@ export class GithubService {
   handleError(error) {
     console.log('Error while fetching data', error);
     this.materialize.showToastMessage('There was an unexpected while sending a request to Github');
-    //return Observable.throw(error.json().error || 'Github error');
+    return Observable.throw(error.json().error || 'Github error');
   }
 
   get(path, searchParams) {
@@ -59,6 +54,10 @@ export class GithubService {
     return this.http.get(this.buildUrl(path), requestOptions)
                     .map((response) => response.json())
                     .catch(this.handleError.bind(this));
+  }
+
+  getCurrentUser() {
+    return this.get('user');
   }
 
   getComments(issueNumber) {

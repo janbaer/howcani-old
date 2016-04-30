@@ -44,16 +44,16 @@ export class StorageService {
     this.storeObject('labels', labels);
   }
 
-  removeGithubToken() {
-    this.db.removeItem('githubToken');
+  removeOauthToken() {
+    this.db.removeItem('oauthToken');
   }
 
-  getGithubToken() {
-    return this.loadValue('githubToken');
+  getOauthToken() {
+    return this.loadValue('oauthToken');
   }
 
-  setGithubToken(githubToken) {
-    this.storeValue('githubToken', githubToken);
+  setOauthToken(oauthToken) {
+    this.storeValue('oauthToken', oauthToken);
   }
 }
 

@@ -33,20 +33,20 @@ export class ConfigurationService {
     this._project = project;
   }
 
-  get githubToken() {
-    if (this._githubToken === undefined) {
-      this._githubToken = this.storage.getGithubToken();
+  get oauthToken() {
+    if (this._oauthToken === undefined) {
+      this._oauthToken = this.storage.getOauthToken();
     }
-    return this._githubToken;
+    return this._oauthToken;
   }
 
-  set githubToken(githubToken) {
-    this.storage.setGithubToken(githubToken);
-    this._githubToken = githubToken;
+  set oauthToken(oauthToken) {
+    this.storage.setOauthToken(oauthToken);
+    this._oauthToken = oauthToken;
   }
 
-  removeGithubToken() {
-    this.storage.removeGithubToken();
-    this._githubToken = undefined;
+  removeOauthToken() {
+    this.storage.removeOauthToken();
+    this._oauthToken = undefined;
   }
 }

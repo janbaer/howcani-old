@@ -8,9 +8,10 @@ import { ROUTER_PROVIDERS, LocationStrategy, HashLocationStrategy } from 'angula
 import { HTTP_PROVIDERS } from 'angular2/http';
 
 import { AppComponent } from './app/app.component';
-import { ConfigurationService } from './app/services/configuration.service';
 import { StorageService } from './app/services/storage.service';
+import { ConfigurationService } from './app/services/configuration.service';
 import { GithubService } from './app/services/github.service';
+import { AuthService } from './app/services/auth.service';
 import { QuestionService } from './app/services/question.service';
 import { LabelService } from './app/services/label.service';
 import { MaterializeService } from './app/services/materialize.service';
@@ -27,6 +28,7 @@ bootstrap(AppComponent, [
   StorageService,
   ConfigurationService,
   GithubService,
+  AuthService,
   QuestionService,
   LabelService,
   MaterializeService,

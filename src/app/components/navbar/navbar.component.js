@@ -1,6 +1,5 @@
 import { Component } from 'angular2/core';
-import { OAuthService } from '../../services/oauth.service';
-import { ROUTER_DIRECTIVES, Router } from 'angular2/router';
+import { ROUTER_DIRECTIVES } from 'angular2/router';
 import { ConfigurationService } from './../../services/configuration.service';
 import { MaterializeService } from './../../services/materialize.service';
 import template from './navbar.tpl.html';
@@ -9,16 +8,12 @@ import template from './navbar.tpl.html';
   selector: 'navbar',
   template: template,
   directives: [ROUTER_DIRECTIVES],
-  providers: [OAuthService]
+  providers: []
 })
 
 export class NavbarComponent {
-  constructor(router: Router,
-              oauth: OAuthService,
-              configuration: ConfigurationService,
+  constructor(configuration: ConfigurationService,
               materializeService: MaterializeService) {
-    this.router = router;
-    this.oauth = oauth;
     this.configuration = configuration;
     this.materialize = materializeService;
   }
@@ -28,14 +23,10 @@ export class NavbarComponent {
   }
 
   isLoggedIn() {
-    return this.configuration.githubToken !== null;
+    return this.configuration.oauthToken !== null;
   }
 
-  logout() {
-    this.oauth.logout();
-  }
-
-  loginUsingGithub() {
-    this.oauth.loginUsingGithub();
+  getUser() {
+    return this.configuration.user;
   }
 }

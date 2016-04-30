@@ -1,28 +1,49 @@
 import { Component } from 'angular2/core';
 import { RouteParams, Router } from 'angular2/router';
-import { OAuthService } from '../../services/oauth.service';
-import { ConfigurationService } from '../../services/configuration.service';
+import { AuthService } from '../../services/auth.service.js';
+
 import template from './login.tpl.html';
 
 @Component({
   selector: 'login',
   template: template,
-  providers: [OAuthService]
+  providers: []
 })
 export class LoginComponent {
-  constructor(oauth: OAuthService,
-              configuration: ConfigurationService,
-              params: RouteParams,
+  constructor(authService: AuthService,
+              routeParams: RouteParams,
               router: Router) {
-    this.oauth = oauth;
+    this.authService = authService;
+    this.router = router;
+    this.routeParams = routeParams;
+  }
 
-    const urlSearchParams = window.location.search;
-    const searchParamsArray = urlSearchParams.split('=');
-    if (searchParamsArray.length > 1) {
-      const code = searchParamsArray[2];
-      configuration.githubToken = code;
+  ngOnInit() {
+    if (this.routeParams.params.logout) {
+      this.logout();
+    } else if (this.routeParams.params.token) {
+      this.verifyUserToken(this.routeParams.params.token);
+    } else {
+      this.login();
     }
 
-    router.navigate(['Questions']);
+  }
+
+  redirectToQuestions() {
+    this.router.navigate(['Questions']);
+  }
+
+  verifyUserToken(oauthToken) {
+    this.authService.verifyUserToken(oauthToken)
+      .subscribe(null, null, this.redirectToQuestions.bind(this));
+  }
+
+  login() {
+    this.authService.login();
+  }
+
+  logout() {
+    this.authService.logout();
+    this.redirectToQuestions();
   }
 }
