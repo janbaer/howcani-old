@@ -1,13 +1,12 @@
 import { Component } from 'angular2/core';
 import { RouteParams, Router } from 'angular2/router';
-import { AuthService } from '../../services/auth.service.js';
+import { AuthService } from '../../services/auth.service';
 
 import template from './login.tpl.html';
 
 @Component({
   selector: 'login',
-  template: template,
-  providers: []
+  template: template
 })
 export class LoginComponent {
   constructor(authService: AuthService,

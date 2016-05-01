@@ -2,19 +2,21 @@ import { Component } from 'angular2/core';
 import { ROUTER_DIRECTIVES } from 'angular2/router';
 import { ConfigurationService } from './../../services/configuration.service';
 import { MaterializeService } from './../../services/materialize.service';
+import { AuthService } from './../../services/auth.service';
 import template from './navbar.tpl.html';
 
 @Component({
   selector: 'navbar',
   template: template,
-  directives: [ROUTER_DIRECTIVES],
-  providers: []
+  directives: [ROUTER_DIRECTIVES]
 })
 
 export class NavbarComponent {
-  constructor(configuration: ConfigurationService,
+  constructor(configurationService: ConfigurationService,
+              authService: AuthService,
               materializeService: MaterializeService) {
-    this.configuration = configuration;
+    this.configuration = configurationService;
+    this.authService = authService;
     this.materialize = materializeService;
   }
 
@@ -23,7 +25,7 @@ export class NavbarComponent {
   }
 
   isLoggedIn() {
-    return this.configuration.oauthToken !== null;
+    return this.authService.isUserLoggedIn();
   }
 
   getUser() {

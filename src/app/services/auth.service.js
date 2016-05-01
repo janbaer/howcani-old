@@ -32,5 +32,9 @@ export class AuthService {
     this.configuration.user = undefined;
     this.configuration.removeOauthToken();
   }
+
+  isUserLoggedIn() {
+    return this.configuration.user !== undefined;
+  }
 }
 

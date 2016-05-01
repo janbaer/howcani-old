@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from 'angular2/core';
 import { LabelService } from './../../services/label.service';
 import { ConfigurationService } from './../../services/configuration.service';
+import { AuthService } from './../../services/auth.service';
 import template from './sidebar.tpl.html';
 
 @Component({
@@ -15,9 +16,10 @@ export class SidebarComponent {
 
   selectedLabels = [];
 
-  constructor(labelService: LabelService, configurationService: ConfigurationService) {
+  constructor(labelService: LabelService, configurationService: ConfigurationService, authService: AuthService) {
     this.labelService = labelService;
     this.configuration = configurationService;
+    this.authService = authService;
     this.state = '';
   }
 
@@ -39,9 +41,8 @@ export class SidebarComponent {
     this.updateSearch();
   }
 
-
   isUserLoggedIn() {
-    return this.configuration.user !== undefined;
+    return this.authService.isUserLoggedIn();
   }
 
   showOnlyMyQuestions(onlyMyQuestions) {
