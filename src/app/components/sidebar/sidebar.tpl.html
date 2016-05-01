@@ -1,7 +1,7 @@
 <ul id="slide-out" class="side-nav fixed">
   <li id="Sidebar-search">
     <div class="card">
-      <form  (ngSubmit)="onSubmitSearchValue($event, searchInput.value)" #searchForm="ngForm">
+      <form (ngSubmit)="onSubmitSearchValue($event, searchInput.value)" #searchForm="ngForm">
         <input #searchInput id="Sidebar-searchInput" [(value)]="searchValue" />
         <i id="Sidebar-searchIcon" class="material-icons" (click)="onSubmitSearchValue($event, searchInput.value)">search</i>
       </form>
@@ -31,7 +31,7 @@
   <li>
     <hr>
   </li>
-  <li *ngFor="#label of labelService.labels; #i = index">
+  <li *ngFor="let label of labelService.labels; let i = index">
     <div class="Label-container">
       <input type="checkbox" id="label{{i}}" (click)="toggleLabel($event, label)" />
       <label attr.for="label{{i}}" [ngStyle]="{'color': '#' + label.color}">{{ label.name  }}</label>

@@ -1,5 +1,5 @@
 import { Injectable } from 'angular2/core';
-import { BehaviorSubject } from 'rxjs/subject/BehaviorSubject';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { ConfigurationService } from './configuration.service';
 import { GithubService } from './github.service';
 import { SearchQueryBuilderService } from './searchquerybuilder.service';

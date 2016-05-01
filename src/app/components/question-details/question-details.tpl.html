@@ -14,7 +14,7 @@
     </div>
   </div>
 
-  <div  class="Comments-container" *ngFor="#comment of comments">
+  <div class="Comments-container" *ngFor="let comment of comments">
     <comment [comment]="comment"></comment>
   </div>
 </div>
