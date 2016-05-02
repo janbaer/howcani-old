@@ -7,14 +7,14 @@
       <a [routerLink]="['Questions']" class="brand-logo">HowCanI</a>
       <ul class="right">
         <li *ngIf="!isLoggedIn()">
-          <a (click)="loginUsingGithub()" class="waves-effect waves-light"  data-position="bottom" data-delay="50" data-tooltip="Login with your Github account">
+          <a [routerLink]="['Login']" class="waves-effect waves-light">
             <i class="material-icons left tooltipped" data-position="bottom" data-delay="50" data-tooltip="Login with your Github account">account_circle</i>
             <span class="NavbarMenu-label"> Login </span>
           </a>
         </li>
         <li *ngIf="isLoggedIn()">
-          <a (click)="logout()" class="waves-effect waves-light">
-            <i class="material-icons left tooltipped" data-position="bottom" data-delay="50" data-tooltip="Logout">account_box</i>
+          <a [routerLink]="['Login', {logout: true}]" class="waves-effect waves-light Logout-link">
+            <img class="User-image" attr.src="{{getUser()?.avatar_url}}" data-position="bottom" data-delay="50" attr.data-tooltip="{{ getUser()?.login }}">
             <span class="NavbarMenu-label"> Logout </span>
           </a>
         </li>
