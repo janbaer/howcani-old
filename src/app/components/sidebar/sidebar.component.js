@@ -41,8 +41,8 @@ export class SidebarComponent {
     this.updateSearch();
   }
 
-  isUserLoggedIn() {
-    return this.authService.isUserLoggedIn();
+  isUserAuthenticated() {
+    return this.authService.isUserAuthenticated();
   }
 
   showOnlyMyQuestions(onlyMyQuestions) {

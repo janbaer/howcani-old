@@ -1,6 +1,7 @@
 import { Component } from 'angular2/core';
 import { MaterializeService } from './../../services/materialize.service';
 import { QuestionService } from './../../services/question.service';
+import { AuthService } from './../../services/auth.service';
 import { QuestionComponent } from './../question/question.component';
 import { QuestionDetailsComponent } from './../question-details/question-details.component';
 
@@ -12,9 +13,10 @@ import template from './questions.tpl.html';
   directives: [QuestionComponent, QuestionDetailsComponent]
 })
 export class QuestionsComponent {
-  constructor(questionService: QuestionService, materializeService: MaterializeService) {
+  constructor(questionService: QuestionService, materializeService: MaterializeService, authService: AuthService) {
     this.questionService = questionService;
     this.materialize = materializeService;
+    this.authService = authService;
   }
 
   get questions() {
@@ -54,6 +56,10 @@ export class QuestionsComponent {
     $event.preventDefault();
     this.selectedQuestion = undefined;
     this.materialize.closeDialog('questionDetailsDialog');
+  }
+
+  isUserAuthenticated() {
+    return this.authService.isUserAuthenticated();
   }
 
   ngOnInit() {
