@@ -78,6 +78,7 @@
     "gulp-less": "3.1.0",
     "gulp-live-server": "0.0.29",
     "gulp-load-plugins": "1.2.2",
+    "gulp-manifest": "0.1.1",
     "gulp-plumber": "1.1.0",
     "gulp-size": "2.1.0",
     "gulp-sourcemaps": "1.6.0",
@@ -92,10 +93,10 @@
     "karma-spec-reporter": "0.0.26",
     "karma-webpack": "1.7.0",
     "mini-lr": "0.1.9",
+    "minimist": "1.2.0",
     "phantomjs-polyfill": "0.0.2",
     "phantomjs-prebuilt": "2.1.7",
     "raw-loader": "0.5.1",
-    "minimist": "1.2.0",
     "run-sequence": "1.1.5",
     "webpack": "1.13.0"
   }

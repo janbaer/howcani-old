@@ -9,6 +9,7 @@ const sourcemaps = require('gulp-sourcemaps');
 const changed = require('gulp-changed');
 const inject = require('gulp-inject');
 const webpack = require('webpack');
+const manifest = require('gulp-manifest');
 const autoprefixer = require('gulp-autoprefixer');
 const cssnano = require('gulp-cssnano');
 const plumber = require('gulp-plumber');
@@ -168,6 +169,7 @@ gulp.task('buildAndDeploy', (done) => {
   runSequence(
     'clean',
     ['build:prod', 'copy', 'copy:assets', 'styles'],
+    'manifest',
     'deploy',
     done
   );
@@ -189,6 +191,24 @@ gulp.task('lint', () => {
     .src([sourceFolder + '/**/*.js'])
     .pipe($.eslint())
     .pipe($.eslint.format());
+});
+
+gulp.task('manifest', () => {
+  gulp.src(['build/**/*', '!build/**/*.*.map'], { base: './build/' })
+    .pipe(manifest({
+      hash: true,
+      preferOnline: true,
+      network: ['*'],
+      cache: [
+        'https://fonts.googleapis.com/icon?family=Material+Icons',
+        'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css',
+        'https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.js',
+        'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js'
+      ],
+      filename: 'app-cache.manifest',
+      exclude: 'app-cache.manifest'
+     }))
+    .pipe(gulp.dest('build'));
 });
 
 gulp.task('watch', () => {
