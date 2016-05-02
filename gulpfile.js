@@ -197,7 +197,7 @@ gulp.task('manifest', () => {
   gulp.src(['build/**/*', '!build/**/*.*.map'], { base: './build/' })
     .pipe(manifest({
       hash: true,
-      preferOnline: true,
+      preferOnline: false,
       network: ['*'],
       cache: [
         'https://fonts.googleapis.com/icon?family=Material+Icons',
