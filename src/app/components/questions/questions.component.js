@@ -58,12 +58,21 @@ export class QuestionsComponent {
     this.materialize.closeDialog('questionDetailsDialog');
   }
 
+  showNewQuestionDialog($event) {
+    $event.preventDefault();
+    this.materialize.showDialog('newQuestionDialog');
+  }
+
+  closeNewQuestionDialog() {
+    this.materialize.closeDialog('newQuestionDialog');
+  }
+
   isUserAuthenticated() {
     return this.authService.isUserAuthenticated();
   }
 
   ngOnInit() {
     this.isBusy = true;
-    this.fetchQuestions();
+    this.fetchQuestions(this.configuration.project.query);
   }
 }

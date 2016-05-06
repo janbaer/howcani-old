@@ -1,0 +1,36 @@
+<div class="card">
+  <form class="col s12" #questionNewForm="ngForm">
+    <div class="card-content">
+        <div class="row">
+          <div class="input-field col s12">
+            <input placeholder="Enter the title for your question"
+                  id="title" type="text" class="validate"
+                  ngControl="title" [(ngModel)]="question.title" required>
+            <label for="title">Title</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <textarea id="description" class="materialize-textarea"
+                      ngControl="description" [(ngModel)]="question.body">
+            </textarea>
+            <label for="description">Description</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input placeholder="Enter a comma separated list of the labels"
+                  id="labels" type="text" class="validate"
+                  ngControl="labels" [(ngModel)]="question.labels">
+            <label for="labels">Labels</label>
+          </div>
+        </div>
+    </div>
+    <div class="card-action QuestionProperties-container">
+      <button class="modal-action waves-effect waves-green btn-flat"
+         [disabled]="!questionNewForm.valid"
+         (click)="closeDialog()">Ok</button>
+    </div>
+  </form>
+</div>
+

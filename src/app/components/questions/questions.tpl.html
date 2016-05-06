@@ -27,8 +27,18 @@
     <question-details [question]="selectedQuestion"></question-details>
   </div>
   <div class="modal-footer">
-    <a href="" class="modal-action waves-effect waves-green btn-flat" (click)="closeQuestionDetailsDialog($event)">Ok</a>
+    <a class="modal-action waves-effect waves-green btn-flat" (click)="closeQuestionDetailsDialog($event)">Ok</a>
   </div>
+</div>
+
+<div id="newQuestionDialog" class="modal">
+  <div class="modal-content">
+    <question-new (onCloseDialog)="closeNewQuestionDialog()"></question-new>
+  </div>
+</div>
+
+<div *ngIf="isUserAuthenticated()" class="FabButton-container">
+  <a class="btn-floating btn-large waves-effect waves-light red" (click)="showNewQuestionDialog($event)"><i class="material-icons">add</i></a>
 </div>
 
 

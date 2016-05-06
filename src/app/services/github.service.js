@@ -45,7 +45,6 @@ export class GithubService {
   }
 
   handleError(error) {
-    console.log('Error while fetching data', error);
     this.materialize.showToastMessage('There was an unexpected while sending a request to our WebApi');
     return Observable.throw(error.json().error || 'WebApi error');
   }
@@ -53,6 +52,13 @@ export class GithubService {
   get(path, searchParams) {
     const requestOptions = this.buildRequestOptions(searchParams);
     return this.http.get(this.buildUrl(path), requestOptions)
+                    .map((response) => response.json())
+                    .catch(this.handleError.bind(this));
+  }
+
+  post(path, bodyObject) {
+    const requestOptions = this.buildRequestOptions();
+    return this.http.post(this.buildUrl(path), JSON.stringify(bodyObject), requestOptions)
                     .map((response) => response.json())
                     .catch(this.handleError.bind(this));
   }
@@ -81,6 +87,10 @@ export class GithubService {
     const searchParams = this.buildSearchParams(searchString, page);
 
     return this.get('search/issues', searchParams);
+  }
+
+  postIssue(issue) {
+    return this.post(`repos/${this.configuration.project.user}/${this.configuration.project.repository}/issues`, issue).toPromise();
   }
 
 }
