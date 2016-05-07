@@ -8,8 +8,9 @@ export class MaterializeService {
     }, 100);
   }
 
-  showDialog(dialogId) {
-    $(`#${dialogId}`).openModal();
+  showDialog(dialogId, dismissible = true) {
+    $(`#${dialogId}`).openModal({ dismissible: dismissible });
+    $(`#${dialogId}`).scrollTop(0);
   }
 
   closeDialog(dialogId) {

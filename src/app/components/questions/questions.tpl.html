@@ -22,12 +22,11 @@
   </div>
 </div>
 
-<div id="questionDetailsDialog" class="modal modal-fixed-footer">
+<div id="questionDetailsDialog" class="modal">
   <div class="modal-content">
-    <question-details [question]="selectedQuestion"></question-details>
-  </div>
-  <div class="modal-footer">
-    <a class="modal-action waves-effect waves-green btn-flat" (click)="closeQuestionDetailsDialog($event)">Ok</a>
+    <question-details [question]="selectedQuestion"
+                      (onCloseDialog)="closeQuestionDetailsDialog($event)">
+    </question-details>
   </div>
 </div>
 

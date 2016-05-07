@@ -1,4 +1,4 @@
-import { Component, Input } from 'angular2/core';
+import { Component, Input, Output, EventEmitter } from 'angular2/core';
 import { QuestionService } from './../../services/question.service';
 import { MarkdownPipe } from './../../pipes/markdown.pipe';
 import { QuestionStateComponent } from './../question-state/question-state.component';
@@ -15,6 +15,9 @@ import template from './question-details.tpl.html';
   pipes: [MarkdownPipe]
 })
 export class QuestionDetailsComponent {
+  @Output() onCloseDialog = new EventEmitter();
+  @Input() question;
+
   constructor(questionService: QuestionService) {
     this.questionService = questionService;
     this.comments = [];
@@ -27,7 +30,9 @@ export class QuestionDetailsComponent {
       });
   }
 
-  @Input() question;
+  closeDialog() {
+    this.onCloseDialog.emit();
+  }
 
   ngOnChanges(changes) {
     if (changes.question && changes.question.currentValue) {
@@ -36,7 +41,6 @@ export class QuestionDetailsComponent {
       } else {
         this.comments = [];
       }
-
     }
   }
 }

@@ -16,13 +16,20 @@ export class QuestionNewComponent {
   }
 
   closeDialog() {
-    this.question.labels = this.question.labels ? this.question.labels.split(',') : [];
+    if (this.question.labels) {
+      this.question.labels = this.question.labels.split(',').map((label) => label.trim());
+    }
 
     this.questionService.postQuestion(this.question)
       .then(() => {
         this.question = {};
         this.onCloseDialog.emit();
       });
+  }
+
+  cancelDialog() {
+    this.question = {};
+    this.onCloseDialog.emit();
   }
 }
 

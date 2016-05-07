@@ -17,4 +17,7 @@
   <div class="Comments-container" *ngFor="let comment of comments">
     <comment [comment]="comment"></comment>
   </div>
+  <div class="QuestionDetailsButton-container">
+    <a class="modal-action waves-effect waves-green btn-flat" (click)="closeDialog($event)">Ok</a>
+  </div>
 </div>
