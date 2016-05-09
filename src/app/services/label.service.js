@@ -13,7 +13,11 @@ export class LabelService {
 
     this.githubService.getLabels()
       .subscribe((labels) => {
-        this.labels = labels;
+        this.labels = labels ? labels.sort(this.sortLabelsByName) : [];
       });
+  }
+
+  sortLabelsByName(label1, label2) {
+    return label1.name.localeCompare(label2.name);
   }
 }
