@@ -14,9 +14,24 @@
     </div>
   </div>
 
-  <div class="Comments-container" *ngFor="let comment of comments">
+  <div *ngIf="isBusy" class="Preloader-container">
+    <div class="preloader-wrapper small active">
+      <div class="spinner-layer spinner-green-only">
+        <div class="circle-clipper left">
+          <div class="circle"></div>
+        </div><div class="gap-patch">
+          <div class="circle"></div>
+        </div><div class="circle-clipper right">
+          <div class="circle"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="Comments-container" [ngClass]="{isHidden: isBusy}" *ngFor="let comment of comments">
     <comment [comment]="comment"></comment>
   </div>
+
   <div class="QuestionDetailsButton-container">
     <a class="modal-action waves-effect waves-green btn-flat" (click)="closeDialog($event)">Ok</a>
   </div>
