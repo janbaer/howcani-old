@@ -24,8 +24,8 @@ export class NavbarComponent {
     this.materialize.updateTooltips();
   }
 
-  isLoggedIn() {
-    return this.authService.isUserLoggedIn();
+  isUserAuthenticated() {
+    return this.authService.isUserAuthenticated();
   }
 
   getUser() {

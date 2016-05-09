@@ -33,7 +33,7 @@ export class AuthService {
     this.configuration.removeOauthToken();
   }
 
-  isUserLoggedIn() {
+  isUserAuthenticated() {
     return this.configuration.user !== undefined;
   }
 }

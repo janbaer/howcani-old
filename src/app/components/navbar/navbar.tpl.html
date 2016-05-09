@@ -6,13 +6,13 @@
       </a>
       <a [routerLink]="['Questions']" class="brand-logo">HowCanI</a>
       <ul class="right">
-        <li *ngIf="!isLoggedIn()">
+        <li *ngIf="!isUserAuthenticated()">
           <a [routerLink]="['Login']" class="waves-effect waves-light">
             <i class="material-icons left tooltipped" data-position="bottom" data-delay="50" data-tooltip="Login with your Github account">account_circle</i>
             <span class="NavbarMenu-label"> Login </span>
           </a>
         </li>
-        <li *ngIf="isLoggedIn()">
+        <li *ngIf="isUserAuthenticated()">
           <a [routerLink]="['Login', {logout: true}]" class="waves-effect waves-light Logout-link">
             <img class="User-image" attr.src="{{getUser()?.avatar_url}}" data-position="bottom" data-delay="50" attr.data-tooltip="{{ getUser()?.login }}">
             <span class="NavbarMenu-label"> Logout </span>

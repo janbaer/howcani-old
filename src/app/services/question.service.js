@@ -51,4 +51,12 @@ export class QuestionService {
     return this.githubService.getComments(issueNumber);
   }
 
+  postQuestion(question) {
+    return this.githubService.postIssue(question)
+      .then((newQuestion) => {
+        const items = [newQuestion].concat(this.questions.value);
+        this.questions.next(items);
+      });
+  }
+
 }
