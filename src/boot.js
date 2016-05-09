@@ -4,11 +4,11 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/observable/throw';
 
-import { bootstrap } from 'angular2/platform/browser';
-import { enableProdMode, provide } from 'angular2/core';
-import { ROUTER_PROVIDERS } from 'angular2/router';
-import { HashLocationStrategy, LocationStrategy } from 'angular2/platform/common';
-import { HTTP_PROVIDERS } from 'angular2/http';
+import { bootstrap } from '@angular/platform-browser-dynamic';
+import { enableProdMode, provide } from '@angular/core';
+import { ROUTER_PROVIDERS } from '@angular/router-deprecated';
+import { FORM_PROVIDERS, LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { HTTP_PROVIDERS } from '@angular/http';
 
 import { AppComponent } from './app/app.component';
 import { StorageService } from './app/services/storage.service';
@@ -25,6 +25,7 @@ if (ENVIRONMENT === 'production') {
 }
 
 bootstrap(AppComponent, [
+  FORM_PROVIDERS,
   HTTP_PROVIDERS,
   ROUTER_PROVIDERS,
   provide(LocationStrategy, { useClass: HashLocationStrategy }),

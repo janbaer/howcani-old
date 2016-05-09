@@ -1,6 +1,6 @@
 'use strict';
 
-import { Injector, provide } from 'angular2/core';
+import { Injector, provide } from '@angular/core';
 import { ConfigurationService } from './configuration.service.js';
 import { SearchQueryBuilderService } from './searchquerybuilder.service.js';
 

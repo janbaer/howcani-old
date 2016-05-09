@@ -1,6 +1,6 @@
-import { Component } from 'angular2/core';
-import { Router } from 'angular2/router';
-import { FORM_DIRECTIVES } from 'angular2/common';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router-deprecated';
+import { FORM_DIRECTIVES } from '@angular/common';
 import { ConfigurationService } from './../../services/configuration.service';
 import { GithubService } from './../../services/github.service';
 import { LabelService } from './../../services/label.service';

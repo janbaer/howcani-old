@@ -1,6 +1,6 @@
 'use strict';
 
-import { Injector } from 'angular2/core';
+import { Injector } from '@angular/core';
 import { ConfigurationService } from './configuration.service.js';
 import { StorageService } from './storage.service.js';
 
