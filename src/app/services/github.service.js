@@ -1,5 +1,5 @@
-import { Injectable } from 'angular2/core';
-import { Http, RequestOptions, URLSearchParams, Headers } from 'angular2/http';
+import { Injectable } from '@angular/core';
+import { Http, RequestOptions, URLSearchParams, Headers } from '@angular/http';
 import 'rxjs/add/observable/throw';
 import { Observable } from 'rxjs/Observable';
 import { ConfigurationService } from './configuration.service.js';

@@ -1,5 +1,5 @@
-import { Component } from 'angular2/core';
-import { RouteParams, Router } from 'angular2/router';
+import { Component } from '@angular/core';
+import { RouteParams, Router } from '@angular/router-deprecated';
 import { AuthService } from '../../services/auth.service';
 
 import template from './login.tpl.html';

@@ -1,7 +1,7 @@
 'use strict';
 
-import { Component } from 'angular2/core';
-import { ROUTER_DIRECTIVES, RouteConfig } from 'angular2/router';
+import { Component } from '@angular/core';
+import { ROUTER_DIRECTIVES, RouteConfig } from '@angular/router-deprecated';
 
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';

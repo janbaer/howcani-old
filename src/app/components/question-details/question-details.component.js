@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from 'angular2/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { QuestionService } from './../../services/question.service';
 import { MarkdownPipe } from './../../pipes/markdown.pipe';
 import { QuestionStateComponent } from './../question-state/question-state.component';

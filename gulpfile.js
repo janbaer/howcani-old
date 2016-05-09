@@ -130,11 +130,12 @@ gulp.task('styles', function () {
   return gulp.src(mainFile)
     .pipe(plumber())
     .pipe(inject(injectFiles, injectOptions))
-    .pipe(sourcemaps.init({loadMaps: true}))
+    //.pipe(sourcemaps.init({loadMaps: true})) // temporary outcommented
+    //because of a problem with less 2.7.0
     .pipe(less())
     .pipe(gulpif(isProduction, autoprefixer({browsers: [ '> 5%', 'last 2 versions' ]})))
     .pipe(cssnano())
-    .pipe(sourcemaps.write('./'))
+    //.pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(destinationFolder + '/styles'))
     .pipe(size());
 });

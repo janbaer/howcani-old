@@ -1,4 +1,4 @@
-import { Component, Input } from 'angular2/core';
+import { Component, Input } from '@angular/core';
 import { MarkdownPipe } from './../../pipes/markdown.pipe';
 import { UserComponent } from './../user/user.component';
 import { DateComponent } from './../date/date.component';

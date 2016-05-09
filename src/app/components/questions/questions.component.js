@@ -1,4 +1,4 @@
-import { Component } from 'angular2/core';
+import { Component } from '@angular/core';
 import { MaterializeService } from './../../services/materialize.service';
 import { QuestionService } from './../../services/question.service';
 import { AuthService } from './../../services/auth.service';

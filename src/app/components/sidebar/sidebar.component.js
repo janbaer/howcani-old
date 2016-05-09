@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from 'angular2/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { LabelService } from './../../services/label.service';
 import { ConfigurationService } from './../../services/configuration.service';
 import { AuthService } from './../../services/auth.service';
