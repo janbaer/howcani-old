@@ -59,4 +59,8 @@ export class QuestionService {
       });
   }
 
+  postComment(questionNumber, commentText) {
+    return this.githubService.postComment(questionNumber, { body: commentText });
+  }
+
 }

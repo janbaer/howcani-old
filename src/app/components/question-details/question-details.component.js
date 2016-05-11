@@ -7,12 +7,13 @@ import { UserComponent } from './../user/user.component';
 import { DateComponent } from './../date/date.component';
 import { LabelsComponent } from './../labels/labels.component';
 import { CommentComponent } from './../comment/comment.component';
+import { CommentNewComponent } from './../comment-new/comment-new.component';
 import template from './question-details.tpl.html';
 
 @Component({
   selector: 'question-details',
   template: template,
-  directives: [NgClass, CommentComponent, QuestionStateComponent, UserComponent, DateComponent, LabelsComponent],
+  directives: [NgClass, CommentComponent, QuestionStateComponent, UserComponent, DateComponent, LabelsComponent, CommentNewComponent],
   pipes: [MarkdownPipe]
 })
 export class QuestionDetailsComponent {
@@ -38,6 +39,10 @@ export class QuestionDetailsComponent {
 
   closeDialog() {
     this.onCloseDialog.emit();
+  }
+
+  newCommentCreated(comment) {
+    this.comments.push(comment);
   }
 
   ngOnChanges(changes) {
