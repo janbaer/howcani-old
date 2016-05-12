@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { AuthService } from './../../services/auth.service';
 import { QuestionService } from './../../services/question.service';
+import { CommentService } from './../../services/comment.service';
 import { MarkdownPipe } from './../../pipes/markdown.pipe';
 import { QuestionStateComponent } from './../question-state/question-state.component';
 import { UserComponent } from './../user/user.component';
@@ -21,8 +22,9 @@ export class QuestionDetailsComponent {
   @Output() onCloseDialog = new EventEmitter();
   @Input() question;
 
-  constructor(questionService: QuestionService, authService: AuthService) {
+  constructor(questionService: QuestionService, commentService: CommentService, authService: AuthService) {
     this.questionService = questionService;
+    this.commentService = commentService;
     this.authService = authService;
     this.comments = [];
   }
@@ -31,7 +33,7 @@ export class QuestionDetailsComponent {
     this.isBusy = true;
     this.questions = [];
 
-    this.questionService.fetchComments(question.number)
+    this.commentService.fetchComments(question.number)
       .subscribe((comments) => {
         this.comments = comments;
       }, undefined, () => {

@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { QuestionService } from './../../services/question.service';
+import { CommentService } from './../../services/comment.service';
 
 import template from './comment-new.tpl.html';
 
@@ -9,8 +9,8 @@ import template from './comment-new.tpl.html';
   directives: []
 })
 export class CommentNewComponent {
-  constructor(questionService: QuestionService) {
-    this.questionService = questionService;
+  constructor(commentService: CommentService) {
+    this.commentService = commentService;
     this.comment = '';
   }
 
@@ -22,7 +22,7 @@ export class CommentNewComponent {
   }
 
   createComment() {
-    this.questionService.postComment(this.questionNumber, this.comment)
+    this.commentService.postComment(this.questionNumber, this.comment)
       .then((newComment) => {
         this.comment = '';
         this.onNewCommentCreated.emit(newComment);
