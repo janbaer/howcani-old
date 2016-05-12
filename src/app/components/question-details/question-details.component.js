@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { NgClass } from '@angular/common';
+import { AuthService } from './../../services/auth.service';
 import { QuestionService } from './../../services/question.service';
 import { MarkdownPipe } from './../../pipes/markdown.pipe';
 import { QuestionStateComponent } from './../question-state/question-state.component';
@@ -20,8 +21,9 @@ export class QuestionDetailsComponent {
   @Output() onCloseDialog = new EventEmitter();
   @Input() question;
 
-  constructor(questionService: QuestionService) {
+  constructor(questionService: QuestionService, authService: AuthService) {
     this.questionService = questionService;
+    this.authService = authService;
     this.comments = [];
   }
 
@@ -39,6 +41,10 @@ export class QuestionDetailsComponent {
 
   closeDialog() {
     this.onCloseDialog.emit();
+  }
+
+  canCreateNewComment() {
+    return this.authService.isUserAuthenticated();
   }
 
   newCommentCreated(comment) {

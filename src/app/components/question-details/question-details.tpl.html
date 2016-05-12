@@ -32,7 +32,7 @@
     <comment [comment]="comment"></comment>
   </div>
 
-  <comment-new [questionNumber]="question?.number" (onNewCommentCreated)="newCommentCreated($event)"></comment-new>
+  <comment-new *ngIf="canCreateNewComment()" [questionNumber]="question?.number" (onNewCommentCreated)="newCommentCreated($event)"></comment-new>
 
   <div class="QuestionDetailsButton-container">
     <a class="modal-action waves-effect waves-green btn-flat" (click)="closeDialog($event)">Ok</a>
