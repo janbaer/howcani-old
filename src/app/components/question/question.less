@@ -1,14 +1,16 @@
 .Question-title {
   font-size: 16px;
   font-weight: 300;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+  display: flex;
 }
 
 .QuestionTitle-label {
   cursor: pointer;
+  margin-left: 5px;
 }
 
 .Question-body {
@@ -24,12 +26,18 @@
 
 .QuestionProperties-container {
   display: flex;
+  flex-wrap: wrap;
+
+  @media @screen-tablets-landscape {
+    flex-wrap: nowrap;
+  }
 }
 
 .QuestionComments-container {
   flex: 0 0 50px;
+  display: flex;
+  align-items: flex-end;
 }
 
 .QuestionCommentsCount-text {
-  vertical-align: super;
 }
