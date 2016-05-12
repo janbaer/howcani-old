@@ -1,11 +1,15 @@
 labels {
   flex: 50%;
   display: flex;
-  justify-content: flex-end;
+  align-items: flex-end;
+
+  @media @screen-tablets-landscape {
+    justify-content: flex-end;
+  }
+
 }
 
 .Label-element {
-  margin-right: @space-normal;
-  vertical-align: super;
+  margin-left: @space-normal;
 }
 
