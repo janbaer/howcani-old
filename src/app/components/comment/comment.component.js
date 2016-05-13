@@ -7,7 +7,10 @@ import template from './comment.tpl.html';
 @Component({
   selector: 'comment',
   template: template,
-  directives: [UserComponent, DateComponent],
+  directives: [
+    UserComponent,
+    DateComponent
+  ],
   pipes: [MarkdownPipe]
 })
 export class CommentComponent {

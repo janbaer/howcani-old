@@ -5,8 +5,7 @@ import template from './comment-new.tpl.html';
 
 @Component({
   selector: 'comment-new',
-  template: template,
-  directives: []
+  template: template
 })
 export class CommentNewComponent {
   constructor(commentService: CommentService) {

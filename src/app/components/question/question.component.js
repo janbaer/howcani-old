@@ -9,7 +9,12 @@ import template from './question.tpl.html';
 @Component({
   selector: 'question',
   template: template,
-  directives: [UserComponent, DateComponent, LabelsComponent, QuestionStateComponent],
+  directives: [
+    UserComponent,
+    DateComponent,
+    LabelsComponent,
+    QuestionStateComponent
+  ],
   pipes: [MarkdownPipe]
 })
 export class QuestionComponent {

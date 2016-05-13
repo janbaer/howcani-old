@@ -12,7 +12,11 @@ import template from './questions.tpl.html';
 @Component({
   selector: 'questions',
   template: template,
-  directives: [QuestionComponent, QuestionDetailsComponent, QuestionNewComponent]
+  directives: [
+    QuestionComponent,
+    QuestionDetailsComponent,
+    QuestionNewComponent
+  ]
 })
 export class QuestionsComponent {
   newQuestion = {};

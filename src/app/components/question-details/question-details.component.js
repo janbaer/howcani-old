@@ -15,7 +15,15 @@ import template from './question-details.tpl.html';
 @Component({
   selector: 'question-details',
   template: template,
-  directives: [NgClass, CommentComponent, QuestionStateComponent, UserComponent, DateComponent, LabelsComponent, CommentNewComponent],
+  directives: [
+    NgClass,
+    CommentComponent,
+    CommentNewComponent,
+    DateComponent,
+    LabelsComponent,
+    QuestionStateComponent,
+    UserComponent
+  ],
   pipes: [MarkdownPipe]
 })
 export class QuestionDetailsComponent {
