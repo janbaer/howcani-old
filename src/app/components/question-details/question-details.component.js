@@ -10,6 +10,7 @@ import { DateComponent } from './../date/date.component';
 import { LabelsComponent } from './../labels/labels.component';
 import { CommentComponent } from './../comment/comment.component';
 import { CommentNewComponent } from './../comment-new/comment-new.component';
+import { ContentEditComponent } from './../content-edit/content-edit.component';
 import template from './question-details.tpl.html';
 
 @Component({
@@ -19,6 +20,7 @@ import template from './question-details.tpl.html';
     NgClass,
     CommentComponent,
     CommentNewComponent,
+    ContentEditComponent,
     DateComponent,
     LabelsComponent,
     QuestionStateComponent,
@@ -51,6 +53,22 @@ export class QuestionDetailsComponent {
 
   closeDialog() {
     this.onCloseDialog.emit();
+  }
+
+  startEditTitle() {
+    this.isEditingTitle = true;
+  }
+
+  cancelEditTitle() {
+    this.isEditingTitle = false;
+  }
+
+  finishEditTitle(title) {
+    this.question.title = title;
+    this.questionService.updateQuestion(this.question)
+      .then(() => {
+        this.isEditingTitle = false;
+      });
   }
 
   canEditQuestion() {

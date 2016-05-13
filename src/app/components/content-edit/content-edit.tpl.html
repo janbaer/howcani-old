@@ -1,0 +1,11 @@
+<div class="ContentEdit-container">
+  <div class="input-field ContentEdit-textbox">
+    <input placeholder="Placeholder" id="first_name" type="text" class="validate" [(ngModel)]="content" >
+  </div>
+    <button class="btn-flat waves-effect waves-light ContentEdit-button isOk" [ngClass]="{isDisabled: !canClose()}" [disabled]="!canClose()" (click)="closeEdit()">
+    <i class="material-icons">done</i>
+  </button>
+  <button class="btn-flat waves-effect waves-light ContentEdit-button isCancel" (click)="cancelEdit()">
+    <i class="material-icons">clear</i>
+  </button>
+</div>

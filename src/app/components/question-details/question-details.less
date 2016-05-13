@@ -2,8 +2,34 @@
   display: flex;
   justify-content: flex-end;
   & > button:first-child {
-    margin-right: 10px;
+    margin-right: @space-large;
   }
+}
+
+.QuestionTitle-container {
+  display: flex;
+  align-items: center;
+}
+
+.QuestionTitleText-container {
+  flex: 1;
+  margin-left: @space-small;
+}
+
+.QuestionTitleText-label {
+  &.isHidden {
+    display: none;
+  }
+}
+
+.QuestionTitleEdit-control {
+  &.isHidden {
+    display: none;
+  }
+}
+
+.QuestionTitleEdit-button {
+  cursor: pointer;
 }
 
 .Comments-container {
@@ -11,3 +37,5 @@
     display: none;
   }
 }
+
+

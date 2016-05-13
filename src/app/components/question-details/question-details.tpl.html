@@ -1,9 +1,18 @@
 <div class="QuestionDetails-container">
   <div class="card">
     <div class="card-content">
-      <div class="Question-title">
+      <div class="QuestionTitle-container">
         <question-state [question]="question"></question-state>
-        {{question?.title}}
+        <div class="QuestionTitleText-container">
+          <span class="QuestionTitleText-label" [ngClass]="{isHidden: isEditingTitle}">{{question?.title}}</span>
+          <content-edit class="QuestionTitleEdit-control"
+                        [ngClass]="{isHidden: !isEditingTitle}"
+                        (onClose)="finishEditTitle($event)" (onCancel)="cancelEditTitle()"
+                        [content]="question?.title"></content-edit>
+        </div>
+        <div *ngIf="canEditQuestion() && !isEditingTitle" class="QuestionTitleEdit-button" (click)="startEditTitle()">
+          <i class="material-icons tooltipped EditItem" data-position="bottom" data-delay="50" data-tooltip="Edit">mode_edit</i>
+        </div>
       </div>
       <div class="Question-body markdown-body" [innerHTML]="question?.body | markdown"></div>
     </div>
