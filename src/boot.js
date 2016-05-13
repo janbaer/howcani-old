@@ -16,6 +16,7 @@ import { ConfigurationService } from './app/services/configuration.service';
 import { GithubService } from './app/services/github.service';
 import { AuthService } from './app/services/auth.service';
 import { QuestionService } from './app/services/question.service';
+import { CommentService } from './app/services/comment.service';
 import { LabelService } from './app/services/label.service';
 import { MaterializeService } from './app/services/materialize.service';
 import { SearchQueryBuilderService } from './app/services/searchquerybuilder.service';
@@ -34,6 +35,7 @@ bootstrap(AppComponent, [
   GithubService,
   AuthService,
   QuestionService,
+  CommentService,
   LabelService,
   MaterializeService,
   SearchQueryBuilderService

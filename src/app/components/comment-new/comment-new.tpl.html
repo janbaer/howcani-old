@@ -1,0 +1,13 @@
+<form class="col s12">
+  <div class="CommentNew-container">
+    <div class="CommentNew-textfield input-field">
+      <textarea id="comment" class="materialize-textarea" [(ngModel)]="comment"></textarea>
+      <label for="comment">New comment</label>
+    </div>
+    <button class="btn-floating CommentNew-button"
+            [disabled]="!hasContent()"
+            (click)="createComment()">
+      <i class="material-icons">add</i>
+    </button>
+  </div>
+</form>

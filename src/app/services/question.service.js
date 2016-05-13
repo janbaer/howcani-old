@@ -8,7 +8,7 @@ import { SearchQueryBuilderService } from './searchquerybuilder.service';
 export class QuestionService {
   constructor(configuration: ConfigurationService, githubService: GithubService, searchQueryBuilderService: SearchQueryBuilderService) {
     this.configuration = configuration;
-    this.githubService = githubService;
+    this.github = githubService;
     this.searchQueryBuilder = searchQueryBuilderService;
 
     this.questions = new BehaviorSubject([]);
@@ -22,7 +22,7 @@ export class QuestionService {
     this.page = page || 1;
 
     const searchString = this.searchQueryBuilder.buildQueryString(searchQuery);
-    const questionsResponse = this.githubService.searchIssues(searchString, this.page);
+    const questionsResponse = this.github.searchIssues(searchString, this.page);
 
     questionsResponse.subscribe((response) => {
       this.totalCountOfQuestions = response.total_count;
@@ -47,12 +47,8 @@ export class QuestionService {
     return undefined;
   }
 
-  fetchComments(issueNumber) {
-    return this.githubService.getComments(issueNumber);
-  }
-
   postQuestion(question) {
-    return this.githubService.postIssue(question)
+    return this.github.postIssue(question)
       .then((newQuestion) => {
         const items = [newQuestion].concat(this.questions.value);
         this.questions.next(items);
