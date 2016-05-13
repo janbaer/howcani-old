@@ -41,7 +41,7 @@ export class QuestionDetailsComponent {
     this.isBusy = true;
     this.questions = [];
 
-    this.commentService.fetchComments(question.number)
+    this.commentService.fetchComments(question.number, question.user)
       .subscribe((comments) => {
         this.comments = comments;
       }, undefined, () => {
