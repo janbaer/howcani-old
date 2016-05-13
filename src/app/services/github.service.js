@@ -100,6 +100,10 @@ export class GithubService {
     return this.post(`repos/${this.configuration.project.user}/${this.configuration.project.repository}/issues`, issue).toPromise();
   }
 
+  patchIssue(issueNumber, issue) {
+    return this.post(`repos/${this.configuration.project.user}/${this.configuration.project.repository}/issues/${issueNumber}`, issue).toPromise();
+  }
+
   postComment(issueNumber, comment) {
     return this.post(`repos/${this.configuration.project.user}/${this.configuration.project.repository}/issues/${issueNumber}/comments`, comment).toPromise();
   }

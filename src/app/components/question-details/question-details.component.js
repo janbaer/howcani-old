@@ -53,6 +53,44 @@ export class QuestionDetailsComponent {
     this.onCloseDialog.emit();
   }
 
+  canEditQuestion() {
+    if (this.question) {
+      return this.authService.isUserAuthenticated() &&
+             this.authService.isSameAuthenticatedUser(this.question.user);
+    }
+    return false;
+  }
+
+  canMarkQuestionAsAnswered() {
+    if (this.question) {
+      return this.canEditQuestion() &&
+             !this.isQuestionAnswered();
+    }
+    return false;
+  }
+
+  canMarkQuestionAsUnanswered() {
+    if (this.question) {
+      return this.canEditQuestion() &&
+             this.isQuestionAnswered();
+    }
+    return false;
+  }
+
+  markQuestionAsAnswered() {
+    this.questionService.markQuestionAsAnswered(this.question)
+      .then(() => this.closeDialog());
+  }
+
+  markQuestionAsUnanswered() {
+    this.questionService.markQuestionAsUnanswered(this.question)
+      .then(() => this.closeDialog());
+  }
+
+  isQuestionAnswered() {
+    return this.question && this.question.state === 'closed';
+  }
+
   canCreateNewComment() {
     return this.authService.isUserAuthenticated();
   }
