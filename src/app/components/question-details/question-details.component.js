@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { AuthService } from './../../services/auth.service';
+import { MaterializeService } from './../../services/materialize.service.js';
 import { QuestionService } from './../../services/question.service';
 import { CommentService } from './../../services/comment.service';
 import { MarkdownPipe } from './../../pipes/markdown.pipe';
@@ -30,10 +31,14 @@ export class QuestionDetailsComponent {
   @Output() onCloseDialog = new EventEmitter();
   @Input() question;
 
-  constructor(questionService: QuestionService, commentService: CommentService, authService: AuthService) {
+  constructor(questionService: QuestionService,
+      commentService: CommentService,
+      authService: AuthService,
+      materializeService: MaterializeService) {
     this.questionService = questionService;
     this.commentService = commentService;
     this.authService = authService;
+    this.materializeService = materializeService;
     this.comments = [];
   }
 
@@ -46,6 +51,7 @@ export class QuestionDetailsComponent {
         this.comments = comments;
       }, undefined, () => {
         this.isBusy = false;
+        this.materializeService.updateTooltips();
       });
   }
 

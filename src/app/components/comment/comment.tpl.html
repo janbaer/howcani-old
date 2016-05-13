@@ -5,5 +5,15 @@
   <div class="card-action CommentProperties-container">
     <user [user]="comment.user"></user>
     <date [date]="comment.created_at"></date>
+    <div class="Comment-answer" *ngIf="comment.isFromAuthenticatedUser" >
+      <i *ngIf="!comment.isCorrectAnswer" class="material-icons tooltipped"
+        (click)="markCommentAsCorrectAnswer()"
+        data-position="bottom" data-delay="50"
+        data-tooltip="Mark as correct answer">offline_pin</i>
+      <i *ngIf="comment.isCorrectAnswer" class="material-icons tooltipped Comment-correctAnswer"
+        (click)="unMarkCorrectAnswer()"
+        data-position="bottom" data-delay="50"
+        data-tooltip="Unselect correct answer">offline_pin</i>
+    </div>
   </div>
 </div>

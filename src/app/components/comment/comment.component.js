@@ -3,6 +3,7 @@ import { MarkdownPipe } from './../../pipes/markdown.pipe';
 import { UserComponent } from './../user/user.component';
 import { DateComponent } from './../date/date.component';
 import template from './comment.tpl.html';
+import { CommentService } from './../../services/comment.service.js';
 
 @Component({
   selector: 'comment',
@@ -15,4 +16,16 @@ import template from './comment.tpl.html';
 })
 export class CommentComponent {
   @Input() comment;
+
+  constructor(commentService: CommentService) {
+    this.commentService = commentService;
+  }
+
+  markCommentAsCorrectAnswer() {
+    this.commentService.markCommentAsCorrectAnswer(this.comment);
+  }
+
+  unMarkCorrectAnswer() {
+    this.commentService.unMarkCorrectAnswer(this.comment);
+  }
 }
