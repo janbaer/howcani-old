@@ -63,6 +63,13 @@ export class GithubService {
                     .catch(this.handleError.bind(this));
   }
 
+  patch(path, bodyObject) {
+    const requestOptions = this.buildRequestOptions();
+    return this.http.put(this.buildUrl(path), JSON.stringify(bodyObject), requestOptions)
+                    .map((response) => response.json())
+                    .catch(this.handleError.bind(this));
+  }
+
   getCurrentUser() {
     return this.get('user');
   }
@@ -97,5 +104,8 @@ export class GithubService {
     return this.post(`repos/${this.configuration.project.user}/${this.configuration.project.repository}/issues/${issueNumber}/comments`, comment).toPromise();
   }
 
+  patchComment(issueNumber, comment) {
+    return this.patch(`repos/${this.configuration.project.user}/${this.configuration.project.repository}/issues/${issueNumber}/comments/${comment.id}`, comment).toPromise();
+  }
 }
 

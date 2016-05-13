@@ -18,6 +18,14 @@ export class ConfigurationService {
     return this.isProduction() ? 'https://howcani-api.herokuapp.com' : 'http://localhost:8080';
   }
 
+  get user() {
+    return this._user;
+  }
+
+  set user(user) {
+    this._user = user;
+  }
+
   get project() {
     if (this._project === undefined) {
       this._project = this.storage.getProject();
