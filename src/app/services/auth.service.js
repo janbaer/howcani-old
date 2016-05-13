@@ -39,7 +39,7 @@ export class AuthService {
 
   isSameAuthenticatedUser(user) {
     if (isUserAuthenticated()) {
-      return this.configuration.user === user;
+      return this.configuration.user.login === user.login;
     }
 
     return false;
