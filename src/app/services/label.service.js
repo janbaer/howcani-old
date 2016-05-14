@@ -25,7 +25,8 @@ export class LabelService {
     const selectedLabels = [];
 
     names.forEach((name) => {
-      const label = this.labels.find((l) => l.name === name);
+      const lowerName = name.toLowerCase();
+      const label = this.labels.find((l) => l.name.toLowerCase() === lowerName);
       if (label) {
         selectedLabels.push(label);
       }
