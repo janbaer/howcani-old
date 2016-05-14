@@ -3,6 +3,7 @@ import { NgClass } from '@angular/common';
 import { AuthService } from './../../services/auth.service';
 import { QuestionService } from './../../services/question.service';
 import { CommentService } from './../../services/comment.service';
+import { LabelService } from './../../services/label.service';
 import { MarkdownPipe } from './../../pipes/markdown.pipe';
 import { QuestionStateComponent } from './../question-state/question-state.component';
 import { UserComponent } from './../user/user.component';
@@ -32,10 +33,16 @@ export class QuestionDetailsComponent {
   @Output() onCloseDialog = new EventEmitter();
   @Input() question;
 
-  constructor(questionService: QuestionService, commentService: CommentService, authService: AuthService) {
+  constructor(
+    questionService: QuestionService,
+    commentService: CommentService,
+    authService: AuthService,
+    labelService: LabelService
+  ) {
     this.questionService = questionService;
     this.commentService = commentService;
     this.authService = authService;
+    this.labelService = labelService;
     this.comments = [];
   }
 
@@ -77,6 +84,27 @@ export class QuestionDetailsComponent {
       .then(() => {
         this.toggleEditBody();
       });
+  }
+
+  toggleEditLabels() {
+    this.isEditingLabels = !this.isEditingLabels;
+  }
+
+  changeLabels(labelNames) {
+    const names = labelNames.split(',').map((label) => label.trim());
+    this.question.labels = this.labelService.getLabelsFromLabelNames(names);
+
+    this.questionService.updateQuestion(this.question)
+      .then(() => {
+        this.toggleEditLabels();
+      });
+  }
+
+  getLabelNames() {
+    if (this.question) {
+      return this.question.labels.map((label) => label.name).join(', ').trim();
+    }
+    return '';
   }
 
   canEditQuestion() {

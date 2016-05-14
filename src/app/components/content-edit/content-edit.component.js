@@ -9,6 +9,7 @@ import template from './content-edit.tpl.html';
 export class ContentEditComponent {
   @Input() content;
   @Input() multiline;
+  @Input() placeholder;
   @Output() onClose = new EventEmitter();
   @Output() onCancel = new EventEmitter();
 
