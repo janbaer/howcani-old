@@ -4,17 +4,28 @@
       <div class="QuestionTitle-container">
         <question-state [question]="question"></question-state>
         <div class="QuestionTitleText-container">
-          <span class="QuestionTitleText-label" [ngClass]="{isHidden: isEditingTitle}">{{question?.title}}</span>
-          <content-edit class="QuestionTitleEdit-control"
-                        [ngClass]="{isHidden: !isEditingTitle}"
-                        (onClose)="finishEditTitle($event)" (onCancel)="cancelEditTitle()"
+          <span *ngIf="!isEditingTitle" class="QuestionTitleText-label">{{question?.title}}</span>
+          <content-edit *ngIf="isEditingTitle"
+                        class="QuestionTitleEdit-control"
+                        [multiline]="false"
+                        (onClose)="changeTitle($event)" (onCancel)="toggleEditTitle()"
                         [content]="question?.title"></content-edit>
         </div>
-        <div *ngIf="canEditQuestion() && !isEditingTitle" class="QuestionTitleEdit-button" (click)="startEditTitle()">
+        <div *ngIf="canEditQuestion() && !isEditingTitle" class="QuestionTitleEdit-button" (click)="toggleEditTitle()">
           <i class="material-icons tooltipped EditItem" data-position="bottom" data-delay="50" data-tooltip="Edit">mode_edit</i>
         </div>
       </div>
-      <div class="Question-body markdown-body" [innerHTML]="question?.body | markdown"></div>
+      <div class="QuestionBody-container">
+        <div *ngIf="!isEditingBody" class="QuestionBody-content markdown-body" [innerHTML]="question?.body | markdown"></div>
+        <content-edit *ngIf="isEditingBody"
+                      class="QuestionBodyEdit-control"
+                      [multiline]="true"
+                      (onClose)="changeBody($event)" (onCancel)="toggleEditBody()"
+                      [content]="question?.body"></content-edit>
+        <div *ngIf="canEditQuestion() && !isEditingBody" class="QuestionTitleEdit-button" (click)="toggleEditBody()">
+          <i class="material-icons tooltipped EditItem" data-position="bottom" data-delay="50" data-tooltip="Edit">mode_edit</i>
+        </div>
+      </div>
     </div>
     <div class="card-action QuestionProperties-container">
       <user [user]="question?.user" tooltipText="Created from"></user>

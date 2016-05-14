@@ -55,19 +55,27 @@ export class QuestionDetailsComponent {
     this.onCloseDialog.emit();
   }
 
-  startEditTitle() {
-    this.isEditingTitle = true;
+  toggleEditTitle() {
+    this.isEditingTitle = !this.isEditingTitle;
   }
 
-  cancelEditTitle() {
-    this.isEditingTitle = false;
-  }
-
-  finishEditTitle(title) {
+  changeTitle(title) {
     this.question.title = title;
     this.questionService.updateQuestion(this.question)
       .then(() => {
-        this.isEditingTitle = false;
+        this.toggleEditTitle();
+      });
+  }
+
+  toggleEditBody() {
+    this.isEditingBody = !this.isEditingBody;
+  }
+
+  changeBody(body) {
+    this.question.body = body;
+    this.questionService.updateQuestion(this.question)
+      .then(() => {
+        this.toggleEditBody();
       });
   }
 
@@ -119,6 +127,9 @@ export class QuestionDetailsComponent {
 
   ngOnChanges(changes) {
     if (changes.question && changes.question.currentValue) {
+      this.isEditingBody = false;
+      this.isEditingTitle = false;
+
       if (changes.question.currentValue) {
         this.loadComments(changes.question.currentValue);
       } else {

@@ -9,6 +9,7 @@
 .QuestionTitle-container {
   display: flex;
   align-items: center;
+  padding-bottom: @space-normal;
 }
 
 .QuestionTitleText-container {
@@ -17,19 +18,29 @@
 }
 
 .QuestionTitleText-label {
-  &.isHidden {
-    display: none;
-  }
 }
 
 .QuestionTitleEdit-control {
-  &.isHidden {
-    display: none;
-  }
 }
 
 .QuestionTitleEdit-button {
   cursor: pointer;
+  align-self: flex-end;
+}
+
+.QuestionBody-container {
+  display: flex;
+  border-top: 1px solid rgba(160, 160, 160, 0.2);
+  padding-top: @space-large;
+  min-height: 150px;
+}
+
+.QuestionBody-content {
+  flex: 1;
+}
+
+.QuestionBodyEdit-control {
+  flex: 1;
 }
 
 .Comments-container {
@@ -37,5 +48,4 @@
     display: none;
   }
 }
-
 

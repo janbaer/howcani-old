@@ -8,14 +8,20 @@ import template from './content-edit.tpl.html';
 })
 export class ContentEditComponent {
   @Input() content;
+  @Input() multiline;
   @Output() onClose = new EventEmitter();
   @Output() onCancel = new EventEmitter();
 
-  constructor() {
+  closeEdit() {
+    if (this.canClose()) {
+      this.onClose.emit(this.content);
+    }
   }
 
-  closeEdit() {
-    this.onClose.emit(this.content);
+  tryCloseEdit(event) {
+    if (event.altKey && event.key === 'Enter') {
+      this.closeEdit();
+    }
   }
 
   cancelEdit() {
