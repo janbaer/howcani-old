@@ -54,7 +54,7 @@
   </div>
 
   <div class="Comments-container" [ngClass]="{isHidden: isBusy}" *ngFor="let comment of comments">
-    <comment [comment]="comment"></comment>
+    <comment [comment]="comment" (onMarkedAsAnswered)="markQuestionAsAnswered()"></comment>
   </div>
 
   <comment-new *ngIf="canCreateNewComment()" [questionNumber]="question?.number" (onNewCommentCreated)="newCommentCreated($event)"></comment-new>
@@ -67,7 +67,7 @@
     </button>
     <button class="btn light-green modal-action waves-effect waves-green"
             *ngIf="canMarkQuestionAsAnswered()"
-            (click)="markQuestionAsAnswered()">
+            (click)="markQuestionAsAnsweredAndClose()">
       Is answered
     </button>
     <button class="btn modal-action waves-effect waves-green" (click)="closeDialog($event)">Ok</button>

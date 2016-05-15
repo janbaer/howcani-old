@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommentService } from './../../services/comment.service.js';
 import { AuthService } from './../../services/auth.service';
 import { MarkdownPipe } from './../../pipes/markdown.pipe';
@@ -19,6 +19,7 @@ import template from './comment.tpl.html';
 })
 export class CommentComponent {
   @Input() comment;
+  @Output() onMarkedAsAnswered = new EventEmitter();
 
   constructor(commentService: CommentService, authService: AuthService) {
     this.commentService = commentService;
@@ -52,6 +53,9 @@ export class CommentComponent {
     this.commentService.updateComment(this.comment)
       .then((updatedComment) => {
         this.comment = updatedComment;
+        if (this.comment.isCorrectAnswer) {
+          this.onMarkedAsAnswered.emit();
+        }
       });
   }
 

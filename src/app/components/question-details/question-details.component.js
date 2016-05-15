@@ -136,7 +136,11 @@ export class QuestionDetailsComponent {
   }
 
   markQuestionAsAnswered() {
-    this.questionService.markQuestionAsAnswered(this.question)
+    return this.questionService.markQuestionAsAnswered(this.question);
+  }
+
+  markQuestionAsAnsweredAndClose() {
+    this.markQuestionAsAnswered()
       .then(() => this.closeDialog());
   }
 
