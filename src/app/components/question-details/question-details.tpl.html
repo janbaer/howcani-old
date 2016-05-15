@@ -1,16 +1,49 @@
 <div class="QuestionDetails-container">
   <div class="card">
     <div class="card-content">
-      <div class="Question-title">
+      <div class="QuestionTitle-container">
         <question-state [question]="question"></question-state>
-        {{question?.title}}
+        <div class="QuestionTitleText-container">
+          <span *ngIf="!isEditingTitle" class="QuestionTitleText-label">{{question?.title}}</span>
+          <content-edit *ngIf="isEditingTitle"
+                        class="QuestionTitleEdit-control"
+                        placeholder="Enter the title for your question"
+                        [multiline]="false"
+                        (onClose)="changeTitle($event)" (onCancel)="toggleEditTitle()"
+                        [content]="question?.title"></content-edit>
+        </div>
+        <div *ngIf="canEditQuestion() && !isEditingTitle" class="QuestionTitleEdit-button" (click)="toggleEditTitle()">
+          <i class="material-icons tooltipped EditItem" data-position="bottom" data-delay="50" data-tooltip="Edit">mode_edit</i>
+        </div>
       </div>
-      <div class="Question-body markdown-body" [innerHTML]="question?.body | markdown"></div>
+      <div class="QuestionBody-container">
+        <div *ngIf="!isEditingBody" class="QuestionBody-content markdown-body" [innerHTML]="question?.body | markdown"></div>
+        <content-edit *ngIf="isEditingBody"
+                      class="QuestionBodyEdit-control"
+                      placeholder="Enter more details about your question"
+                      [multiline]="true"
+                      (onClose)="changeBody($event)" (onCancel)="toggleEditBody()"
+                      [content]="question?.body"></content-edit>
+        <div *ngIf="canEditQuestion() && !isEditingBody" class="QuestionTitleEdit-button" (click)="toggleEditBody()">
+          <i class="material-icons tooltipped EditItem" data-position="bottom" data-delay="50" data-tooltip="Edit">mode_edit</i>
+        </div>
+      </div>
     </div>
     <div class="card-action QuestionProperties-container">
-      <user [user]="question?.user" tooltipText="Created from"></user>
-      <date [date]="question?.created_at" tooltipText="Created on"></date>
-      <labels [labels]="question?.labels"></labels>
+      <user class="QuestionDetails-user" [user]="question?.user" tooltipText="Created from"></user>
+      <date class="QuestionDetails-date" [date]="question?.created_at" tooltipText="Created on"></date>
+      <div class="QuestionDetailsLabels-container">
+        <labels *ngIf="!isEditingLabels" class="QuestionDetails-labels" [labels]="question?.labels"></labels>
+        <content-edit *ngIf="isEditingLabels"
+                      class="QuestionLabelsEdit-control"
+                      placeholder="Enter a comma separated list of the labels"
+                      [multiline]="false"
+                      (onClose)="changeLabels($event)" (onCancel)="toggleEditLabels()"
+                      [content]="getLabelNames()"></content-edit>
+        <div *ngIf="canEditQuestion() && !isEditingLabels" class="QuestionLabelsEdit-button" (click)="toggleEditLabels()">
+          <i class="material-icons tooltipped EditItem" data-position="bottom" data-delay="50" data-tooltip="Edit">mode_edit</i>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -35,6 +68,16 @@
   <comment-new *ngIf="canCreateNewComment()" [questionNumber]="question?.number" (onNewCommentCreated)="newCommentCreated($event)"></comment-new>
 
   <div class="QuestionDetailsButton-container">
-    <a class="modal-action waves-effect waves-green btn-flat" (click)="closeDialog($event)">Ok</a>
+    <button class="btn deep-orange modal-action waves-effect waves-green"
+            *ngIf="canMarkQuestionAsUnanswered()"
+            (click)="markQuestionAsUnanswered()">
+      Is not answered
+    </button>
+    <button class="btn light-green modal-action waves-effect waves-green"
+            *ngIf="canMarkQuestionAsAnswered()"
+            (click)="markQuestionAsAnswered()">
+      Is answered
+    </button>
+    <button class="btn modal-action waves-effect waves-green" (click)="closeDialog($event)">Ok</button>
   </div>
 </div>

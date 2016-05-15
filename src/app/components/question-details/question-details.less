@@ -1,6 +1,46 @@
 .QuestionDetailsButton-container {
   display: flex;
   justify-content: flex-end;
+  & > button:first-child {
+    margin-right: @space-large;
+  }
+}
+
+.QuestionTitle-container {
+  display: flex;
+  align-items: center;
+  padding-bottom: @space-normal;
+}
+
+.QuestionTitleText-container {
+  flex: 1;
+  margin-left: @space-small;
+}
+
+.QuestionTitleText-label {
+}
+
+.QuestionTitleEdit-control {
+}
+
+.QuestionTitleEdit-button {
+  cursor: pointer;
+  align-self: flex-end;
+}
+
+.QuestionBody-container {
+  display: flex;
+  border-top: 1px solid rgba(160, 160, 160, 0.2);
+  padding-top: @space-large;
+  min-height: 150px;
+}
+
+.QuestionBody-content {
+  flex: 1;
+}
+
+.QuestionBodyEdit-control {
+  flex: 1;
 }
 
 .Comments-container {
@@ -8,3 +48,44 @@
     display: none;
   }
 }
+
+.QuestionDetailsProperties-container {
+  display: flex;
+  flex-wrap: wrap;
+
+  @media @screen-tablets-landscape {
+    flex-wrap: nowrap;
+  }
+
+}
+
+.QuestionDetails-user {
+  flex: 25%;
+}
+
+.QuestionDetails-date {
+  flex: 25%;
+}
+
+.QuestionDetailsLabels-container {
+  display: flex;
+  flex: 100%;
+  @media @screen-tablets-landscape {
+    flex: 50%;
+  }
+}
+
+.QuestionDetails-labels {
+  flex: 1;
+}
+
+.QuestionLabelsEdit-control {
+  flex: 1;
+}
+
+.QuestionLabelsEdit-button {
+  display: flex;
+  cursor: pointer;
+  margin-left: @space-small;
+}
+

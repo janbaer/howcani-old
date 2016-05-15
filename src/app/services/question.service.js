@@ -55,4 +55,33 @@ export class QuestionService {
       });
   }
 
+  markQuestionAsAnswered(question) {
+    question.state = 'closed';
+    return this.updateQuestion(question);
+  }
+
+  markQuestionAsUnanswered(question) {
+    question.state = 'open';
+    return this.updateQuestion(question);
+  }
+
+  updateQuestion(question) {
+    return this.github.patchIssue(question.number, this.createIssueFromQuestion(question))
+      .then((updatedQuestion) => {
+        const items = this.questions.value;
+        const index = items.findIndex((item) => item.number === updatedQuestion.number);
+        items[index] = updatedQuestion;
+        this.questions.next(items);
+      });
+  }
+
+  createIssueFromQuestion(question) {
+    return {
+      title: question.title,
+      body: question.body,
+      state: question.state,
+      labels: question.labels.map((label) => label.name)
+    };
+  }
+
 }

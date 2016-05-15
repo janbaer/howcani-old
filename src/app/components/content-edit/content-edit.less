@@ -1,0 +1,23 @@
+.ContentEdit-container {
+  display: flex;
+}
+
+.ContentEdit-textbox {
+  flex: 1;
+}
+
+.ContentEdit-button {
+  cursor: pointer;
+  align-self: center;
+  width: 30px;
+  padding: 0;
+  &.isOk {
+    color: green;
+  }
+  &.isCancel {
+    color: red;
+  }
+  &.isDisabled {
+    color: grey;
+  }
+}
