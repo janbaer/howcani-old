@@ -154,6 +154,7 @@ export class QuestionDetailsComponent {
   }
 
   newCommentCreated(comment) {
+    this.question.comments = this.question.comments + 1;
     comment.canMarkQuestionAsAnswered = this.authService.isSameAuthenticatedUser(this.question.user);
     this.comments.push(comment);
   }
