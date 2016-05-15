@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { AuthService } from './../../services/auth.service';
+import { MaterializeService } from './../../services/materialize.service.js';
 import { QuestionService } from './../../services/question.service';
 import { CommentService } from './../../services/comment.service';
 import { LabelService } from './../../services/label.service';
@@ -37,12 +38,14 @@ export class QuestionDetailsComponent {
     questionService: QuestionService,
     commentService: CommentService,
     authService: AuthService,
-    labelService: LabelService
+    labelService: LabelService,
+    materializeService: MaterializeService
   ) {
     this.questionService = questionService;
     this.commentService = commentService;
     this.authService = authService;
     this.labelService = labelService;
+    this.materializeService = materializeService;
     this.comments = [];
   }
 
@@ -50,11 +53,12 @@ export class QuestionDetailsComponent {
     this.isBusy = true;
     this.questions = [];
 
-    this.commentService.fetchComments(question.number)
+    this.commentService.fetchComments(question.number, question.user)
       .subscribe((comments) => {
         this.comments = comments;
       }, undefined, () => {
         this.isBusy = false;
+        this.materializeService.updateTooltips();
       });
   }
 

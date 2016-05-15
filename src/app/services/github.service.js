@@ -65,7 +65,7 @@ export class GithubService {
 
   patch(path, bodyObject) {
     const requestOptions = this.buildRequestOptions();
-    return this.http.put(this.buildUrl(path), JSON.stringify(bodyObject), requestOptions)
+    return this.http.patch(this.buildUrl(path), JSON.stringify(bodyObject), requestOptions)
                     .map((response) => response.json())
                     .catch(this.handleError.bind(this));
   }
@@ -108,8 +108,8 @@ export class GithubService {
     return this.post(`repos/${this.configuration.project.user}/${this.configuration.project.repository}/issues/${issueNumber}/comments`, comment).toPromise();
   }
 
-  patchComment(issueNumber, comment) {
-    return this.patch(`repos/${this.configuration.project.user}/${this.configuration.project.repository}/issues/${issueNumber}/comments/${comment.id}`, comment).toPromise();
+  patchComment(comment) {
+    return this.patch(`repos/${this.configuration.project.user}/${this.configuration.project.repository}/issues/comments/${comment.id}`, comment).toPromise();
   }
 }
 
