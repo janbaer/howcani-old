@@ -26,6 +26,9 @@
 .QuestionTitleEdit-button {
   cursor: pointer;
   align-self: flex-end;
+  &.isHidden {
+    display: none;
+  }
 }
 
 .QuestionBody-container {
@@ -87,5 +90,8 @@
   display: flex;
   cursor: pointer;
   margin-left: @space-small;
+  &.isHidden {
+    display: none;
+  }
 }
 
