@@ -31,11 +31,11 @@ export class CommentService {
   }
 
   removeAnswerTag(commentText) {
-    return commentText.replace(/^#ANSWER/, '');
+    return commentText.replace(/^#ANSWER\n/, '');
   }
 
   addIsCorrectAnswerTag(commentText) {
-    return '#ANSWER' + commentText;
+    return '#ANSWER\n' + commentText;
   }
 
   postComment(questionNumber, commentText) {
