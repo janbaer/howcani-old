@@ -8,7 +8,9 @@
                       [multiline]="true"
                       (onClose)="changeComment($event)" (onCancel)="toggleEditComment()"
                       [content]="comment.body"></content-edit>
-        <div *ngIf="canChangeComment() && !isEditingComment" class="EditComment-button" (click)="toggleEditComment()">
+        <div class="EditComment-button"
+             [ngClass]="{isHidden: !canChangeComment() || isEditingComment}"
+            (click)="toggleEditComment()">
           <i class="material-icons tooltipped EditItem" data-position="bottom" data-delay="50" data-tooltip="Edit">mode_edit</i>
         </div>
     </div>
@@ -16,13 +18,10 @@
   <div class="card-action CommentProperties-container">
     <user class="Comment-user" [user]="comment.user"></user>
     <date class="Comment-date" [date]="comment.created_at"></date>
-    <div *ngIf="canMarkQuestionAsAnswered()" (click)="toggleMarkQuestionAsAnswered()" class="Comment-answer" *ngIf="comment.isFromAuthenticatedUser" >
-      <i *ngIf="!comment.isCorrectAnswer" class="material-icons tooltipped"
+    <div *ngIf="canMarkQuestionAsAnswered()" (click)="toggleMarkQuestionAsAnswered()" class="Comment-answer">
+      <i class="material-icons tooltipped Comment" [ngClass]="{isAnswer: comment.isCorrectAnswer}"
         data-position="bottom" data-delay="50"
-        data-tooltip="Mark as correct answer">offline_pin</i>
-      <i *ngIf="comment.isCorrectAnswer" class="material-icons tooltipped Comment-correctAnswer"
-        data-position="bottom" data-delay="50"
-        data-tooltip="Unselect correct answer">offline_pin</i>
+        attr.data-tooltip="{{comment.isCorrectAnswer ? 'Unselected correct answer' : 'Mark as correct answer' }}">offline_pin</i>
     </div>
   </div>
 </div>

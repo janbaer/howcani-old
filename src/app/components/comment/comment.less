@@ -13,11 +13,14 @@
   cursor: pointer;
 }
 
-.Comment-correctAnswer {
-  color: green;
-}
 .CommentProperties-container {
   display: flex;
+}
+
+.Comment {
+  &.isAnswer {
+    color: green;
+  }
 }
 
 .Comment-user {
@@ -34,6 +37,9 @@
 .EditComment-button {
   cursor: pointer;
   align-self: flex-end;
+  &.isHidden {
+    display: none;
+  }
 }
 
 .CommentBodyEdit-control {
