@@ -1,17 +1,26 @@
 <div class="card">
   <div class="card-content">
-    <div class="Comment-body markdown-body" [innerHTML]="comment.body | markdown"></div>
+    <div class="CommentBody-container">
+      <div *ngIf="!isEditingComment" class="Comment-body markdown-body" [innerHTML]="comment.body | markdown"></div>
+        <content-edit *ngIf="isEditingComment"
+                      class="CommentBodyEdit-control"
+                      placeholder="Enter a comment to the question"
+                      [multiline]="true"
+                      (onClose)="changeComment($event)" (onCancel)="toggleEditComment()"
+                      [content]="comment.body"></content-edit>
+        <div *ngIf="canChangeComment() && !isEditingComment" class="EditComment-button" (click)="toggleEditComment()">
+          <i class="material-icons tooltipped EditItem" data-position="bottom" data-delay="50" data-tooltip="Edit">mode_edit</i>
+        </div>
+    </div>
   </div>
   <div class="card-action CommentProperties-container">
-    <user [user]="comment.user"></user>
-    <date [date]="comment.created_at"></date>
-    <div class="Comment-answer" *ngIf="comment.isFromAuthenticatedUser" >
+    <user class="Comment-user" [user]="comment.user"></user>
+    <date class="Comment-date" [date]="comment.created_at"></date>
+    <div *ngIf="canMarkQuestionAsAnswered()" (click)="toggleMarkQuestionAsAnswered()" class="Comment-answer" *ngIf="comment.isFromAuthenticatedUser" >
       <i *ngIf="!comment.isCorrectAnswer" class="material-icons tooltipped"
-        (click)="markCommentAsCorrectAnswer()"
         data-position="bottom" data-delay="50"
         data-tooltip="Mark as correct answer">offline_pin</i>
       <i *ngIf="comment.isCorrectAnswer" class="material-icons tooltipped Comment-correctAnswer"
-        (click)="unMarkCorrectAnswer()"
         data-position="bottom" data-delay="50"
         data-tooltip="Unselect correct answer">offline_pin</i>
     </div>
