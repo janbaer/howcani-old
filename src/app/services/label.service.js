@@ -13,11 +13,25 @@ export class LabelService {
 
     this.githubService.getLabels()
       .subscribe((labels) => {
-        this.labels = labels ? labels.sort(this.sortLabelsByName) : [];
+        this.labels = labels ? labels.sort(this.compareLabelsByName) : [];
       });
   }
 
-  sortLabelsByName(label1, label2) {
+  compareLabelsByName(label1, label2) {
     return label1.name.localeCompare(label2.name);
+  }
+
+  getLabelsFromLabelNames(names) {
+    const selectedLabels = [];
+
+    names.forEach((name) => {
+      const lowerName = name.toLowerCase();
+      const label = this.labels.find((l) => l.name.toLowerCase() === lowerName);
+      if (label) {
+        selectedLabels.push(label);
+      }
+    });
+
+    return selectedLabels.sort(this.compareLabelsByName);
   }
 }

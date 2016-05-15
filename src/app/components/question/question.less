@@ -34,10 +34,27 @@
 }
 
 .QuestionComments-container {
-  flex: 0 0 50px;
-  display: flex;
   align-items: flex-end;
+  display: flex;
+  cursor: pointer;
+  flex: 0 0 50px;
 }
 
 .QuestionCommentsCount-text {
+  margin-left: @space-small;
+}
+
+.Question-user {
+  flex: 25%;
+}
+
+.Question-date {
+  flex: 25%;
+}
+
+.Question-labels {
+  flex: 100%;
+  @media @screen-tablets-landscape {
+    flex: 50%;
+  }
 }

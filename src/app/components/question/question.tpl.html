@@ -7,14 +7,14 @@
     <div class="Question-body markdown-body" [innerHTML]="question.body | markdown"></div>
   </div>
   <div class="card-action QuestionProperties-container">
-    <user [user]="question.user" tooltipText="Created from"></user>
-    <date [date]="question.created_at" tooltipText="Created on"></date>
-    <div class="QuestionComments-container">
+    <user class="Question-user" [user]="question.user" tooltipText="Created from"></user>
+    <date class="Question-date" [date]="question.created_at" tooltipText="Created on"></date>
+    <div class="QuestionComments-container" (click)="showDetails(question)">
       <i class="material-icons tooltipped"
          data-position="bottom" data-delay="50" data-tooltip="Comments">chat_bubble_outline</i>
       <span class="QuestionCommentsCount-text">{{ question.comments }}</span>
     </div>
-    <labels [labels]="question.labels"></labels>
+    <labels class="Question-labels" [labels]="question.labels"></labels>
   </div>
 </div>
 

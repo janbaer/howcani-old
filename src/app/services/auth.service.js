@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ConfigurationService } from './configuration.service';
+import { ConfigurationService } from './configuration.service.js';
 import { GithubService } from './github.service';
 
 @Injectable()
@@ -36,5 +36,12 @@ export class AuthService {
   isUserAuthenticated() {
     return this.configuration.user !== undefined;
   }
-}
 
+  isSameAuthenticatedUser(user) {
+    if (this.isUserAuthenticated()) {
+      return this.configuration.user.login === user.login;
+    }
+
+    return false;
+  }
+}

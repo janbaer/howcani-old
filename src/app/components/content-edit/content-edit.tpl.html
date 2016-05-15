@@ -1,0 +1,12 @@
+<div class="ContentEdit-container">
+  <div class="input-field ContentEdit-textbox">
+    <input *ngIf="!multiline" placeholder="{{placeholder}}" type="text" class="validate" [(ngModel)]="content" (keyup.enter)="closeEdit()" >
+    <textarea *ngIf="multiline" placeholder="{{placeholder}}" class="materialize-textarea" [(ngModel)]="content" (keyup)="tryCloseEdit($event)"></textarea>
+  </div>
+    <button class="btn-flat waves-effect waves-light ContentEdit-button isOk" [ngClass]="{isDisabled: !canClose()}" [disabled]="!canClose()" (click)="closeEdit()">
+    <i class="material-icons">done</i>
+  </button>
+  <button class="btn-flat waves-effect waves-light ContentEdit-button isCancel" (click)="cancelEdit()">
+    <i class="material-icons">clear</i>
+  </button>
+</div>
