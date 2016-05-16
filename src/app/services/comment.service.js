@@ -45,11 +45,13 @@ export class CommentService {
   updateComment(comment) {
     const canMarkQuestionAsAnswered = comment.canMarkQuestionAsAnswered;
     const isCorrectAnswer = comment.isCorrectAnswer;
+
+    const commentForUpdate = { body: comment.body }; // Github needs only the body of a comment
     if (isCorrectAnswer) {
-      comment.body = this.addIsCorrectAnswerTag(comment.body);
+      commentForUpdate.body = this.addIsCorrectAnswerTag(commentForUpdate.body);
     }
 
-    return this.github.patchComment(comment)
+    return this.github.patchComment(comment.id, commentForUpdate)
       .then((updatedComment) => {
         updatedComment.isCorrectAnswer = isCorrectAnswer;
         updatedComment.canMarkQuestionAsAnswered = canMarkQuestionAsAnswered;
