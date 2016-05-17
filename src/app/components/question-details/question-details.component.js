@@ -136,7 +136,11 @@ export class QuestionDetailsComponent {
   }
 
   markQuestionAsAnswered() {
-    this.questionService.markQuestionAsAnswered(this.question)
+    return this.questionService.markQuestionAsAnswered(this.question);
+  }
+
+  markQuestionAsAnsweredAndClose() {
+    this.markQuestionAsAnswered()
       .then(() => this.closeDialog());
   }
 
@@ -154,6 +158,8 @@ export class QuestionDetailsComponent {
   }
 
   newCommentCreated(comment) {
+    this.question.comments = this.question.comments + 1;
+    comment.canMarkQuestionAsAnswered = this.authService.isSameAuthenticatedUser(this.question.user);
     this.comments.push(comment);
   }
 

@@ -28,6 +28,12 @@ export class CommentNewComponent {
       });
   }
 
+  handleKeyEnter(event) {
+    if (event.altKey && event.key === 'Enter') {
+      this.createComment();
+    }
+  }
+
   ngOnChanges(changes) {
     if (changes.questionNumber && changes.questionNumber.currentValue === null) {
       this.comment = '';

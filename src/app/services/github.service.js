@@ -108,8 +108,8 @@ export class GithubService {
     return this.post(`repos/${this.configuration.project.user}/${this.configuration.project.repository}/issues/${issueNumber}/comments`, comment).toPromise();
   }
 
-  patchComment(comment) {
-    return this.patch(`repos/${this.configuration.project.user}/${this.configuration.project.repository}/issues/comments/${comment.id}`, comment).toPromise();
+  patchComment(commentId, comment) {
+    return this.patch(`repos/${this.configuration.project.user}/${this.configuration.project.repository}/issues/comments/${commentId}`, comment).toPromise();
   }
 }
 

@@ -1,4 +1,9 @@
+.CommentBody-container {
+  display: flex;
+}
+
 .Comment-body {
+  flex: 1;
   min-height: 100px;
   max-height: 200px;
   overflow: auto;
@@ -8,9 +13,35 @@
   cursor: pointer;
 }
 
-.Comment-correctAnswer {
-  color: green;
-}
 .CommentProperties-container {
   display: flex;
+}
+
+.Comment {
+  &.isAnswer {
+    color: green;
+  }
+}
+
+.Comment-user {
+  flex: 1;
+}
+
+.Comment-date {
+  flex: 1;
+}
+
+.Comment-answer {
+}
+
+.EditComment-button {
+  cursor: pointer;
+  align-self: flex-end;
+  &.isHidden {
+    display: none;
+  }
+}
+
+.CommentBodyEdit-control {
+  flex: 1;
 }

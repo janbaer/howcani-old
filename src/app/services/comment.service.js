@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { GithubService } from './github.service';
 import { AuthService } from './auth.service.js';
-import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class CommentService {
@@ -10,47 +9,56 @@ export class CommentService {
     this.authService = authService;
   }
 
-  fetchComments(issueNumber, issueOwner) {
+  fetchComments(issueNumber, questionAuthor) {
     const commentsObservable = this.github.getComments(issueNumber);
     const newObservable = commentsObservable.map((comments) => {
       comments = comments.map((comment) => {
-        comment.isFromAuthenticatedUser = this.authService.isSameAuthenticatedUser(issueOwner);
-        comment.isCorrectAnswer = comment.body.startsWith('#ANSWER');
+        comment.canMarkQuestionAsAnswered = this.authService.isSameAuthenticatedUser(questionAuthor);
+        comment.isCorrectAnswer = this.hasIsCorrectAnswerTag(comment.body);
         if (comment.isCorrectAnswer === true) {
-          comment = this.removeAnswerTag(comment);
+          comment.body = this.removeAnswerTag(comment.body);
         }
         return comment;
       });
       return comments;
     });
 
-    return newObservable; 
+    return newObservable;
   }
 
-  removeAnswerTag(comment) {
-    comment.body = comment.body.replace(/^#ANSWER/, "");
-    return comment;
+  hasIsCorrectAnswerTag(commentText) {
+    return commentText.startsWith('#ANSWER');
   }
 
+  removeAnswerTag(commentText) {
+    return commentText.replace(/^#ANSWER\n/, '');
+  }
+
+  addIsCorrectAnswerTag(commentText) {
+    return '#ANSWER\n' + commentText;
+  }
 
   postComment(questionNumber, commentText) {
     return this.github.postComment(questionNumber, { body: commentText });
   }
 
-  updateComment(questionNumber, comment) {
-    return this.github.patchComment(questionNumber, comment);
-  }
+  updateComment(comment) {
+    const canMarkQuestionAsAnswered = comment.canMarkQuestionAsAnswered;
+    const isCorrectAnswer = comment.isCorrectAnswer;
 
-  unMarkCorrectAnswer(comment) {
-    const updatedComment = this.removeAnswerTag(comment);
-    comment.isCorrectAnswer = false;
-    return this.github.patchComment(comment);
-  }
+    const commentForUpdate = { body: comment.body }; // Github needs only the body of a comment
+    if (isCorrectAnswer) {
+      commentForUpdate.body = this.addIsCorrectAnswerTag(commentForUpdate.body);
+    }
 
-  markCommentAsCorrectAnswer(comment) {
-    comment.body = '#ANSWER' + comment.body;
-    comment.isCorrectAnswer = true;
-    this.github.patchComment(comment);
-    comment = this.removeAnswerTag(comment);
+    return this.github.patchComment(comment.id, commentForUpdate)
+      .then((updatedComment) => {
+        updatedComment.isCorrectAnswer = isCorrectAnswer;
+        updatedComment.canMarkQuestionAsAnswered = canMarkQuestionAsAnswered;
+        if (isCorrectAnswer) {
+          updatedComment.body = this.removeAnswerTag(updatedComment.body);
+        }
+        return updatedComment;
+      });
   }
 }

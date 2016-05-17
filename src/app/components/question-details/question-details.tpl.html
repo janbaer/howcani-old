@@ -12,7 +12,9 @@
                         (onClose)="changeTitle($event)" (onCancel)="toggleEditTitle()"
                         [content]="question?.title"></content-edit>
         </div>
-        <div *ngIf="canEditQuestion() && !isEditingTitle" class="QuestionTitleEdit-button" (click)="toggleEditTitle()">
+        <div class="QuestionTitleEdit-button"
+             [ngClass]="{isHidden: !canEditQuestion() || isEditingTitle}"
+             (click)="toggleEditTitle()">
           <i class="material-icons tooltipped EditItem" data-position="bottom" data-delay="50" data-tooltip="Edit">mode_edit</i>
         </div>
       </div>
@@ -24,7 +26,9 @@
                       [multiline]="true"
                       (onClose)="changeBody($event)" (onCancel)="toggleEditBody()"
                       [content]="question?.body"></content-edit>
-        <div *ngIf="canEditQuestion() && !isEditingBody" class="QuestionTitleEdit-button" (click)="toggleEditBody()">
+        <div class="QuestionTitleEdit-button"
+             [ngClass]="{isHidden: !canEditQuestion() || isEditingBody}"
+             (click)="toggleEditBody()">
           <i class="material-icons tooltipped EditItem" data-position="bottom" data-delay="50" data-tooltip="Edit">mode_edit</i>
         </div>
       </div>
@@ -40,29 +44,17 @@
                       [multiline]="false"
                       (onClose)="changeLabels($event)" (onCancel)="toggleEditLabels()"
                       [content]="getLabelNames()"></content-edit>
-        <div *ngIf="canEditQuestion() && !isEditingLabels" class="QuestionLabelsEdit-button" (click)="toggleEditLabels()">
+        <div class="QuestionLabelsEdit-button"
+             [ngClass]="{isHidden: !canEditQuestion() || isEditingLabels}"
+             (click)="toggleEditLabels()">
           <i class="material-icons tooltipped EditItem" data-position="bottom" data-delay="50" data-tooltip="Edit">mode_edit</i>
         </div>
       </div>
     </div>
   </div>
 
-  <div *ngIf="isBusy" class="Preloader-container">
-    <div class="preloader-wrapper small active">
-      <div class="spinner-layer spinner-green-only">
-        <div class="circle-clipper left">
-          <div class="circle"></div>
-        </div><div class="gap-patch">
-          <div class="circle"></div>
-        </div><div class="circle-clipper right">
-          <div class="circle"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <div class="Comments-container" [ngClass]="{isHidden: isBusy}" *ngFor="let comment of comments">
-    <comment [comment]="comment"></comment>
+    <comment [comment]="comment" (onMarkedAsAnswered)="markQuestionAsAnswered()"></comment>
   </div>
 
   <comment-new *ngIf="canCreateNewComment()" [questionNumber]="question?.number" (onNewCommentCreated)="newCommentCreated($event)"></comment-new>
@@ -75,7 +67,7 @@
     </button>
     <button class="btn light-green modal-action waves-effect waves-green"
             *ngIf="canMarkQuestionAsAnswered()"
-            (click)="markQuestionAsAnswered()">
+            (click)="markQuestionAsAnsweredAndClose()">
       Is answered
     </button>
     <button class="btn modal-action waves-effect waves-green" (click)="closeDialog($event)">Ok</button>

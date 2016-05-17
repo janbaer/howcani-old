@@ -1,7 +1,7 @@
 <form class="col s12">
   <div class="CommentNew-container">
     <div class="CommentNew-textfield input-field">
-      <textarea id="comment" class="materialize-textarea" [(ngModel)]="comment"></textarea>
+      <textarea id="comment" class="materialize-textarea" [(ngModel)]="comment" (keyup)="handleKeyEnter($event)"></textarea>
       <label for="comment">New comment</label>
     </div>
     <button class="btn-floating CommentNew-button"
