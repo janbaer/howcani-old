@@ -33,7 +33,7 @@
   </li>
   <li *ngFor="let label of labelService.labels; let i = index">
     <div class="Label-container">
-      <input type="checkbox" id="label{{i}}" (click)="toggleLabel($event, label)" />
+      <input type="checkbox" id="label{{i}}" (click)="toggleLabel($event, label)" [checked]="label.isSelected" />
       <label attr.for="label{{i}}" [ngStyle]="{'color': '#' + label.color}">{{ label.name  }}</label>
     </div>
   </li>

@@ -16,7 +16,9 @@ export class SidebarComponent {
 
   selectedLabels = [];
 
-  constructor(labelService: LabelService, configurationService: ConfigurationService, authService: AuthService) {
+  constructor(labelService: LabelService,
+              configurationService: ConfigurationService,
+              authService: AuthService) {
     this.labelService = labelService;
     this.configuration = configurationService;
     this.authService = authService;
@@ -33,11 +35,7 @@ export class SidebarComponent {
   }
 
   toggleLabel(event, label) {
-    if (this.selectedLabels.indexOf(label) >= 0) {
-      this.selectedLabels = this.selectedLabels.filter((selectedLabel) => selectedLabel !== label);
-    } else {
-      this.selectedLabels.push(label);
-    }
+    label.isSelected = !label.isSelected;
     this.updateSearch();
   }
 
@@ -56,9 +54,11 @@ export class SidebarComponent {
   }
 
   updateSearch() {
+    const selectedLabels = this.labelService.labels.filter((label) => label.isSelected);
+
     const searchQuery = {
       query: this.searchValue,
-      labels: this.selectedLabels.map((label) => label.name),
+      labels: selectedLabels.map((label) => label.name),
       state: this.state,
       onlyMyQuestions: this.onlyMyQuestions
     };
@@ -66,7 +66,17 @@ export class SidebarComponent {
     this.onFilterChanged.emit(searchQuery);
   }
 
+  restoreQuery(query) {
+    this.searchValue = query.query;
+    this.state = query.state;
+    this.onlyMyQuestions = query.onlyMyQuestions;
+  }
+
   ngOnInit() {
     this.labelService.fetchLabels();
+
+    if (this.configuration.project.query) {
+      this.restoreQuery(this.configuration.project.query);
+    }
   }
 }

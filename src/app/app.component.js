@@ -36,7 +36,14 @@ export class AppComponent {
 
   onFilterChanged(searchQuery) {
     window.scrollTo(0, 0);
+    this.updateCurrentProjectWithQuery(searchQuery);
     this.questionService.fetchQuestions(searchQuery, 1);
+  }
+
+  updateCurrentProjectWithQuery(query) {
+    const project = this.configuration.project;
+    project.query = query;
+    this.configuration.project = project;
   }
 }
 
