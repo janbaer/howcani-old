@@ -24,7 +24,7 @@ export class ConnectComponent {
     this.labelService = labelService;
     this.materialize = materializeService;
 
-    this.project = Object.assign({}, this.configuration.project);
+    this.project = { user: this.configuration.project.user, repository: this.configuration.project.repository };
   }
 
   onSubmit() {

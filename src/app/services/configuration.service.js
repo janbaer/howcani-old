@@ -1,10 +1,12 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { StorageService } from './storage.service.js';
 
 @Injectable()
 export class ConfigurationService {
+
   constructor(storage: StorageService) {
     this.storage = storage;
+    this.onProjectChanged = new EventEmitter();
 
     this.defaultProject = {
       user: 'howcani-project',
@@ -37,8 +39,19 @@ export class ConfigurationService {
   }
 
   set project(project) {
+    const isOtherProject = !this.isSameProject(this._project, project);
+
+    if (this._project && isOtherProject) {
+      this.saveToRecentProjects(this._project);
+    }
+
+    project.query = project.query || this.tryRestoreQueryFromRecentProjects(project);
     this.storage.setProject(project);
     this._project = project;
+
+    if (isOtherProject) {
+      this.onProjectChanged.emit(this._project);
+    }
   }
 
   get oauthToken() {
@@ -53,8 +66,43 @@ export class ConfigurationService {
     this._oauthToken = oauthToken;
   }
 
+  get recentProjects() {
+    if (this._recentProjects === undefined) {
+      this._recentProjects = this.storage.getRecentProjects() || [];
+    }
+    return this._recentProjects;
+  }
+
+  set recentProjects(recentProjects) {
+    this.storage.setRecentProjects(recentProjects);
+    this._recentProjects = recentProjects;
+  }
+
   removeOauthToken() {
     this.storage.removeOauthToken();
     this._oauthToken = undefined;
+  }
+
+  tryRestoreQueryFromRecentProjects(project) {
+    const recentProject = this.recentProjects.find((p) => this.isSameProject(p, project));
+    return recentProject ? recentProject.query : undefined;
+  }
+
+  saveToRecentProjects(project) {
+    const recentProjects = this.recentProjects;
+    const index = recentProjects.findIndex((p) => this.isSameProject(p, project));
+    if (index >= 0) {
+      recentProjects[index] = project;
+    } else {
+      recentProjects.push(project);
+    }
+    this.recentProjects = recentProjects;
+  }
+
+  isSameProject(p1, p2) {
+    if (p1 && p2) {
+      return p1.user === p2.user && p1.repository === p2.repository;
+    }
+    return false;
   }
 }

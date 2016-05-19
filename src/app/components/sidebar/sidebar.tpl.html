@@ -8,7 +8,7 @@
     </div>
   </li>
   <li *ngIf="isUserAuthenticated()">
-    <input type="checkbox" id="onlyMyQuestions" (click)="showOnlyMyQuestions($event.currentTarget.checked)" [(checked)]="onlyMyQuestions"/>
+    <input type="checkbox" id="onlyMyQuestions" (click)="showOnlyMyQuestions($event.currentTarget.checked)" [checked]="onlyMyQuestions"/>
     <label for="onlyMyQuestions" >Only my questions</label>
   </li>
   <li>

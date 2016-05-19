@@ -14,8 +14,6 @@ export class SidebarComponent {
   @Input() onlyMyQuestions = false;
   @Output() onFilterChanged = new EventEmitter();
 
-  selectedLabels = [];
-
   constructor(labelService: LabelService,
               configurationService: ConfigurationService,
               authService: AuthService) {
@@ -37,10 +35,6 @@ export class SidebarComponent {
   toggleLabel(event, label) {
     label.isSelected = !label.isSelected;
     this.updateSearch();
-  }
-
-  isUserAuthenticated() {
-    return this.authService.isUserAuthenticated();
   }
 
   showOnlyMyQuestions(onlyMyQuestions) {
@@ -66,17 +60,23 @@ export class SidebarComponent {
     this.onFilterChanged.emit(searchQuery);
   }
 
-  restoreQuery(query) {
-    this.searchValue = query.query;
-    this.state = query.state;
-    this.onlyMyQuestions = query.onlyMyQuestions;
+  restoreQuery() {
+    const query = this.configuration.project.query;
+    if (query) {
+      this.state = query.state;
+      this.searchValue = query.query;
+      this.onlyMyQuestions = query.onlyMyQuestions;
+    }
+  }
+
+  isUserAuthenticated() {
+    return this.authService.isUserAuthenticated();
   }
 
   ngOnInit() {
     this.labelService.fetchLabels();
-
-    if (this.configuration.project.query) {
-      this.restoreQuery(this.configuration.project.query);
-    }
+    this.restoreQuery();
+    this.configuration.onProjectChanged
+      .subscribe(() => this.restoreQuery());
   }
 }
