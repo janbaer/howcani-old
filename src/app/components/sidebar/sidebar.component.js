@@ -76,7 +76,11 @@ export class SidebarComponent {
   ngOnInit() {
     this.labelService.fetchLabels();
     this.restoreQuery();
+
     this.configuration.onProjectChanged
-      .subscribe(() => this.restoreQuery());
+      .subscribe(() => {
+        this.restoreQuery();
+        this.labelService.fetchLabels();
+      });
   }
 }

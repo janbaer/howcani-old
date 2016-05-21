@@ -46,12 +46,16 @@ export class ConfigurationService {
     }
 
     project.query = project.query || this.tryRestoreQueryFromRecentProjects(project);
-    this.storage.setProject(project);
     this._project = project;
 
     if (isOtherProject) {
       this.onProjectChanged.emit(this._project);
     }
+  }
+
+  saveProject(project) {
+    this.project = project;
+    this.storage.setProject(project);
   }
 
   get oauthToken() {

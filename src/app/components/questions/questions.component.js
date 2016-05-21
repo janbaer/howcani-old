@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
+import { Router, RouteParams } from '@angular/router-deprecated';
 import { MaterializeService } from './../../services/materialize.service';
 import { QuestionService } from './../../services/question.service';
 import { AuthService } from './../../services/auth.service';
+import { GithubService } from './../../services/github.service';
 import { ConfigurationService } from './../../services/configuration.service';
 import { QuestionComponent } from './../question/question.component';
 import { QuestionDetailsComponent } from './../question-details/question-details.component';
@@ -21,11 +23,17 @@ import template from './questions.tpl.html';
 export class QuestionsComponent {
   newQuestion = {};
 
-  constructor(configurationService: ConfigurationService,
+  constructor(router: Router,
+              routerParams: RouteParams,
+              configurationService: ConfigurationService,
+              githubService: GithubService,
               questionService: QuestionService,
               materializeService: MaterializeService,
               authService: AuthService) {
+    this.router = router;
+    this.routeParams = routerParams;
     this.configuration = configurationService;
+    this.github = githubService;
     this.questionService = questionService;
     this.materialize = materializeService;
     this.authService = authService;
@@ -82,8 +90,24 @@ export class QuestionsComponent {
     return this.authService.isUserAuthenticated();
   }
 
+  connectToProject(username, repositoryname) {
+    this.github.getRepo(username, repositoryname)
+      .subscribe(() => {
+        this.configuration.project = { user: username, repository: repositoryname };
+        this.fetchQuestions(this.configuration.project.query);
+      });
+  }
+
   ngOnInit() {
     this.isBusy = true;
-    this.fetchQuestions(this.configuration.project.query);
+
+    const user = this.routeParams.get('user');
+    const repository = this.routeParams.get('repository');
+
+    if (user && repository) {
+      this.connectToProject(user, repository);
+    } else {
+      this.fetchQuestions(this.configuration.project.query);
+    }
   }
 }
