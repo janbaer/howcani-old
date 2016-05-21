@@ -1,11 +1,13 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { StorageService } from './storage.service.js';
+import { StorageService } from './storage.service';
+import { RecentProjectsService } from './recent-projects.service';
 
 @Injectable()
 export class ConfigurationService {
+  constructor(storageService: StorageService, recentProjectsService: RecentProjectsService) {
+    this.storage = storageService;
+    this.recentProjects = recentProjectsService;
 
-  constructor(storage: StorageService) {
-    this.storage = storage;
     this.onProjectChanged = new EventEmitter();
 
     this.defaultProject = {
@@ -42,10 +44,10 @@ export class ConfigurationService {
     const isOtherProject = !this.isSameProject(this._project, project);
 
     if (this._project && isOtherProject) {
-      this.saveToRecentProjects(this._project);
+      this.recentProjects.save(this._project);
     }
 
-    project.query = project.query || this.tryRestoreQueryFromRecentProjects(project);
+    project.query = project.query || this.recentProjects.tryRestoreQuery(project);
     this._project = project;
 
     if (isOtherProject) {
@@ -70,43 +72,12 @@ export class ConfigurationService {
     this._oauthToken = oauthToken;
   }
 
-  get recentProjects() {
-    if (this._recentProjects === undefined) {
-      this._recentProjects = this.storage.getRecentProjects() || [];
-    }
-    return this._recentProjects;
-  }
-
-  set recentProjects(recentProjects) {
-    this.storage.setRecentProjects(recentProjects);
-    this._recentProjects = recentProjects;
-  }
-
   removeOauthToken() {
     this.storage.removeOauthToken();
     this._oauthToken = undefined;
   }
 
-  tryRestoreQueryFromRecentProjects(project) {
-    const recentProject = this.recentProjects.find((p) => this.isSameProject(p, project));
-    return recentProject ? recentProject.query : undefined;
-  }
-
-  saveToRecentProjects(project) {
-    const recentProjects = this.recentProjects;
-    const index = recentProjects.findIndex((p) => this.isSameProject(p, project));
-    if (index >= 0) {
-      recentProjects[index] = project;
-    } else {
-      recentProjects.push(project);
-    }
-    this.recentProjects = recentProjects;
-  }
-
   isSameProject(p1, p2) {
-    if (p1 && p2) {
-      return p1.user === p2.user && p1.repository === p2.repository;
-    }
-    return false;
+    return this.recentProjects.isSameProject(p1, p2);
   }
 }

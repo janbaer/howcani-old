@@ -13,6 +13,7 @@ import { HTTP_PROVIDERS } from '@angular/http';
 import { AppComponent } from './app/app.component';
 import { StorageService } from './app/services/storage.service';
 import { ConfigurationService } from './app/services/configuration.service';
+import { RecentProjectsService } from './app/services/recent-projects.service';
 import { GithubService } from './app/services/github.service';
 import { AuthService } from './app/services/auth.service';
 import { QuestionService } from './app/services/question.service';
@@ -32,6 +33,7 @@ bootstrap(AppComponent, [
   provide(LocationStrategy, { useClass: HashLocationStrategy }),
   StorageService,
   ConfigurationService,
+  RecentProjectsService,
   GithubService,
   AuthService,
   QuestionService,

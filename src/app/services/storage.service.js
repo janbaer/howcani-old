@@ -41,7 +41,7 @@ export class StorageService {
   }
 
   setRecentProjects(projects) {
-    this.storeObject('recentProject', projects);
+    this.storeObject('recentProjects', projects);
   }
 
   getLabels() {
