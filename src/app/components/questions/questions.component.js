@@ -5,6 +5,7 @@ import { QuestionService } from './../../services/question.service';
 import { AuthService } from './../../services/auth.service';
 import { GithubService } from './../../services/github.service';
 import { ConfigurationService } from './../../services/configuration.service';
+import { RecentProjectsService } from './../../services/recent-projects.service';
 import { QuestionComponent } from './../question/question.component';
 import { QuestionDetailsComponent } from './../question-details/question-details.component';
 import { QuestionNewComponent } from './../question-new/question-new.component';
@@ -26,6 +27,7 @@ export class QuestionsComponent {
   constructor(router: Router,
               routerParams: RouteParams,
               configurationService: ConfigurationService,
+              recentProjectsService: RecentProjectsService,
               githubService: GithubService,
               questionService: QuestionService,
               materializeService: MaterializeService,
@@ -33,6 +35,7 @@ export class QuestionsComponent {
     this.router = router;
     this.routeParams = routerParams;
     this.configuration = configurationService;
+    this.recentProjects = recentProjectsService;
     this.github = githubService;
     this.questionService = questionService;
     this.materialize = materializeService;
@@ -110,4 +113,9 @@ export class QuestionsComponent {
       this.fetchQuestions(this.configuration.project.query);
     }
   }
+
+  ngOnDestroy() {
+    this.recentProjects.save(this.configuration.project);
+  }
+
 }
