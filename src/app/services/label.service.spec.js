@@ -1,5 +1,6 @@
 import { Injector, provide } from '@angular/core';
 import { GithubService } from './github.service.js';
+import { ConfigurationService } from './configuration.service.js';
 import { LabelService } from './label.service.js';
 
 describe('LabelService spec', () => {
@@ -11,9 +12,13 @@ describe('LabelService spec', () => {
   class GithubServiceMock {
   }
 
+  class ConfigurationServiceMock {
+  }
+
   beforeEachProviders(() => [
     LabelService,
-    provide(GithubService, { useClass: GithubServiceMock })
+    provide(GithubService, { useClass: GithubServiceMock }),
+    provide(ConfigurationService, { useClass: ConfigurationServiceMock })
   ]);
 
   beforeEach(inject([Injector], (injector) => {
