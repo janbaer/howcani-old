@@ -36,6 +36,14 @@ export class StorageService {
     this.storeObject('project', project);
   }
 
+  getRecentProjects() {
+    return this.loadObject('recentProjects');
+  }
+
+  setRecentProjects(projects) {
+    this.storeObject('recentProjects', projects);
+  }
+
   getLabels() {
     return this.loadObject('labels');
   }

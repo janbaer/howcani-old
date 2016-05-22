@@ -1,15 +1,14 @@
-'use strict';
-
 import { Injector } from '@angular/core';
-import { ConfigurationService } from './configuration.service.js';
-import { StorageService } from './storage.service.js';
+import { ConfigurationService } from './configuration.service';
+import { RecentProjectsService } from './recent-projects.service';
+import { StorageService } from './storage.service';
 
 describe('Configuration service spec', function() {
   let configuration;
   let storage = {};
 
   beforeEachProviders(() => [
-    ConfigurationService, StorageService
+    ConfigurationService, StorageService, RecentProjectsService
   ]);
 
   beforeEach(inject([Injector], (injector) => {
@@ -21,6 +20,7 @@ describe('Configuration service spec', function() {
     beforeEach(function() {
       storage.getProject = () => undefined;
     });
+
     it('Should return the defaultProject', function() {
       expect(configuration.project).toEqual(configuration.defaultProject);
     });

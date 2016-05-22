@@ -14,9 +14,9 @@ export class SidebarComponent {
   @Input() onlyMyQuestions = false;
   @Output() onFilterChanged = new EventEmitter();
 
-  selectedLabels = [];
-
-  constructor(labelService: LabelService, configurationService: ConfigurationService, authService: AuthService) {
+  constructor(labelService: LabelService,
+              configurationService: ConfigurationService,
+              authService: AuthService) {
     this.labelService = labelService;
     this.configuration = configurationService;
     this.authService = authService;
@@ -33,16 +33,8 @@ export class SidebarComponent {
   }
 
   toggleLabel(event, label) {
-    if (this.selectedLabels.indexOf(label) >= 0) {
-      this.selectedLabels = this.selectedLabels.filter((selectedLabel) => selectedLabel !== label);
-    } else {
-      this.selectedLabels.push(label);
-    }
+    label.isSelected = !label.isSelected;
     this.updateSearch();
-  }
-
-  isUserAuthenticated() {
-    return this.authService.isUserAuthenticated();
   }
 
   showOnlyMyQuestions(onlyMyQuestions) {
@@ -56,9 +48,11 @@ export class SidebarComponent {
   }
 
   updateSearch() {
+    const selectedLabels = this.labelService.labels.filter((label) => label.isSelected);
+
     const searchQuery = {
       query: this.searchValue,
-      labels: this.selectedLabels.map((label) => label.name),
+      labels: selectedLabels.map((label) => label.name),
       state: this.state,
       onlyMyQuestions: this.onlyMyQuestions
     };
@@ -66,7 +60,31 @@ export class SidebarComponent {
     this.onFilterChanged.emit(searchQuery);
   }
 
+  restoreQuery() {
+    const query = this.configuration.project.query;
+    if (query) {
+      this.state = query.state;
+      this.searchValue = query.query;
+      this.onlyMyQuestions = query.onlyMyQuestions;
+    }
+  }
+
+  isUserAuthenticated() {
+    return this.authService.isUserAuthenticated();
+  }
+
+  get currentProject() {
+    return this.configuration.project;
+  }
+
   ngOnInit() {
     this.labelService.fetchLabels();
+    this.restoreQuery();
+
+    this.configuration.onProjectChanged
+      .subscribe(() => {
+        this.restoreQuery();
+        this.labelService.fetchLabels();
+      });
   }
 }
