@@ -1,40 +1,45 @@
-<ul id="slide-out" class="side-nav fixed">
-  <li id="Sidebar-search">
-    <div class="card">
-      <form (ngSubmit)="onSubmitSearchValue($event, searchInput.value)" #searchForm="ngForm">
-        <input #searchInput id="Sidebar-searchInput" [(value)]="searchValue" />
-        <i id="Sidebar-searchIcon" class="material-icons" (click)="onSubmitSearchValue($event, searchInput.value)">search</i>
-      </form>
-    </div>
-  </li>
-  <li *ngIf="isUserAuthenticated()">
-    <input type="checkbox" id="onlyMyQuestions" (click)="showOnlyMyQuestions($event.currentTarget.checked)" [checked]="onlyMyQuestions"/>
-    <label for="onlyMyQuestions" >Only my questions</label>
-  </li>
-  <li>
-    <hr>
-  </li>
-  <li>
-    <div class="StateFilter-container">
-      <input name="state" type="radio" id="state-all" [checked]="state===''" (click)="filterByState('')" />
-      <label for="state-all">All</label>
-    </div>
-    <div class="StateFilter-container">
-      <input name="state" type="radio" id="state-open" [checked]="state==='open'" (click)="filterByState('open')" />
-      <label for="state-open">Open</label>
-    </div>
-    <div class="StateFilter-container">
-      <input name="state" type="radio" id="state-closed" [checked]="state==='closed'" (click)="filterByState('closed')" />
-      <label for="state-closed">Closed</label>
-    </div>
-  </li>
-  <li>
-    <hr>
-  </li>
-  <li *ngFor="let label of labelService.labels; let i = index">
-    <div class="Label-container">
-      <input type="checkbox" id="label{{i}}" (click)="toggleLabel($event, label)" [checked]="label.isSelected" />
-      <label attr.for="label{{i}}" [ngStyle]="{'color': '#' + label.color}">{{ label.name  }}</label>
-    </div>
-  </li>
-</ul>
+<div class="SidebarMenu-container">
+  <ul>
+    <li id="Sidebar-search">
+      <div class="card">
+        <form (ngSubmit)="onSubmitSearchValue($event, searchInput.value)" #searchForm="ngForm">
+          <input #searchInput id="Sidebar-searchInput" [(value)]="searchValue" />
+          <i id="Sidebar-searchIcon" class="material-icons" (click)="onSubmitSearchValue($event, searchInput.value)">search</i>
+        </form>
+      </div>
+    </li>
+    <li *ngIf="isUserAuthenticated()">
+      <input type="checkbox" id="onlyMyQuestions" (click)="showOnlyMyQuestions($event.currentTarget.checked)" [checked]="onlyMyQuestions"/>
+      <label for="onlyMyQuestions" >Only my questions</label>
+    </li>
+    <li>
+      <hr>
+    </li>
+    <li>
+      <div class="StateFilter-container">
+        <input name="state" type="radio" id="state-all" [checked]="state===''" (click)="filterByState('')" />
+        <label for="state-all">All</label>
+      </div>
+      <div class="StateFilter-container">
+        <input name="state" type="radio" id="state-open" [checked]="state==='open'" (click)="filterByState('open')" />
+        <label for="state-open">Open</label>
+      </div>
+      <div class="StateFilter-container">
+        <input name="state" type="radio" id="state-closed" [checked]="state==='closed'" (click)="filterByState('closed')" />
+        <label for="state-closed">Closed</label>
+      </div>
+    </li>
+    <li>
+      <hr>
+    </li>
+    <li *ngFor="let label of labelService.labels; let i = index">
+      <div class="Label-container">
+        <input type="checkbox" id="label{{i}}" (click)="toggleLabel($event, label)" [checked]="label.isSelected" />
+        <label attr.for="label{{i}}" [ngStyle]="{'color': '#' + label.color}">{{ label.name  }}</label>
+      </div>
+    </li>
+  </ul>
+</div>
+<div class="SidebarProject-container">
+  <span class="SidebarProject-label">{{ currentProject.user }} / {{ currentProject.repository }}</span>
+</div>

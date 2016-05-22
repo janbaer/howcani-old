@@ -1,6 +1,24 @@
-#slide-out {
+sidebar {
+  display: flex;
+  flex-direction: column;
   @media @screen-sidebar-break {
-    margin-top: 65px;
+    margin-top: 65px !important;
+  }
+}
+
+.SidebarMenu-container {
+  flex: 1;
+}
+
+.SidebarProject-container {
+  border-top: 1px solid #dcdcdc;
+  flex: 0 0 25px;
+  display: flex;
+  justify-content: center;
+  color: grey;
+
+  @media @screen-sidebar-break {
+    flex: 0 0 90px;
   }
 }
 

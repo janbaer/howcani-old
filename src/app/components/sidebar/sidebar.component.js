@@ -73,6 +73,10 @@ export class SidebarComponent {
     return this.authService.isUserAuthenticated();
   }
 
+  get currentProject() {
+    return this.configuration.project;
+  }
+
   ngOnInit() {
     this.labelService.fetchLabels();
     this.restoreQuery();
