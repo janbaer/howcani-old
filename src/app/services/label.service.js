@@ -36,6 +36,18 @@ export class LabelService {
     return label1.name.localeCompare(label2.name);
   }
 
+  updateLabels(labels) {
+    labels.forEach((label) => {
+      if (!this.isLabelInList(this.labels, label)) {
+        this.labels.push(label);
+      }
+    });
+  }
+
+  isLabelInList(labels, label) {
+    return labels.find((l) => l.name === label.name) !== undefined;
+  }
+
   getLabelsFromLabelNames(names) {
     const selectedLabels = [];
 
@@ -44,6 +56,8 @@ export class LabelService {
       const label = this.labels.find((l) => l.name.toLowerCase() === lowerName);
       if (label) {
         selectedLabels.push(label);
+      } else {
+        selectedLabels.push({ name: name, color: 'black' });
       }
     });
 

@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { LabelService } from './../../services/label.service';
 import { ConfigurationService } from './../../services/configuration.service';
 import { AuthService } from './../../services/auth.service';
+import { QuestionService } from './../../services/question.service';
 import template from './sidebar.tpl.html';
 
 @Component({
@@ -16,9 +17,11 @@ export class SidebarComponent {
 
   constructor(labelService: LabelService,
               configurationService: ConfigurationService,
+              questionService: QuestionService,
               authService: AuthService) {
     this.labelService = labelService;
     this.configuration = configurationService;
+    this.questionService = questionService;
     this.authService = authService;
     this.state = '';
   }
@@ -77,6 +80,10 @@ export class SidebarComponent {
     return this.configuration.project;
   }
 
+  questionCreatedOrUpdated(question) {
+    this.labelService.updateLabels(question.labels);
+  }
+
   ngOnInit() {
     this.labelService.fetchLabels();
     this.restoreQuery();
@@ -86,5 +93,8 @@ export class SidebarComponent {
         this.restoreQuery();
         this.labelService.fetchLabels();
       });
+
+    this.questionService.onQuestionCreated.subscribe((question) => this.questionCreatedOrUpdated(question));
+    this.questionService.onQuestionUpdated.subscribe((question) => this.questionCreatedOrUpdated(question));
   }
 }

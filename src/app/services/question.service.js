@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { ConfigurationService } from './configuration.service';
 import { GithubService } from './github.service';
@@ -10,6 +10,9 @@ export class QuestionService {
     this.configuration = configuration;
     this.github = githubService;
     this.searchQueryBuilder = searchQueryBuilderService;
+
+    this.onQuestionCreated = new EventEmitter();
+    this.onQuestionUpdated = new EventEmitter();
 
     this.questions = new BehaviorSubject([]);
     this.totalCountOfQuestions = 0;
@@ -52,6 +55,8 @@ export class QuestionService {
       .then((newQuestion) => {
         const items = [newQuestion].concat(this.questions.value);
         this.questions.next(items);
+
+        this.onQuestionCreated.emit(newQuestion);
       });
   }
 
@@ -72,6 +77,8 @@ export class QuestionService {
         const index = items.findIndex((item) => item.number === updatedQuestion.number);
         items[index] = updatedQuestion;
         this.questions.next(items);
+
+        this.onQuestionUpdated.emit(updatedQuestion);
       });
   }
 
