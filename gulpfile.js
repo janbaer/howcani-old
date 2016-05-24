@@ -66,7 +66,7 @@ function buildWithWebPack(configFile, singleRun, callback) {
       firstRun = false;
     } else {
       util.log(`webpack:build ${elapsedTime} s`);
-      callback(
+      notifyChanged(
         statistics.assets.map((file) => file.name)
       );
     }
