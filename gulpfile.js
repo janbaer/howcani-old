@@ -167,6 +167,8 @@ gulp.task('buildAndDeploy', (done) => {
     return;
   }
 
+  util.log(util.colors.green(`Starting deployment for version ${versionTag}`));
+
   isProduction = true;
   runSequence(
     'clean',
