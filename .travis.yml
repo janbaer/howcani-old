@@ -1,3 +1,10 @@
 language: node_js
 node_js:
   - "4.2.4"
+
+install:
+  - npm install
+  - npm install -g gulp
+
+script:
+  - gulp buildAndDeploy --tag=${TRAVIS_TAG}

@@ -28,6 +28,7 @@ const destinationFolder = 'build';
 let isProduction = false;
 
 const args = minimist(process.argv.slice(2));
+const versionTag = args.tag;
 const port = args.port || 3000;
 const liveReloadPort = args.lrport || 35729;
 const liveReload = miniLr();
@@ -99,7 +100,6 @@ gulp.task('build:prod', (callback) => {
   buildWithWebPack(webPackProdConfig, callback);
 });
 
-
 gulp.task('build:dev', (callback) => {
   const webPackConfig = require('./webpack.config.js');
   buildWithWebPack(webPackConfig, callback);
@@ -161,6 +161,12 @@ gulp.task('serve:prod', (done) => {
 });
 
 gulp.task('buildAndDeploy', (done) => {
+  if (versionTag === undefined) {
+    util.log(util.colors.magenta('No tag specified, nothing will be deployed'));
+    done();
+    return;
+  }
+
   isProduction = true;
   runSequence(
     'clean',
