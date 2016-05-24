@@ -41,14 +41,14 @@ function notifyChanged(files) {
   });
 }
 
-function buildWithWebPack(configFile, callback) {
+function buildWithWebPack(configFile, singleRun, callback) {
   const webpackBuild = webpack(configFile);
   let firstRun = true;
 
-  webpackBuild.watch({ aggregateTimeout: 100 }, function(err, stats) {
-    if (err) {
-      throw new util.PluginError('webpack:error', err);
-    }
+  const callbackOnBuild = function(err, stats) {
+      if (err) {
+        throw new util.PluginError('webpack:error', err);
+      }
 
     const statistics = stats.toJson({
       children: false,
@@ -59,16 +59,24 @@ function buildWithWebPack(configFile, callback) {
 
     const elapsedTime = Math.round(statistics.time / 10) / 100;
 
-    if (firstRun) {
+    if (singleRun) {
+      callback();
+    } else if (firstRun) {
       callback();
       firstRun = false;
     } else {
       util.log(`webpack:build ${elapsedTime} s`);
-      notifyChanged(
+      callback(
         statistics.assets.map((file) => file.name)
       );
     }
-  });
+  };
+
+  if (singleRun) {
+    webpackBuild.run(callbackOnBuild);
+  } else {
+    webpackBuild.watch({ aggregateTimeout: 100 }, callbackOnBuild);
+  }
 }
 
 gulp.task('serve', ['serve:dev']);
@@ -77,7 +85,7 @@ gulp.task('livereload', () => {
   liveReload.listen(liveReloadPort);
 });
 
-gulp.task('copy', () => {
+gulp.task('copyAndWatch', () => {
   const clientWatch = watch(source, { base: sourceFolder, verbose: true });
   clientWatch.on('change', (fileName) => {
     notifyChanged([fileName]);
@@ -88,6 +96,11 @@ gulp.task('copy', () => {
     .pipe(gulp.dest(destinationFolder));
 });
 
+gulp.task('copy', () => {
+  gulp.src(source, { base: sourceFolder })
+    .pipe(gulp.dest(destinationFolder));
+});
+
 gulp.task('copy:assets', () => {
   gulp.src(['assets/CNAME'])
     .pipe(gulp.dest(destinationFolder));
@@ -95,14 +108,14 @@ gulp.task('copy:assets', () => {
     .pipe(gulp.dest(destinationFolder + '/images'));
 });
 
-gulp.task('build:prod', (callback) => {
+gulp.task('build:prod', (done) => {
   const webPackProdConfig = require('./webpack.config.prod.js');
-  buildWithWebPack(webPackProdConfig, callback);
+  buildWithWebPack(webPackProdConfig, true, done);
 });
 
-gulp.task('build:dev', (callback) => {
+gulp.task('build:dev', (done) => {
   const webPackConfig = require('./webpack.config.js');
-  buildWithWebPack(webPackConfig, callback);
+  buildWithWebPack(webPackConfig, false, done);
 });
 
 gulp.task('styles', function () {
@@ -172,7 +185,7 @@ gulp.task('buildAndDeploy', (done) => {
   isProduction = true;
   runSequence(
     'clean',
-    ['build:prod', 'copy', 'copy:assets', 'styles'],
+    ['build:prod', 'copyAndWatch', 'copy:assets', 'styles'],
     'manifest',
     'deploy',
     done
@@ -211,7 +224,7 @@ gulp.task('manifest', () => {
       ],
       filename: 'app-cache.manifest',
       exclude: 'app-cache.manifest'
-     }))
+    }))
     .pipe(gulp.dest('build'));
 });
 
