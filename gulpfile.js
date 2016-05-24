@@ -174,7 +174,7 @@ gulp.task('serve:prod', (done) => {
 });
 
 gulp.task('buildAndDeploy', (done) => {
-  if (versionTag === undefined) {
+  if (versionTag === undefined || versionTag.length === 0) {
     util.log(util.colors.magenta('No tag specified, nothing will be deployed'));
     done();
     return;
