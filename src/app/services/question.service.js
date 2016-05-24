@@ -16,6 +16,7 @@ export class QuestionService {
 
     this.questions = new BehaviorSubject([]);
     this.totalCountOfQuestions = 0;
+    this.totalCountOfHiddenQuestions = 0;
     this.page = 0;
     this.lastSearchQuery = undefined;
   }
@@ -24,16 +25,35 @@ export class QuestionService {
     this.lastSearchQuery = searchQuery;
     this.page = page || 1;
 
+    if (this.page === 1) {
+      this.totalCountOfHiddenQuestions = 0;
+    }
+
     const searchString = this.searchQueryBuilder.buildQueryString(searchQuery);
     const questionsResponse = this.github.searchIssues(searchString, this.page);
 
     questionsResponse.subscribe((response) => {
-      this.totalCountOfQuestions = response.total_count;
-      const items = this.page === 1 ? response.items : this.questions.value.concat(response.items);
+      const filteredItems = this.filterItemsByLockedState(response.items);
+
+      this.totalCountOfQuestions = this.calculateTotalCountOfQuestions(response.total_count,
+                                                                       response.items.length,
+                                                                       filteredItems.length);
+
+      const items = this.page === 1 ? filteredItems : this.questions.value.concat(filteredItems);
+
       this.questions.next(items);
     });
 
     return questionsResponse;
+  }
+
+  calculateTotalCountOfQuestions(totalCountOfItems, countOfReturnedItems, countOfFilteredItems) {
+    this.totalCountOfHiddenQuestions = this.totalCountOfHiddenQuestions + (countOfReturnedItems - countOfFilteredItems);
+    return totalCountOfItems - this.totalCountOfHiddenQuestions;
+  }
+
+  filterItemsByLockedState(items) {
+    return items.filter((item) => item.locked === false);
   }
 
   hasMoreQuestions() {
