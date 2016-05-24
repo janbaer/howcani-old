@@ -6,7 +6,6 @@ const watch = require('gulp-watch');
 const util = require('gulp-util');
 const less = require('gulp-less');
 const sourcemaps = require('gulp-sourcemaps');
-const changed = require('gulp-changed');
 const inject = require('gulp-inject');
 const webpack = require('webpack');
 const manifest = require('gulp-manifest');
@@ -18,7 +17,6 @@ const runSequence = require('run-sequence');
 const size = require('gulp-size');
 const del = require('del');
 const miniLr = require('mini-lr');
-const path = require('path');
 const minimist = require('minimist');
 
 const karma = require('./tasks/karma.js');
@@ -43,30 +41,28 @@ function notifyChanged(files) {
 }
 
 function buildWithWebPack(configFile, callback) {
-  let webpackBuild = webpack(configFile);
+  const webpackBuild = webpack(configFile);
   let firstRun = true;
 
   webpackBuild.watch({ aggregateTimeout: 100 }, function(err, stats) {
     if (err) {
-      throw new util.PluginError("webpack:error", err);
+      throw new util.PluginError('webpack:error', err);
     }
 
-    let statistics = stats.toJson({
+    const statistics = stats.toJson({
       children: false,
       source: false,
       modules: false,
       chunkModules: false
     });
 
-    let elapsedTime = Math.round(statistics.time / 10) / 100;
+    const elapsedTime = Math.round(statistics.time / 10) / 100;
 
     if (firstRun) {
       callback();
       firstRun = false;
-    }
-    else {
+    } else {
       util.log(`webpack:build ${elapsedTime} s`);
-
       notifyChanged(
         statistics.assets.map((file) => file.name)
       );
@@ -81,7 +77,7 @@ gulp.task('livereload', () => {
 });
 
 gulp.task('copy', () => {
-  let clientWatch = watch(source, { base: sourceFolder, verbose: true });
+  const clientWatch = watch(source, { base: sourceFolder, verbose: true });
   clientWatch.on('change', (fileName) => {
     notifyChanged([fileName]);
   });
@@ -131,9 +127,9 @@ gulp.task('styles', function () {
   return gulp.src(mainFile)
     .pipe(plumber())
     .pipe(inject(injectFiles, injectOptions))
-    .pipe(sourcemaps.init({loadMaps: true}))
+    .pipe(sourcemaps.init({ loadMaps: true }))
     .pipe(less())
-    .pipe(gulpif(isProduction, autoprefixer({browsers: [ '> 5%', 'last 2 versions' ]})))
+    .pipe(gulpif(isProduction, autoprefixer({ browsers: ['> 5%', 'last 2 versions'] })))
     .pipe(cssnano())
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(destinationFolder + '/styles'))
