@@ -67,7 +67,7 @@ gulp.task('addAll', (done) => {
     .pipe(git.add(gitOptions));
 });
 
-gulp.task('commit', (done) => {
+gulp.task('commit', () => {
   return gulp.src(distFolder + '/**/*')
     .pipe(git.commit(`New version ${tag}`, Object.assign({ disableAppendPaths: true }, gitOptions)));
 });

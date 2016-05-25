@@ -157,7 +157,7 @@ gulp.task('serve:dev', (done) => {
   isProduction = false;
 
   runSequence(
-    ['build:dev', 'copy', 'copy:assets', 'styles'],
+    ['build:dev', 'copyAndWatch', 'copy:assets', 'styles'],
     'live-server',
     'watch',
     done
@@ -185,7 +185,7 @@ gulp.task('buildAndDeploy', (done) => {
   isProduction = true;
   runSequence(
     'clean',
-    ['build:prod', 'copyAndWatch', 'copy:assets', 'styles'],
+    ['build:prod', 'copy', 'copy:assets', 'styles'],
     'manifest',
     'deploy',
     done
