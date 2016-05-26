@@ -43,7 +43,7 @@ gulp.task('deploy', (done) => {
 });
 
 gulp.task('gitconfig', (done) => {
-  git.exec({ args: 'config user.name "Jan Baer"', cwd: distFolder }, (err) => {
+  git.exec({ args: 'config user.name "Travis-CI"', cwd: distFolder }, (err) => {
     if (err) {
       handleError('Error while config git user name', err);
       done();
