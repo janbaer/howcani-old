@@ -27,6 +27,19 @@
 <body>
   <howcani-app>Loading...</howcani-app>
 
+  <script>
+    window.addEventListener('load', function(e) {
+      window.applicationCache.addEventListener('updateready', function(e) {
+        if (window.applicationCache.status == window.applicationCache.UPDATEREADY) {
+          // Browser downloaded a new app cache.
+          if (confirm('We have deployed a new version of HowCanI! Do you want to use it now?')) {
+            window.location.reload();
+          }
+        }
+      }, false);
+    }, false);
+  </script>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
   <script src="scripts/vendor.js"></script>
