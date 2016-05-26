@@ -32,6 +32,7 @@ gulp.task('deploy', (done) => {
   runSequence(
     'deleteDistFolder',
     'clone',
+    'config-remote',
     'removeAll',
     'copyBuild',
     'addAll',
@@ -52,6 +53,22 @@ gulp.task('gitconfig', (done) => {
 
     git.exec({ args: 'config user.email "jan@janbaer.de"', cwd: distFolder }, (err) => {
       handleError('Error while config git user email', err);
+      if (err) throw err;
+      done();
+    });
+  });
+});
+
+gulp.task('config-remote', (done) => {
+  git.exec({ args: 'remote rm origin', cwd: distFolder }, (err) => {
+    if (err) {
+      handleError('Error while removing remote origin', err);
+      done();
+      return;
+    }
+
+    git.exec({ args: 'remote add origin https://janbaer:${GH_TOKEN}@github.com/howcani-project/howcani-project.github.io.git', cwd: distFolder }, (err) => {
+      handleError('Error while configuring new remote origin', err);
       if (err) throw err;
       done();
     });
