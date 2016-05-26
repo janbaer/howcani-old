@@ -35,10 +35,27 @@ gulp.task('deploy', (done) => {
     'removeAll',
     'copyBuild',
     'addAll',
+    'gitconfig',
     'commit',
     'push',
     done
   );
+});
+
+gulp.task('gitconfig', (done) => {
+  git.exec({ args: 'config user.name "Jan Baer"', cwd: distFolder }, (err) => {
+    if (err) {
+      handleError('Error while config git user name', err);
+      done();
+      return;
+    }
+
+    git.exec({ args: 'config user.email "jan@janbaer.de"', cwd: distFolder }, (err) => {
+      handleError('Error while config git user email', err);
+      if (err) throw err;
+      done();
+    });
+  });
 });
 
 gulp.task('deleteDistFolder', () => {
