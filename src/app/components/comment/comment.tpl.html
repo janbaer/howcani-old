@@ -18,7 +18,7 @@
   <div class="card-action CommentProperties-container">
     <user class="Comment-user" [user]="comment.user" tooltipText="Created from"></user>
     <date class="Comment-date" [date]="comment.created_at" tooltipText="Created on"></date>
-    <div *ngIf="canMarkQuestionAsAnswered()" (click)="toggleMarkQuestionAsAnswered()" class="Comment-answer">
+    <div class="Comment-answer" [ngClass]="{canClick: canMarkQuestionAsAnswered()}" (click)="toggleMarkQuestionAsAnswered()">
       <i class="material-icons tooltipped Comment" [ngClass]="{isAnswer: comment.isCorrectAnswer}"
         data-position="bottom" data-delay="50"
         attr.data-tooltip="{{comment.isCorrectAnswer ? 'Unselected correct answer' : 'Mark as correct answer' }}">offline_pin</i>
