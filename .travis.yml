@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - "4.2.4"
+  - "6.0.0"
 
 branches:
   only:
@@ -11,7 +11,6 @@ install:
   - npm install -g gulp
 
 before_script:
-  - test $TRAVIS_TAG != ''
 
 script:
   - gulp build:prod
@@ -20,17 +19,7 @@ script:
   - gulp styles
 
 after_script:
-  - git config --global user.name "TRAVIS-CI"
-  - git config --global user.email "jan@janbaer.de"
-  - git clone https://janbaer:${GH_TOKEN}@github.com/howcani-project/howcani-project.github.io.git dist
-  - cd dist
-  - git rm -r .
-  - cp -r ../build/* ./
-  - rm ./scripts/*.js.map
-  - rm ./styles/*.css.map
-  - git add -u && git add .
-  - git commit -m "Version ${TRAVIS_TAG}"
-  - git push origin master
+  - ./deploy_travis.sh
 
 env:
   global:
