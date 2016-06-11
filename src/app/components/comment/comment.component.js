@@ -49,6 +49,10 @@ export class CommentComponent {
   }
 
   toggleMarkQuestionAsAnswered() {
+    if (!this.canMarkQuestionAsAnswered()) {
+      return;
+    }
+
     this.comment.isCorrectAnswer = !this.comment.isCorrectAnswer;
     this.commentService.updateComment(this.comment)
       .then((updatedComment) => {
