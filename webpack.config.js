@@ -23,13 +23,8 @@ module.exports = {
         loader: 'babel',
         exclude: /node_modules/,
         query: {
-          presets: ['es2015'],
-          plugins: [
-            'angular2-annotations',
-            'transform-decorators-legacy',
-            'transform-class-properties',
-            'transform-flow-strip-types'
-          ]
+          presets: ['es2015', 'angular2'],
+          plugins: []
         }
       },
       {

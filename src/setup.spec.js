@@ -7,7 +7,7 @@ import 'zone.js/dist/async-test';
 
 import {
   TEST_BROWSER_DYNAMIC_PLATFORM_PROVIDERS, TEST_BROWSER_DYNAMIC_APPLICATION_PROVIDERS
-} from '@angular/platform-browser-dynamic/testing/browser';
+} from '@angular/platform-browser-dynamic/testing';
 import {
   setBaseTestProviders,
   afterEach, beforeEach, beforeEachProviders,
@@ -21,8 +21,7 @@ setBaseTestProviders(TEST_BROWSER_DYNAMIC_PLATFORM_PROVIDERS, TEST_BROWSER_DYNAM
 Object.assign(global, {
   afterEach, beforeEach, beforeEachProviders,
   describe, it, expect,
-  inject, injectAsync,
-  async, tick
+  inject, async, tick
 });
 
 Error.stackTraceLimit = Infinity;
