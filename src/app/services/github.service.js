@@ -13,8 +13,18 @@ export class GithubService {
     this.materialize = materializeService;
   }
 
-  buildUrl(path) {
-    return `${this.configuration.webApiBaseUrl}/api/${path}`;
+  buildUrl(path, searchParams) {
+    const url = `${this.configuration.webApiBaseUrl}/api/${path}`;
+    let query = '';
+
+    if (searchParams) {
+      for (const [key, value] of searchParams.paramsMap) {
+        const separator = query.length === 0 ? '?' : '&';
+        query += `${separator}${key}=${value}`;
+      }
+    }
+
+    return url + query;
   }
 
   buildSearchParams(searchTerm, page, sort = 'created', order = 'desc') {
@@ -50,8 +60,9 @@ export class GithubService {
   }
 
   get(path, searchParams) {
-    const requestOptions = this.buildRequestOptions(searchParams);
-    return this.http.get(this.buildUrl(path), requestOptions)
+    const requestOptions = this.buildRequestOptions();
+    const url = this.buildUrl(path, searchParams);
+    return this.http.get(url, requestOptions)
                     .map((response) => response.json())
                     .catch(this.handleError.bind(this));
   }
