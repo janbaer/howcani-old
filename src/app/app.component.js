@@ -1,7 +1,7 @@
 'use strict';
 
 import { Component } from '@angular/core';
-import { ROUTER_DIRECTIVES, RouteConfig } from '@angular/router-deprecated';
+import { ROUTER_DIRECTIVES } from '@angular/router';
 
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
@@ -9,7 +9,6 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { QuestionService } from './services/question.service';
 import { AuthService } from './services/auth.service';
 import { ConfigurationService } from './services/configuration.service';
-import { router } from './router';
 
 import template from './app.tpl.html';
 
@@ -18,7 +17,6 @@ import template from './app.tpl.html';
   template: template,
   directives: [ROUTER_DIRECTIVES, NavbarComponent, SidebarComponent]
 })
-@RouteConfig(router.config)
 export class AppComponent {
   constructor(configurationService: ConfigurationService,
               authService: AuthService,

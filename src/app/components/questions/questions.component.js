@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, RouteParams } from '@angular/router-deprecated';
+import { Router } from '@angular/router';
 import { MaterializeService } from './../../services/materialize.service';
 import { QuestionService } from './../../services/question.service';
 import { AuthService } from './../../services/auth.service';
@@ -25,7 +25,6 @@ export class QuestionsComponent {
   newQuestion = {};
 
   constructor(router: Router,
-              routerParams: RouteParams,
               configurationService: ConfigurationService,
               recentProjectsService: RecentProjectsService,
               githubService: GithubService,
@@ -33,7 +32,6 @@ export class QuestionsComponent {
               materializeService: MaterializeService,
               authService: AuthService) {
     this.router = router;
-    this.routeParams = routerParams;
     this.configuration = configurationService;
     this.recentProjects = recentProjectsService;
     this.github = githubService;
@@ -104,14 +102,18 @@ export class QuestionsComponent {
   ngOnInit() {
     this.isBusy = true;
 
-    const user = this.routeParams.get('user');
-    const repository = this.routeParams.get('repository');
+    //this.router.routerState.queryParams.subscribe((params) => {
+      //const user = params['user'];
+      //const repository = params['repository'];
 
-    if (user && repository) {
-      this.connectToProject(user, repository);
-    } else {
-      this.fetchQuestions(this.configuration.project.query);
-    }
+      //if (user && repository) {
+        //this.connectToProject(user, repository);
+      //} else {
+        //this.fetchQuestions(this.configuration.project.query);
+      //}
+    //});
+    this.fetchQuestions(this.configuration.project.query);
+
   }
 
   ngOnDestroy() {

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { RouteParams, Router } from '@angular/router-deprecated';
+import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
 import template from './login.tpl.html';
@@ -10,17 +11,17 @@ import template from './login.tpl.html';
 })
 export class LoginComponent {
   constructor(authService: AuthService,
-              routeParams: RouteParams,
+              route: ActivatedRoute,
               router: Router) {
     this.authService = authService;
     this.router = router;
-    this.routeParams = routeParams;
+    this.route = route;
   }
 
   ngOnInit() {
-    if (this.routeParams.params.logout) {
+    if (this.route.url.value[0].path === 'logout') {
       this.logout();
-    } else if (this.routeParams.params.token) {
+    } else if (this.route.params.token) {
       this.verifyUserToken(this.routeParams.params.token);
     } else {
       this.login();
@@ -29,7 +30,7 @@ export class LoginComponent {
   }
 
   redirectToQuestions() {
-    this.router.navigate(['Questions']);
+    this.router.navigate(['questions']);
   }
 
   verifyUserToken(oauthToken) {

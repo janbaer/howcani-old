@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router-deprecated';
+import { Router } from '@angular/router';
 import { FORM_DIRECTIVES } from '@angular/common';
 import { ConfigurationService } from './../../services/configuration.service';
 import { GithubService } from './../../services/github.service';
@@ -32,7 +32,7 @@ export class ConnectComponent {
         this.isBusy = false;
         if (isValid) {
           this.configuration.saveProject(this.project);
-          this.router.navigate(['Questions']);
+          this.router.navigate(['questions']);
         } else {
           this.materialize.showToastMessage('The given Github user or project does not exists! Please verify your input!');
         }

@@ -6,10 +6,10 @@ import 'rxjs/add/observable/throw';
 
 import { bootstrap } from '@angular/platform-browser-dynamic';
 import { enableProdMode, provide } from '@angular/core';
-import { ROUTER_PROVIDERS } from '@angular/router-deprecated';
 import { FORM_PROVIDERS, LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { HTTP_PROVIDERS } from '@angular/http';
 
+import { APP_ROUTER_PROVIDER } from './app/routes';
 import { AppComponent } from './app/app.component';
 import { StorageService } from './app/services/storage.service';
 import { ConfigurationService } from './app/services/configuration.service';
@@ -29,8 +29,8 @@ if (ENVIRONMENT === 'production') {
 bootstrap(AppComponent, [
   FORM_PROVIDERS,
   HTTP_PROVIDERS,
-  ROUTER_PROVIDERS,
   provide(LocationStrategy, { useClass: HashLocationStrategy }),
+  APP_ROUTER_PROVIDER,
   StorageService,
   ConfigurationService,
   RecentProjectsService,
