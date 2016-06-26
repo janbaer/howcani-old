@@ -14,7 +14,7 @@ export class GithubService {
   }
 
   buildUrl(path, searchParams) {
-    const url = `${this.configuration.webApiBaseUrl}/api/${path}`;
+    const url = `https://api.github.com/${path}`;
     let query = '';
 
     if (searchParams) {
