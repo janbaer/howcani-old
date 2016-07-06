@@ -18,10 +18,14 @@ script:
   - gulp copy
   - gulp copy:assets
   - gulp styles
+  - gulp manifest
 
 after_script:
-  - ./deploy_travis.sh
+  - git config --global user.name "TRAVIS-CI"
+  - git config --global user.email "jan@janbaer.de"
+  - ./deploy_travis.sh $TRAVIS_TAG $GH_TOKEN
 
 env:
   global:
-  - secure: "y+tWVx0RWYrvnQBX9v2nJfYEBD5h/7CH/kxu6G6CKCDfwfeNF1a08GHrB8Q2OK3hdpAOw51EnUpmnk9+TB2g7b+mDsnfhtd6pfXxmFMeFgyeAcYbjzqsnd4VKaiPTOf+g/XGzC+pYPCCBFlnT1r9orSjgxvKtk2hdB4xGkB1bEm+4409X+QT/dCnIvfn1/PPkgtq+cA3GfwHF/ZGPzYBbKL+xJlTPIda9Jg3BstbsBJ0lov7gwoRwqaueFsAs5XkxDkgUjxk0uv0Ctzg8YSTneDkrXI62qdebiIWj9ctiKpzTYlzyuPE6KjYQLPloHLDLiOZO6IX8bXShdd7RdBqmngZ8SwnQpe2S3XswxqGaJHWHvPC0tr5GA0+A1qoytHXVbpW3l1E/fjqUWIyW+tvtU3op02VK1EqT9bya4KuujoHPTrHt5wBBNDS7r4jGes4PAp1Ajg+Q4cIYxt1b+FKB3mFmq66ZP1o+kOFywHGIXjJTVoWmq/6ZDdwhDmFqt5qwNJhUEGFzY5/Jgde2/jRGBogPcKf2+lNvtSTtL4KND1Nknoxvv0cFQJQ5syew8jYAHp3gxAoqvsMTBH1P9qy9yFepmFloobovxdeHnHPpWfSpGA10qi2K6QWed5d26unDFUmjRyeDyibJjbWhZtEyLOb2OsL/x7OUIJTKDe/HwU="
+  - secure: "LbvGLIwah72Sv1ynDBMrBq+AUQSvCE/9ijDq0hywD7ymPRqaTmik8gR5aQnN+p1ocaDKLjDm4ay8x2LW+Ws6dXzAVepIvcuRstDfdVvSK0eMiaeTHbnuiqcjFunEX1MXqtPobxKxuf34m3yTbKK3KDSxWCd3LPw2MDKx5deFoo9EeQIt+cQzChxssFpzE67NYnNBxpE/6cJizKX8bx7cnsek6tDOvEuf4ljpVGnf/bKJsQe0kL5SWatmkE18eLGFfA6rEZEMPMMG8ams1MT2YbgEhq2+UBRbKU8EHPBgo4J7/7765Wkg4ZeUJOkdCARs8PqWqPKK4mY1v22EzanLi+TyUDwcWUctK6WqQzxAySZ5U8PqQQkzX5aroia5IDfAMm+RWF6pgFjDaxYS2P5ld6cCukfdWJ/vuApeBnI7UmEGBhG7y13YAfXo5ENzdxp4bTBWn5suekiWSjPnbUWPdTN6rVhg/i3Iu/WZmcf9Wp8/BDuSe/x2wSybFhRmBTkQxq+JDnpa631Px3HD1r5w4T7wBKkzaSZO2S7wt8HwLYMutSw6OUS8u0uuvW6BXyIioQfS0tC1eTv42KeOZZ9ZBkQq709sCRWOqtrxeMLaRSruYtvCZ5IvAeRc4+whnU/U432uEHxpfPYVQpdlT5/+L7IUMu5pL3F2rfmMvNGV99c="
+
