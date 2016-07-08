@@ -29,8 +29,8 @@ if (ENVIRONMENT === 'production') {
 bootstrap(AppComponent, [
   FORM_PROVIDERS,
   HTTP_PROVIDERS,
-  provide(LocationStrategy, { useClass: HashLocationStrategy }),
   APP_ROUTER_PROVIDER,
+  provide(LocationStrategy, { useClass: HashLocationStrategy }),
   StorageService,
   ConfigurationService,
   RecentProjectsService,

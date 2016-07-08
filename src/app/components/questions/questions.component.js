@@ -102,17 +102,15 @@ export class QuestionsComponent {
   ngOnInit() {
     this.isBusy = true;
 
-    //this.router.routerState.queryParams.subscribe((params) => {
-      //const user = params['user'];
-      //const repository = params['repository'];
+    const queryParams = this.router.routerState.snapshot.queryParams;
+    const user = queryParams.user;
+    const repository = queryParams.repository;
 
-      //if (user && repository) {
-        //this.connectToProject(user, repository);
-      //} else {
-        //this.fetchQuestions(this.configuration.project.query);
-      //}
-    //});
-    this.fetchQuestions(this.configuration.project.query);
+    if (user && repository) {
+      this.connectToProject(user, repository);
+    } else {
+      this.fetchQuestions(this.configuration.project.query);
+    }
 
   }
 

@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
@@ -11,18 +10,17 @@ import template from './login.tpl.html';
 })
 export class LoginComponent {
   constructor(authService: AuthService,
-              route: ActivatedRoute,
               router: Router) {
     this.authService = authService;
     this.router = router;
-    this.route = route;
   }
 
   ngOnInit() {
-    if (this.route.url.value[0].path === 'logout') {
+    const route = this.router.routerState.snapshot;
+    if (route.url === '/logout') {
       this.logout();
-    } else if (this.route.params.token) {
-      this.verifyUserToken(this.routeParams.params.token);
+    } else if (route.queryParams.token) {
+      this.verifyUserToken(route.queryParams.token);
     } else {
       this.login();
     }
@@ -30,7 +28,7 @@ export class LoginComponent {
   }
 
   redirectToQuestions() {
-    this.router.navigate(['questions']);
+    this.router.navigateByUrl('');
   }
 
   verifyUserToken(oauthToken) {
