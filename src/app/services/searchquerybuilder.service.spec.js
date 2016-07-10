@@ -20,10 +20,12 @@ describe('Search Query service spec', () => {
     }
   }
 
-  beforeEachProviders(() => [
-    SearchQueryBuilderService,
-    provide(ConfigurationService, { useClass: ConfigurationServiceMock })
-  ]);
+  beforeEach(() => {
+    addProviders([
+      SearchQueryBuilderService,
+      provide(ConfigurationService, { useClass: ConfigurationServiceMock })
+    ]);
+  });
 
   beforeEach(inject([Injector], (injector) => {
     searchQueryBuilder = injector.get(SearchQueryBuilderService);

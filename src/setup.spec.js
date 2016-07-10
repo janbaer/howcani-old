@@ -10,8 +10,7 @@ import {
 } from '@angular/platform-browser-dynamic/testing';
 import {
   setBaseTestProviders,
-  afterEach, beforeEach, beforeEachProviders,
-  describe, it, expect,
+  addProviders,
   inject, injectAsync,
   async, tick
 } from '@angular/core/testing';
@@ -19,9 +18,8 @@ import {
 setBaseTestProviders(TEST_BROWSER_DYNAMIC_PLATFORM_PROVIDERS, TEST_BROWSER_DYNAMIC_APPLICATION_PROVIDERS);
 
 Object.assign(global, {
-  afterEach, beforeEach, beforeEachProviders,
-  describe, it, expect,
-  inject, async, tick
+  addProviders,
+  inject, async: async
 });
 
 Error.stackTraceLimit = Infinity;

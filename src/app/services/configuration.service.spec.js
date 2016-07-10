@@ -7,9 +7,13 @@ describe('Configuration service spec', function() {
   let configuration;
   let storage = {};
 
-  beforeEachProviders(() => [
-    ConfigurationService, StorageService, RecentProjectsService
-  ]);
+  beforeEach(() => {
+    addProviders([
+      ConfigurationService,
+      StorageService,
+      RecentProjectsService
+    ]);
+  });
 
   beforeEach(inject([Injector], (injector) => {
     configuration = injector.get(ConfigurationService);

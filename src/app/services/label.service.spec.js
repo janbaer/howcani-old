@@ -15,11 +15,13 @@ describe('LabelService spec', () => {
   class ConfigurationServiceMock {
   }
 
-  beforeEachProviders(() => [
-    LabelService,
-    provide(GithubService, { useClass: GithubServiceMock }),
-    provide(ConfigurationService, { useClass: ConfigurationServiceMock })
-  ]);
+  beforeEach(() => {
+    addProviders([
+      LabelService,
+      provide(GithubService, { useClass: GithubServiceMock }),
+      provide(ConfigurationService, { useClass: ConfigurationServiceMock })
+    ]);
+  });
 
   beforeEach(inject([Injector], (injector) => {
     labelService = injector.get(LabelService);
