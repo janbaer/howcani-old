@@ -23,5 +23,5 @@ script:
 after_script:
   - git config --global user.name "TRAVIS-CI"
   - git config --global user.email "jan@janbaer.de"
-  - ./deploy_travis.sh $TRAVIS_TAG $GH_TOKEN
+  - ./deploy_travis.sh $GH_TOKEN $TRAVIS_TAG
 

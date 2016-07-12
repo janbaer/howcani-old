@@ -1,5 +1,5 @@
-VERSION=$1
-GITHUB_TOKEN=$2
+GITHUB_TOKEN=$1
+VERSION=$2
 
 if [[ "$VERSION" == "" ]]; then
   echo "We do not have a tag"
