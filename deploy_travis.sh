@@ -6,6 +6,8 @@ if [[ "$VERSION" == "" ]]; then
   exit 0
 fi
 
+echo "Deploying new version $VERSION with using $GITHUB_TOKEN"
+
 git clone https://janbaer:${GITHUB_TOKEN}@github.com/howcani-project/howcani-project.github.io.git dist
 cd dist
 git rm -r .
