@@ -22,8 +22,6 @@ import template from './questions.tpl.html';
   ]
 })
 export class QuestionsComponent {
-  newQuestion = {};
-
   constructor(router: Router,
               configurationService: ConfigurationService,
               recentProjectsService: RecentProjectsService,
@@ -102,15 +100,16 @@ export class QuestionsComponent {
   ngOnInit() {
     this.isBusy = true;
 
-    const queryParams = this.router.routerState.snapshot.queryParams;
-    const user = queryParams.user;
-    const repository = queryParams.repository;
-
-    if (user && repository) {
-      this.connectToProject(user, repository);
-    } else {
-      this.fetchQuestions(this.configuration.project.query);
-    }
+    this.router.routerState.queryParams
+      .subscribe((queryParams) => {
+        const user = queryParams.user;
+        const repository = queryParams.repository;
+        if (user && repository) {
+          this.connectToProject(user, repository);
+        } else {
+          this.fetchQuestions(this.configuration.project.query);
+        }
+      });
 
   }
 
