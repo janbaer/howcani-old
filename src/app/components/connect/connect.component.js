@@ -32,7 +32,7 @@ export class ConnectComponent {
         this.isBusy = false;
         if (isValid) {
           this.configuration.saveProject(this.project);
-          this.router.navigate(['questions']);
+          this.router.navigate(['']);
         } else {
           this.materialize.showToastMessage('The given Github user or project does not exists! Please verify your input!');
         }
