@@ -47,7 +47,12 @@ export class ConfigurationService {
       this.recentProjects.save(this._project);
     }
 
-    project.query = project.query || this.recentProjects.tryRestoreQuery(project);
+    if (project.query) {
+      this.recentProjects.save(project);
+    } else {
+      project.query = this.recentProjects.tryRestoreQuery(project);
+    }
+
     this._project = project;
 
     if (isOtherProject) {
