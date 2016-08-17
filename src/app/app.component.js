@@ -1,7 +1,6 @@
 'use strict';
 
 import { Component } from '@angular/core';
-import { ROUTER_DIRECTIVES } from '@angular/router';
 
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
@@ -15,7 +14,7 @@ import template from './app.tpl.html';
 @Component({
   selector: 'howcani-app',
   template: template,
-  directives: [ROUTER_DIRECTIVES, NavbarComponent, SidebarComponent]
+  directives: [NavbarComponent, SidebarComponent]
 })
 export class AppComponent {
   constructor(configurationService: ConfigurationService,
