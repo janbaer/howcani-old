@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { FORM_DIRECTIVES } from '@angular/common';
 import { ConfigurationService } from './../../services/configuration.service';
 import { GithubService } from './../../services/github.service';
 import { MaterializeService } from './../../services/materialize.service';
@@ -8,8 +7,7 @@ import template from './connect.tpl.html';
 
 @Component({
   selector: 'connect',
-  template: template,
-  directives: [FORM_DIRECTIVES]
+  template: template
 })
 export class ConnectComponent {
   constructor(router: Router,

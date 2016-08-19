@@ -6,7 +6,8 @@
                       class="CommentBodyEdit-control"
                       placeholder="Enter a comment to the question"
                       [multiline]="true"
-                      (onClose)="changeComment($event)" (onCancel)="toggleEditComment()"
+                      (onClose)="changeComment($event)"
+                      (onCancel)="toggleEditComment()"
                       [content]="comment.body"></content-edit>
         <div class="EditComment-button"
              [ngClass]="{isHidden: !canChangeComment() || isEditingComment}"

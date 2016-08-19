@@ -1,13 +1,15 @@
-<form class="col s12">
-  <div class="CommentNew-container">
-    <div class="CommentNew-textfield input-field">
-      <textarea id="comment" class="materialize-textarea" [(ngModel)]="comment" (keyup)="handleKeyEnter($event)"></textarea>
-      <label for="comment">New comment</label>
-    </div>
-    <button class="btn-floating CommentNew-button"
-            [disabled]="!hasContent()"
-            (click)="createComment()">
-      <i class="material-icons">add</i>
-    </button>
+<div class="CommentNew-container">
+  <div class="CommentNew-textfield input-field">
+    <textarea class="materialize-textarea"
+              name="comment"
+              [(ngModel)]="comment"
+              (keyup)="handleKeyEnter($event)">
+    </textarea>
+    <label for="comment">New comment</label>
   </div>
-</form>
+  <button class="btn-floating CommentNew-button"
+          [disabled]="!hasContent()"
+          (click)="createComment()">
+    <i class="material-icons">add</i>
+  </button>
+</div>

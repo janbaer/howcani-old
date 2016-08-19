@@ -2,10 +2,11 @@
   <ul>
     <li id="Sidebar-search">
       <div class="card">
-        <form (ngSubmit)="onSubmitSearchValue($event, searchInput.value)" #searchForm="ngForm">
-          <input #searchInput id="Sidebar-searchInput" [(value)]="searchValue" />
-          <i id="Sidebar-searchIcon" class="material-icons" (click)="onSubmitSearchValue($event, searchInput.value)">search</i>
-        </form>
+        <input id="Sidebar-searchInput" name="searchInput"
+               #searchInput [ngModel]="searchValue"
+               (keyup.enter)="onSubmitSearchValue($event, searchInput.value)"/>
+        <i id="Sidebar-searchIcon" class="material-icons"
+           (click)="onSubmitSearchValue($event, searchInput.value)">search</i>
       </div>
     </li>
     <li *ngIf="isUserAuthenticated()">

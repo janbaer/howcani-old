@@ -3,16 +3,16 @@
     <div class="card-content">
         <div class="row">
           <div class="input-field col s12">
-            <input placeholder="Enter the title for your question"
-                  id="title" type="text" class="validate"
-                  ngControl="title" [(ngModel)]="question.title" required>
+            <input type="text" class="validate" name="title"
+                   [(ngModel)]="question.title" required
+                   placeholder="Enter the title for your question">
             <label for="title" class="active">Title</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12">
-            <textarea id="description" class="materialize-textarea"
-                      ngControl="description" [(ngModel)]="question.body">
+            <textarea class="materialize-textarea"
+                      name="description" [(ngModel)]="question.body">
             </textarea>
             <label for="description" class="active">Description</label>
           </div>
@@ -20,8 +20,8 @@
         <div class="row">
           <div class="input-field col s12">
             <input placeholder="Enter a comma separated list of the labels"
-                  id="labels" type="text" class="validate"
-                  ngControl="labels" [(ngModel)]="question.labels">
+                   type="text" class="validate"
+                   name="labels" [(ngModel)]="question.labels">
             <label for="labels" class="active">Labels</label>
           </div>
         </div>
@@ -31,8 +31,7 @@
     <button class="modal-action waves-effect waves-green btn-flat"
             (click)="cancelDialog()">Cancel</button>
     <button class="modal-action waves-effect waves-green btn-flat"
-            [disabled]="!questionNewForm.valid"
-            (click)="closeDialog()">Ok</button>
+            (click)="closeDialog()" [disabled]="!questionNewForm.valid">Ok</button>
   </div>
 </form>
 
