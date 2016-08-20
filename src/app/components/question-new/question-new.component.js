@@ -13,9 +13,16 @@ export class QuestionNewComponent {
   constructor(questionService: QuestionService) {
     this.questionService = questionService;
     this.question = {};
+    this.isCancelled = false;
   }
 
-  closeDialog() {
+  onSubmit() {
+    if (this.isCancelled) {
+      this.isCancelled = false;
+      this.onCloseDialog.emit();
+      return;
+    }
+
     if (this.question.labels) {
       this.question.labels = this.question.labels.split(',').map((label) => label.trim());
     }
@@ -29,7 +36,7 @@ export class QuestionNewComponent {
 
   cancelDialog() {
     this.question = {};
-    this.onCloseDialog.emit();
+    this.isCancelled = true;
   }
 }
 

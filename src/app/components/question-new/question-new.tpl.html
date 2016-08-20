@@ -1,4 +1,4 @@
-<form class="col s12" #questionNewForm="ngForm" novalidate>
+<form class="col s12" #questionNewForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
   <div class="card">
     <div class="card-content">
         <div class="row">
@@ -28,10 +28,12 @@
     </div>
   </div>
   <div class="QuestionActions-container">
-    <button class="modal-action waves-effect waves-green btn-flat"
+    <button type="submit"
+            class="btn modal-action waves-effect waves-green"
+            [ngClass]="{disabled: !questionNewForm.valid}"
+            [disabled]="!questionNewForm.valid">Ok</button>
+    <button class="btn modal-action waves-effect waves-green grey lighten-1"
             (click)="cancelDialog()">Cancel</button>
-    <button class="modal-action waves-effect waves-green btn-flat"
-            (click)="closeDialog()" [disabled]="!questionNewForm.valid">Ok</button>
   </div>
 </form>
 
