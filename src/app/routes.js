@@ -4,6 +4,7 @@ import { LoginComponent } from './components/login/login.component.js';
 
 export const routes = [
   { path: '', component: QuestionsComponent, terminal: true },
+  { path: 'questions/:user/:repository', component: QuestionsComponent },
   { path: 'connect', component: ConnectComponent },
   { path: 'login', component: LoginComponent },
   { path: 'logout', component: LoginComponent }

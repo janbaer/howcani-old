@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { MaterializeService } from './../../services/materialize.service';
 import { QuestionService } from './../../services/question.service';
 import { AuthService } from './../../services/auth.service';
@@ -23,6 +23,7 @@ import template from './questions.tpl.html';
 })
 export class QuestionsComponent {
   constructor(router: Router,
+              activatedRoute: ActivatedRoute,
               configurationService: ConfigurationService,
               recentProjectsService: RecentProjectsService,
               githubService: GithubService,
@@ -30,6 +31,7 @@ export class QuestionsComponent {
               materializeService: MaterializeService,
               authService: AuthService) {
     this.router = router;
+    this.route = activatedRoute;
     this.configuration = configurationService;
     this.recentProjects = recentProjectsService;
     this.github = githubService;
@@ -94,20 +96,22 @@ export class QuestionsComponent {
       .subscribe(() => {
         this.configuration.project = { user: username, repository: repositoryname };
         this.fetchQuestions(this.configuration.project.query);
+      }, () => {
+        this.router.navigate(['connect']);
       });
   }
 
   ngOnInit() {
     this.isBusy = true;
 
-    this.router.routerState.queryParams
-      .subscribe((queryParams) => {
-        const user = queryParams.user;
-        const repository = queryParams.repository;
+    this.route.params
+      .subscribe((params) => {
+        const user = params.user;
+        const repository = params.repository;
         if (user && repository) {
           this.connectToProject(user, repository);
         } else {
-          this.fetchQuestions(this.configuration.project.query);
+          this.router.navigate(['questions', this.configuration.project.user, this.configuration.project.repository]);
         }
       });
 
