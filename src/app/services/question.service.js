@@ -70,6 +70,10 @@ export class QuestionService {
     return undefined;
   }
 
+  fetchQuestion(id) {
+    return this.github.getIssue(id);
+  }
+
   postQuestion(question) {
     return this.github.postIssue(question)
       .then((newQuestion) => {
@@ -99,6 +103,8 @@ export class QuestionService {
         this.questions.next(items);
 
         this.onQuestionUpdated.emit(updatedQuestion);
+
+        return updatedQuestion;
       });
   }
 

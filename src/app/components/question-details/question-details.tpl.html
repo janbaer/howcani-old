@@ -33,21 +33,35 @@
         </div>
       </div>
     </div>
-    <div class="card-action QuestionProperties-container">
-      <user class="QuestionDetails-user" [user]="question?.user" tooltipText="Created from"></user>
-      <date class="QuestionDetails-date" [date]="question?.created_at" tooltipText="Created on"></date>
-      <div class="QuestionDetailsLabels-container">
-        <labels *ngIf="!isEditingLabels" class="QuestionDetails-labels" [labels]="question?.labels"></labels>
-        <content-edit *ngIf="isEditingLabels"
-                      class="QuestionLabelsEdit-control"
-                      placeholder="Enter a comma separated list of the labels"
-                      [multiline]="false"
-                      (onClose)="changeLabels($event)" (onCancel)="toggleEditLabels()"
-                      [content]="getLabelNames()"></content-edit>
-        <div class="QuestionLabelsEdit-button"
-             [ngClass]="{isHidden: !canEditQuestion() || isEditingLabels}"
-             (click)="toggleEditLabels()">
-          <i class="material-icons tooltipped EditItem" data-position="bottom" data-delay="50" data-tooltip="Edit">mode_edit</i>
+    <div class="card-action">
+      <div class="QuestionPropertiesRow-container">
+        <user class="QuestionDetails-user" [user]="question?.user" tooltipText="Created from"></user>
+        <date class="QuestionDetails-date" [date]="question?.created_at" tooltipText="Created on"></date>
+        <div class="QuestionDetailsIsAnswered-container">
+          <input *ngIf="canChangeQuestionIsAnsweredState()"
+                 id="isAnsweredCheckbox"
+                 type="checkbox"
+                 [checked]="isQuestionAnswered()"
+                 (click)="changeQuestionIsAnsweredState()">
+          <label *ngIf="canChangeQuestionIsAnsweredState()"
+                 class="QuestionDetailsIsAnswered-label"
+                 for="isAnsweredCheckbox">Question is answered</label>
+        </div>
+      </div>
+      <div class="QuestionPropertiesRow-container">
+        <div class="QuestionDetailsLabels-container">
+          <labels *ngIf="!isEditingLabels" class="QuestionDetails-labels" [labels]="question?.labels"></labels>
+          <content-edit *ngIf="isEditingLabels"
+                        class="QuestionLabelsEdit-control"
+                        placeholder="Enter a comma separated list of the labels"
+                        [multiline]="false"
+                        (onClose)="changeLabels($event)" (onCancel)="toggleEditLabels()"
+                        [content]="getLabelNames()"></content-edit>
+          <div class="QuestionLabelsEdit-button"
+              [ngClass]="{isHidden: !canEditQuestion() || isEditingLabels}"
+              (click)="toggleEditLabels()">
+            <i class="material-icons tooltipped EditItem" data-position="bottom" data-delay="50" data-tooltip="Edit">mode_edit</i>
+          </div>
         </div>
       </div>
     </div>
@@ -60,16 +74,8 @@
   <comment-new *ngIf="canCreateNewComment()" [questionNumber]="question?.number" (onNewCommentCreated)="newCommentCreated($event)"></comment-new>
 
   <div class="QuestionDetailsButton-container">
-    <button class="btn deep-orange modal-action waves-effect waves-green"
-            *ngIf="canMarkQuestionAsUnanswered()"
-            (click)="markQuestionAsUnanswered()">
-      Is not answered
-    </button>
-    <button class="btn light-green modal-action waves-effect waves-green"
-            *ngIf="canMarkQuestionAsAnswered()"
-            (click)="markQuestionAsAnsweredAndClose()">
-      Is answered
-    </button>
-    <button class="btn modal-action waves-effect waves-green" (click)="closeDialog($event)">Ok</button>
+    <button *ngIf="isModalShown()"
+            class="btn modal-action waves-effect waves-green"
+            (click)="closeDialog($event)">Ok</button>
   </div>
 </div>

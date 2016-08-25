@@ -33,6 +33,7 @@ import template from './question-details.tpl.html';
 export class QuestionDetailsComponent {
   @Output() onCloseDialog = new EventEmitter();
   @Input() question;
+  @Input() isModal = false;
 
   constructor(
     questionService: QuestionService,
@@ -119,34 +120,24 @@ export class QuestionDetailsComponent {
     return false;
   }
 
-  canMarkQuestionAsAnswered() {
-    if (this.question) {
-      return this.canEditQuestion() &&
-             !this.isQuestionAnswered();
-    }
-    return false;
-  }
-
-  canMarkQuestionAsUnanswered() {
-    if (this.question) {
-      return this.canEditQuestion() &&
-             this.isQuestionAnswered();
-    }
-    return false;
+  canChangeQuestionIsAnsweredState() {
+    return this.question && this.canEditQuestion();
   }
 
   markQuestionAsAnswered() {
     return this.questionService.markQuestionAsAnswered(this.question);
   }
 
-  markQuestionAsAnsweredAndClose() {
-    this.markQuestionAsAnswered()
-      .then(() => this.closeDialog());
-  }
+  changeQuestionIsAnsweredState() {
+    let promise;
 
-  markQuestionAsUnanswered() {
-    this.questionService.markQuestionAsUnanswered(this.question)
-      .then(() => this.closeDialog());
+    if (this.isQuestionAnswered()) {
+      promise = this.questionService.markQuestionAsUnanswered(this.question);
+    } else {
+      promise = this.questionService.markQuestionAsAnswered(this.question);
+    }
+
+    return promise;
   }
 
   isQuestionAnswered() {
@@ -155,6 +146,10 @@ export class QuestionDetailsComponent {
 
   canCreateNewComment() {
     return this.authService.isUserAuthenticated();
+  }
+
+  isModalShown() {
+    return this.isModal;
   }
 
   newCommentCreated(comment) {

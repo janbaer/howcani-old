@@ -107,6 +107,10 @@ export class GithubService {
     return this.get('search/issues', searchParams);
   }
 
+  getIssue(number) {
+    return this.get(`repos/${this.configuration.project.user}/${this.configuration.project.repository}/issues/${number}`).toPromise();
+  }
+
   postIssue(issue) {
     return this.post(`repos/${this.configuration.project.user}/${this.configuration.project.repository}/issues`, issue).toPromise();
   }

@@ -52,30 +52,30 @@
   }
 }
 
-.QuestionDetailsProperties-container {
+.QuestionPropertiesRow-container {
   display: flex;
-  flex-wrap: wrap;
-
-  @media @screen-tablets-landscape {
-    flex-wrap: nowrap;
-  }
-
+  margin-bottom: @space-normal;
 }
 
 .QuestionDetails-user {
-  flex: 25%;
+  flex: 1;
 }
 
 .QuestionDetails-date {
-  flex: 25%;
+  flex: 1;
+}
+
+.QuestionDetailsIsAnswered-container {
+  flex: 1;
+}
+
+.QuestionDetailsIsAnswered-label {
+  color: black;
 }
 
 .QuestionDetailsLabels-container {
   display: flex;
-  flex: 100%;
-  @media @screen-tablets-landscape {
-    flex: 50%;
-  }
+  flex: 1;
 }
 
 .QuestionDetails-labels {
@@ -84,6 +84,10 @@
 
 .QuestionLabelsEdit-control {
   flex: 1;
+}
+
+.QuestionDetails-labels {
+
 }
 
 .QuestionLabelsEdit-button {

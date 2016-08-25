@@ -24,7 +24,7 @@
 
 <div id="questionDetailsDialog" class="modal">
   <div class="modal-content">
-    <question-details [question]="selectedQuestion"
+    <question-details [question]="selectedQuestion" [isModal]="true"
                       (onCloseDialog)="closeQuestionDetailsDialog($event)">
     </question-details>
   </div>
