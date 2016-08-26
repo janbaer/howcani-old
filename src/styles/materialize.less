@@ -44,6 +44,14 @@ nav .button-collapse i {
   width: 64px;
 }
 
+.side-nav {
+  @media @screen-sidebar-break {
+    &.is-hidden {
+      display: none;
+    }
+  }
+}
+
 .side-nav li {
   background: none;
   padding: 0 15px;

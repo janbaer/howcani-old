@@ -115,6 +115,8 @@ export class QuestionsComponent {
         }
       });
 
+    this.materialize.showSidebar();
+
   }
 
   ngOnDestroy() {

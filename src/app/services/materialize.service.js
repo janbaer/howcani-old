@@ -21,4 +21,13 @@ export class MaterializeService {
     Materialize.toast(message, timeout);
   }
 
+  showSidebar() {
+    $('.AppContent-container').removeClass('is-fullview');
+    $('.side-nav').removeClass('is-hidden');
+  }
+
+  hideSidebar() {
+    $('.AppContent-container').addClass('is-fullview');
+    $('.side-nav').addClass('is-hidden');
+  }
 }

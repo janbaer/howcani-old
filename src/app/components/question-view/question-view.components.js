@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { QuestionService } from './../../services/question.service';
 import { ConfigurationService } from './../../services/configuration.service';
+import { MaterializeService } from './../../services/materialize.service.js';
 import { QuestionDetailsComponent } from './../question-details/question-details.component';
 
 import template from './question-view.tpl.html';
@@ -15,11 +16,13 @@ export class QuestionViewComponent {
   constructor(router: Router,
               activatedRoute: ActivatedRoute,
               configurationService: ConfigurationService,
-              questionService: QuestionService) {
+              questionService: QuestionService,
+              materializeService: MaterializeService) {
     this.router = router;
     this.route = activatedRoute;
     this.configuration = configurationService;
     this.questionService = questionService;
+    this.materializeService = materializeService;
   }
 
   ngOnInit() {
@@ -39,6 +42,7 @@ export class QuestionViewComponent {
           });
       });
 
+    this.materializeService.hideSidebar();
   }
 
 }
