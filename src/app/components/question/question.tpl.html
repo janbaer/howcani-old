@@ -3,6 +3,12 @@
     <div class="Question-title">
       <question-state [question]="question"></question-state>
       <span class="QuestionTitle-label" (click)="showDetails(question)">{{ question.title }}</span>
+      <div class="QuestionCopyLink-button" (click)="copyLink()">
+        <i class="material-icons tooltipped CopyLink-icon"
+           data-position="bottom" data-delay="50" data-tooltip="Copy link">
+          insert_link
+        </i>
+      </div>
     </div>
     <div class="Question-body markdown-body" [innerHTML]="question.body | markdown"></div>
   </div>

@@ -28,4 +28,23 @@ export class QuestionComponent {
   showDetails(question) {
     this.onSelectQuestion.emit(question);
   }
+
+  copyLink() {
+    this.copyToClipboard(window.document.location.href + '/' + this.question.number);
+  }
+
+  copyToClipboard(textToCopy) {
+    $('body')
+        .append($('<input type="text" name="fname" class="textToCopyInput"/>' )
+        .val(textToCopy))
+        .find('.textToCopyInput')
+        .select();
+
+    try {
+      window.document.execCommand('copy');
+    } catch (error) {
+      console.log('Text could not copied to clipbboard', error);
+    }
+    $('.textToCopyInput').remove();
+  }
 }
