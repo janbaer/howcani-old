@@ -1,3 +1,13 @@
+
+0.54 / 2016-08-27
+==================
+
+  * Fix a wrong padding on tablets for modal dialogs
+  * Question title are now fully visible even on small devices
+  * Add some spacing in single question view mode
+  * Fix a problem that the sidebar wasnt scrollable on mobiel devices with too much tags
+  * **Known issues** - Copy link doesn't work on Safari 9 (iOS and Desktop), but Safari 10 will support it
+
 0.53 / 2016-08-26
 ==================
 

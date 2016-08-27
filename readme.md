@@ -5,9 +5,7 @@
 [![Build Status](https://travis-ci.org/howcani-project/howcani.svg?branch=master)](https://travis-ci.org/howcani-project/howcani)
 
 This repository contains the source code for our project **HowCanI**.
-It's a simple Webapplication for frequently asqed questions.
-
-For chatting about the project you can goto [howcani.slack.com](https://howcani.slack.com)
+It's a simple Webapplication for frequently asked questions.
 
 This project is based on the [angular-es6-starter](https://github.com/blacksonic/angular2-es6-starter) project from [@blacksonic](https://github.com/blacksonic).
 
@@ -31,4 +29,3 @@ message.
 - [Google Material Icons](https://design.google.com/icons/)
 - [Materialize.css](http://materializecss.com/)
 - [Github API for issues](https://developer.github.com/v3/issues/)
-- [Github Client for JavaScript](https://github.com/michael/github)
