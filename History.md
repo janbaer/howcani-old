@@ -1,4 +1,9 @@
 
+0.55 / 2016-08-30
+==================
+
+  * Fix a problem with a jumping page when copying the link to the question to the clipboard
+
 0.54 / 2016-08-27
 ==================
 
