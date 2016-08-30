@@ -1,6 +1,6 @@
 <div class="card">
   <div class="card-content">
-    <div class="Question-title">
+    <div id="question{{ question.number }}" class="Question-title">
       <question-state [question]="question"></question-state>
       <span class="QuestionTitle-label" (click)="showDetails(question)">{{ question.title }}</span>
       <div class="QuestionCopyLink-button" (click)="copyLink()">

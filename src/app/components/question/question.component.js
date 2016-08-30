@@ -34,7 +34,7 @@ export class QuestionComponent {
   }
 
   copyToClipboard(textToCopy) {
-    $('body')
+    $(`#question${this.question.number}`)
         .append($('<input type="text" name="fname" class="textToCopyInput"/>' )
         .val(textToCopy))
         .find('.textToCopyInput')
