@@ -1,3 +1,4 @@
+import { TestBed, inject } from '@angular/core/testing';
 import { Injector } from '@angular/core';
 import { ConfigurationService } from './configuration.service';
 import { RecentProjectsService } from './recent-projects.service';
@@ -8,11 +9,13 @@ describe('Configuration service spec', function() {
   let storage = {};
 
   beforeEach(() => {
-    addProviders([
-      ConfigurationService,
-      StorageService,
-      RecentProjectsService
-    ]);
+    TestBed.configureTestingModule({
+      providers: [
+        ConfigurationService,
+        StorageService,
+        RecentProjectsService
+      ]
+    });
   });
 
   beforeEach(inject([Injector], (injector) => {

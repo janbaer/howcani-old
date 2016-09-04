@@ -1,6 +1,5 @@
-'use strict';
-
-import { Injector, provide } from '@angular/core';
+import { TestBed, inject } from '@angular/core/testing';
+import { Injector } from '@angular/core';
 import { ConfigurationService } from './configuration.service.js';
 import { SearchQueryBuilderService } from './searchquerybuilder.service.js';
 
@@ -21,10 +20,12 @@ describe('Search Query service spec', () => {
   }
 
   beforeEach(() => {
-    addProviders([
-      SearchQueryBuilderService,
-      provide(ConfigurationService, { useClass: ConfigurationServiceMock })
-    ]);
+    TestBed.configureTestingModule({
+      providers: [
+        SearchQueryBuilderService,
+        { provide: ConfigurationService, useClass: ConfigurationServiceMock }
+      ]
+    });
   });
 
   beforeEach(inject([Injector], (injector) => {

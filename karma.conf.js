@@ -8,12 +8,14 @@ module.exports = function(config) {
     basePath: '',
     frameworks: ['jasmine'],
     files: [
-      { pattern: 'src/setup.spec.js' }
+      { pattern: 'src/test.vendor.js' },
+      { pattern: 'src/test.boot.js' },
     ],
     exclude: [
     ],
     preprocessors: {
-      'src/setup.spec.js': ['webpack', 'sourcemap']
+      'src/test.vendor.js': ['webpack', 'sourcemap'],
+      'src/test.boot.js': ['webpack', 'sourcemap']
     },
     reporters: ['spec'],
     specReporter : {
