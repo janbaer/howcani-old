@@ -7,8 +7,7 @@ import template from './sidebar.tpl.html';
 
 @Component({
   selector: 'sidebar',
-  template: template,
-  directives: []
+  template: template
 })
 export class SidebarComponent {
   @Input() searchValue = '';

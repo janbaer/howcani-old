@@ -6,20 +6,11 @@ import { AuthService } from './../../services/auth.service';
 import { GithubService } from './../../services/github.service';
 import { ConfigurationService } from './../../services/configuration.service';
 import { RecentProjectsService } from './../../services/recent-projects.service';
-import { QuestionComponent } from './../question/question.component';
-import { QuestionDetailsComponent } from './../question-details/question-details.component';
-import { QuestionNewComponent } from './../question-new/question-new.component';
-
 import template from './questions.tpl.html';
 
 @Component({
   selector: 'questions',
-  template: template,
-  directives: [
-    QuestionComponent,
-    QuestionDetailsComponent,
-    QuestionNewComponent
-  ]
+  template: template
 })
 export class QuestionsComponent {
   constructor(router: Router,

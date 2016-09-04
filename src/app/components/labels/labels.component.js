@@ -3,8 +3,7 @@ import template from './labels.tpl.html';
 
 @Component({
   selector: 'labels',
-  template: template,
-  directives: []
+  template: template
 })
 export class LabelsComponent {
   @Input() labels;

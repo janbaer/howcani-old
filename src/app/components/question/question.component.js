@@ -1,21 +1,9 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { MarkdownPipe } from './../../pipes/markdown.pipe';
-import { QuestionStateComponent } from './../question-state/question-state.component';
-import { UserComponent } from './../user/user.component';
-import { DateComponent } from './../date/date.component';
-import { LabelsComponent } from './../labels/labels.component';
 import template from './question.tpl.html';
 
 @Component({
   selector: 'question',
-  template: template,
-  directives: [
-    UserComponent,
-    DateComponent,
-    LabelsComponent,
-    QuestionStateComponent
-  ],
-  pipes: [MarkdownPipe]
+  template: template
 })
 export class QuestionComponent {
   @Input() question;

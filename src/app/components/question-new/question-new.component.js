@@ -4,8 +4,7 @@ import template from './question-new.tpl.html';
 
 @Component({
   selector: 'question-new',
-  template: template,
-  directives: []
+  template: template
 })
 export class QuestionNewComponent {
   @Output() onCloseDialog = new EventEmitter();

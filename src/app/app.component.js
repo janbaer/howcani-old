@@ -2,9 +2,6 @@
 
 import { Component } from '@angular/core';
 
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { SidebarComponent } from './components/sidebar/sidebar.component';
-
 import { QuestionService } from './services/question.service';
 import { AuthService } from './services/auth.service';
 import { ConfigurationService } from './services/configuration.service';
@@ -13,8 +10,7 @@ import template from './app.tpl.html';
 
 @Component({
   selector: 'howcani-app',
-  template: template,
-  directives: [NavbarComponent, SidebarComponent]
+  template: template
 })
 export class AppComponent {
   constructor(configurationService: ConfigurationService,

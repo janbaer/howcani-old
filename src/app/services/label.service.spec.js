@@ -1,4 +1,5 @@
-import { Injector, provide } from '@angular/core';
+import { Injector } from '@angular/core';
+import { TestBed, inject } from '@angular/core/testing';
 import { GithubService } from './github.service.js';
 import { ConfigurationService } from './configuration.service.js';
 import { LabelService } from './label.service.js';
@@ -16,11 +17,13 @@ describe('LabelService spec', () => {
   }
 
   beforeEach(() => {
-    addProviders([
-      LabelService,
-      provide(GithubService, { useClass: GithubServiceMock }),
-      provide(ConfigurationService, { useClass: ConfigurationServiceMock })
-    ]);
+    TestBed.configureTestingModule({
+      providers: [
+        LabelService,
+        { provide: GithubService, useClass: GithubServiceMock },
+        { provide: ConfigurationService, useClass: ConfigurationServiceMock }
+      ]
+    });
   });
 
   beforeEach(inject([Injector], (injector) => {

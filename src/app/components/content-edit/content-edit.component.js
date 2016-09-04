@@ -3,8 +3,7 @@ import template from './content-edit.tpl.html';
 
 @Component({
   selector: 'content-edit',
-  template: template,
-  directives: []
+  template: template
 })
 export class ContentEditComponent {
   @Input() content;

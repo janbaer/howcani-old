@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { ROUTER_DIRECTIVES } from '@angular/router';
 import { ConfigurationService } from './../../services/configuration.service';
 import { MaterializeService } from './../../services/materialize.service';
 import { AuthService } from './../../services/auth.service';
@@ -7,8 +6,7 @@ import template from './navbar.tpl.html';
 
 @Component({
   selector: 'navbar',
-  template: template,
-  directives: [ROUTER_DIRECTIVES]
+  template: template
 })
 
 export class NavbarComponent {
