@@ -1,21 +1,11 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommentService } from './../../services/comment.service.js';
 import { AuthService } from './../../services/auth.service';
-import { MarkdownPipe } from './../../pipes/markdown.pipe';
-import { UserComponent } from './../user/user.component';
-import { DateComponent } from './../date/date.component';
-import { ContentEditComponent } from './../content-edit/content-edit.component';
 import template from './comment.tpl.html';
 
 @Component({
   selector: 'comment',
-  template: template,
-  directives: [
-    ContentEditComponent,
-    UserComponent,
-    DateComponent
-  ],
-  pipes: [MarkdownPipe]
+  template: template
 })
 export class CommentComponent {
   @Input() comment;

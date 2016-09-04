@@ -1,12 +1,9 @@
 import { Component, Input } from '@angular/core';
-import { TimeFromNowPipe } from './../../pipes/timefromnow.pipe';
 import template from './date.tpl.html';
 
 @Component({
   selector: 'date',
-  template: template,
-  directives: [],
-  pipes: [TimeFromNowPipe]
+  template: template
 })
 export class DateComponent {
   @Input() date;

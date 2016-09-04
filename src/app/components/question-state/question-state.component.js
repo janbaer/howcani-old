@@ -3,9 +3,7 @@ import template from './question-state.tpl.html';
 
 @Component({
   selector: 'question-state',
-  template: template,
-  directives: [],
-  pipes: []
+  template: template
 })
 export class QuestionStateComponent {
   @Input() question;

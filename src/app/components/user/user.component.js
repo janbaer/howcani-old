@@ -3,8 +3,7 @@ import template from './user.tpl.html';
 
 @Component({
   selector: 'user',
-  template: template,
-  directives: []
+  template: template
 })
 export class UserComponent {
   @Input() user;

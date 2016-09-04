@@ -3,14 +3,12 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { QuestionService } from './../../services/question.service';
 import { ConfigurationService } from './../../services/configuration.service';
 import { MaterializeService } from './../../services/materialize.service.js';
-import { QuestionDetailsComponent } from './../question-details/question-details.component';
 
 import template from './question-view.tpl.html';
 
 @Component({
   selector: 'question-view',
-  template: template,
-  directives: [QuestionDetailsComponent]
+  template: template
 })
 export class QuestionViewComponent {
   constructor(router: Router,
