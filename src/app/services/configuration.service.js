@@ -57,12 +57,8 @@ export class ConfigurationService {
 
     if (isOtherProject) {
       this.onProjectChanged.emit(this._project);
+      this.storage.setProject(project);
     }
-  }
-
-  saveProject(project) {
-    this.project = project;
-    this.storage.setProject(project);
   }
 
   get oauthToken() {

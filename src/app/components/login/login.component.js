@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { ConfigurationService } from './../../services/configuration.service.js';
 
 import template from './login.tpl.html';
 
@@ -10,25 +11,31 @@ import template from './login.tpl.html';
 })
 export class LoginComponent {
   constructor(authService: AuthService,
+              configurationService: ConfigurationService,
+              activatedRoute: ActivatedRoute,
               router: Router) {
     this.authService = authService;
+    this.configuration = configurationService;
+    this.route = activatedRoute;
     this.router = router;
   }
 
   ngOnInit() {
-    const route = this.router.routerState.snapshot;
-    if (route.url === '/logout') {
+    if (this.route.routeConfig.path === 'logout') {
       this.logout();
-    } else if (route.queryParams.token) {
-      this.verifyUserToken(route.queryParams.token);
     } else {
-      this.login();
+      const queryParams = this.route.queryParams.getValue();
+      if (queryParams.token) {
+        this.verifyUserToken(queryParams.token);
+      } else {
+        this.login();
+      }
     }
 
   }
 
   redirectToQuestions() {
-    this.router.navigateByUrl('');
+    this.router.navigate(['questions', this.configuration.project.user, this.configuration.project.repository]);
   }
 
   verifyUserToken(oauthToken) {
