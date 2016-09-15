@@ -54,10 +54,10 @@ export class ConfigurationService {
     }
 
     this._project = project;
+    this.storage.setProject(project);
 
     if (isOtherProject) {
       this.onProjectChanged.emit(this._project);
-      this.storage.setProject(project);
     }
   }
 
