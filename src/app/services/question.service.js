@@ -75,13 +75,25 @@ export class QuestionService {
   }
 
   postQuestion(question) {
+    const isAnswered = question.isAnswered;
+
     return this.github.postIssue(question)
+      .then((newQuestion) => {
+        return this.changeQuestionToAnsweredWhenIsAnswered(newQuestion, isAnswered);
+      })
       .then((newQuestion) => {
         const items = [newQuestion].concat(this.questions.value);
         this.questions.next(items);
 
         this.onQuestionCreated.emit(newQuestion);
       });
+  }
+
+  changeQuestionToAnsweredWhenIsAnswered(question, isAnswered) {
+    if (isAnswered) {
+      return this.markQuestionAsAnswered(question);
+    }
+    return Promise.resolve(question);
   }
 
   markQuestionAsAnswered(question) {

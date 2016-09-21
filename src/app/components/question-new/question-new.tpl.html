@@ -25,6 +25,14 @@
             <label for="labels" class="active">Labels</label>
           </div>
         </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="isAnsweredCheckbox" name="isAnsweredCheckbox" type="checkbox"
+            [(ngModel)]="question.isAnswered">
+            <label class="QuestionNewIsAnswered-label"
+              for="isAnsweredCheckbox">Question is answered</label>
+          </div>
+        </div>
     </div>
   </div>
   <div class="QuestionActions-container">

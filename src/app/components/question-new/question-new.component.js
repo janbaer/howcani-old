@@ -15,6 +15,10 @@ export class QuestionNewComponent {
     this.isCancelled = false;
   }
 
+  onChangeSelected() {
+    this.question.isAnswered = !this.question.isAnswered;
+  }
+
   onSubmit() {
     if (this.isCancelled) {
       this.isCancelled = false;
