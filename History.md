@@ -1,4 +1,13 @@
 
+0.56 / 2016-09-22
+==================
+
+  * Change min-width for content-edit buttons
+  * Set the focus automatically to the first input element when a modal dialog will be shown
+  * Mark a question as answered directly after creating a new question
+  * SearchValues will now be correctly saved and restored
+  * Update npm packages - Angular 2.0 final
+
 0.55 / 2016-08-30
 ==================
 
