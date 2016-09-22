@@ -5,7 +5,7 @@
     <textarea *ngIf="multiline" placeholder="{{placeholder}}" class="materialize-textarea"
               name="contentTextare" [(ngModel)]="content" (keyup)="tryCloseEdit($event)"></textarea>
   </div>
-    <button class="btn-flat waves-effect waves-light ContentEdit-button isOk" [ngClass]="{isDisabled: !canClose()}" [disabled]="!canClose()" (click)="closeEdit()">
+  <button class="btn-flat waves-effect waves-light ContentEdit-button isOk" [ngClass]="{isDisabled: !canClose()}" [disabled]="!canClose()" (click)="closeEdit()">
     <i class="material-icons">done</i>
   </button>
   <button class="btn-flat waves-effect waves-light ContentEdit-button isCancel" (click)="cancelEdit()">
