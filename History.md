@@ -1,5 +1,5 @@
 
-0.56 / 2016-09-22
+0.57 / 2016-09-22
 ==================
 
   * Change min-width for content-edit buttons
