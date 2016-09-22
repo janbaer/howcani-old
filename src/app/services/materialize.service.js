@@ -9,8 +9,10 @@ export class MaterializeService {
   }
 
   showDialog(dialogId, dismissible = true) {
-    $(`#${dialogId}`).openModal({ dismissible: dismissible });
-    $(`#${dialogId}`).scrollTop(0);
+    const dialog = $(`#${dialogId}`);
+    dialog.openModal({ dismissible: dismissible });
+    dialog.scrollTop(0);
+    dialog.find('input').first().focus();
   }
 
   closeDialog(dialogId) {
