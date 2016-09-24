@@ -1,4 +1,9 @@
 
+0.58 / 2016-09-24
+==================
+
+  * Some style optimizations for mobile devices
+
 0.57 / 2016-09-22
 ==================
 
