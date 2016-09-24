@@ -47,7 +47,6 @@
     "es6-promise": "3.3.1",
     "es6-shim": "0.35.1",
     "github-markdown-css": "2.4.0",
-    "jquery": "2.2.4",
     "marked": "0.3.6",
     "moment": "2.15.0",
     "reflect-metadata": "0.1.8",
