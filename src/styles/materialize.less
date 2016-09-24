@@ -3,8 +3,12 @@
 
 .modal {
   max-height: @max-height-mobile;
+  width: 100%;
 
-  width: 95%;
+  @media @screen-tablets-portrait {
+    width: 95%;
+  }
+
   @media @screen-tablets-landscape {
     width: 80%;
     max-height: @max-height-tablet;

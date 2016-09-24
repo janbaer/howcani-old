@@ -6,6 +6,7 @@
 @space-normal: 5px;
 @space-large: 10px;
 @space-x-large: 15px;
+@space-xx-large: 25px;
 
 /* Screen-Sizes */
 @screen-width-desktop: 1025px;
@@ -41,6 +42,20 @@ body {
     &.is-fullview {
       margin-left: 0px;
     }
+  }
+}
+
+.Tablet-text {
+  display: none;
+  @media @screen-tablets-portrait {
+    display: inline;
+  }
+}
+
+.Mobile-text {
+  display: inline;
+  @media @screen-tablets-portrait {
+    display: none;
   }
 }
 
