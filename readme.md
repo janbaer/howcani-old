@@ -15,9 +15,13 @@ This project is based on the [angular-es6-starter](https://github.com/blacksonic
 - serve --port=3001 --lrport=123456 - starts the local webserver on the given port and listen on the give livereloadport
 - test - starts the karma server and stays in a watch mode
 - test-ci - starts the karma server, executes the tests and finish
-- buildAndDeploy --tag=1.0 - builds the app with the production settings and
-deploys the build to github with the given tag as version number in the commit
-message.
+
+## Deployment
+
+To deploy a new version of HowCanI you just have to push a new tag to Github.
+The rest will be done by Travis. It's building a new release from the current
+master branch with the given Tag as head and publish it automatically to the
+github project page.
 
 ## Links for developer infos
 
