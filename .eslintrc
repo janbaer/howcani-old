@@ -36,6 +36,7 @@
 
   "ecmaFeatures": {
     "arrowFunctions": true,
+    "arrow-parens": 1,
     "binaryLiterals": true,
     "blockBindings": true,
     "classes": true,
@@ -212,18 +213,17 @@
     "wrap-regex": 0,
 
     // ECMAScript 6
-    // "constructor-super": 2, // Not supported in current version
-    "generator-star-spacing": [2, "before"],
-    // "no-this-before-super": 2, // Not supported in current version
+    "constructor-super": 1,
+    "generator-star-spacing": 1,
+    "array-bracket-spacing": 1,
+    "no-this-before-super": 1,
     "no-var": 2,
     "object-shorthand": 0,
     "prefer-const": 1,
-    "babel/generator-star-spacing": 1,
     "babel/new-cap": 1,
-    "babel/array-bracket-spacing": 1,
     "babel/object-curly-spacing": [2, "always"],
     "babel/object-shorthand": 0,
-    "babel/arrow-parens": 1,
+    /*"babel/arrow-parens": 1,*/
     "babel/no-await-in-loop": 1
   }
 }
