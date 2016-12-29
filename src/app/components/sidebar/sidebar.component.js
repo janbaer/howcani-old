@@ -3,6 +3,7 @@ import { LabelService } from './../../services/label.service';
 import { ConfigurationService } from './../../services/configuration.service';
 import { AuthService } from './../../services/auth.service';
 import { QuestionService } from './../../services/question.service';
+import { MaterializeService } from './../../services/materialize.service';
 import template from './sidebar.tpl.html';
 
 @Component({
@@ -17,11 +18,14 @@ export class SidebarComponent {
   constructor(labelService: LabelService,
               configurationService: ConfigurationService,
               questionService: QuestionService,
-              authService: AuthService) {
+              authService: AuthService,
+              materializeService: MaterializeService
+             ) {
     this.labelService = labelService;
     this.configuration = configurationService;
     this.questionService = questionService;
     this.authService = authService;
+    this.materialize = materializeService;
     this.state = '';
   }
 
@@ -73,6 +77,28 @@ export class SidebarComponent {
 
   isUserAuthenticated() {
     return this.authService.isUserAuthenticated();
+  }
+
+  showActions(index) {
+    $('#labelActionsContainer' + index).addClass('hovered');
+  }
+
+  hideActions(index) {
+    $('#labelActionsContainer' + index).removeClass('hovered');
+  }
+
+  deleteLabel(label) {
+    this.materialize.showYesNo('deleteLabelDialog')
+      .then(cancel => {
+        if (cancel) {
+          return;
+        }
+        //this.labelService.deleteLabel(label);
+      });
+  }
+
+  editLabel(label) {
+    
   }
 
   get currentProject() {

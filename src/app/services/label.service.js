@@ -19,6 +19,13 @@ export class LabelService {
       });
   }
 
+  deleteLabel(label) {
+    this.githubService.deleteLabel(label)
+      .then(() => {
+
+      });
+  }
+
   restoreSelectionState(labels) {
     const query = this.configuration.project.query;
     if (query && query.labels) {

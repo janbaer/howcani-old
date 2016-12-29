@@ -19,6 +19,16 @@ export class MaterializeService {
     $(`#${dialogId}`).closeModal();
   }
 
+  showYesNo(dialogId) {
+    return new Promise(resolve => {
+      $(`#${dialogId}`).openModal({
+        complete: function() {
+          resolve();
+        }
+      });
+    });
+  }
+
   showToastMessage(message, timeout = 4000) {
     Materialize.toast(message, timeout);
   }

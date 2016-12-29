@@ -74,6 +74,13 @@ export class GithubService {
                     .catch(this.handleError.bind(this));
   }
 
+  delete(path) {
+    const requestOptions = this.buildRequestOptions();
+    return this.http.delete(this.buildUrl(path), requestOptions)
+                    .map((response) => response.json())
+                    .catch(this.handleError.bind(this));
+  }
+
   patch(path, bodyObject) {
     const requestOptions = this.buildRequestOptions();
     return this.http.patch(this.buildUrl(path), JSON.stringify(bodyObject), requestOptions)
@@ -91,6 +98,14 @@ export class GithubService {
 
   getLabels() {
     return this.get(`repos/${this.configuration.project.user}/${this.configuration.project.repository}/labels`);
+  }
+
+  patchLabel(label) {
+    return this.patch(`repos/${this.configuration.project.user}/${this.configuration.project.repository}/labels/${label.name}`, label).toPromise();
+  }
+
+  deleteLabel(label) {
+    return this.delete(`repos/${this.configuration.project.user}/${this.configuration.project.repository}/labels/${label.name}`).toPromise();
   }
 
   getUser(username) {
