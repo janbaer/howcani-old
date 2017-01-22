@@ -3,6 +3,7 @@ import { CommentComponent } from './comment/comment.component.js';
 import { ContentEditComponent } from './content-edit/content-edit.component.js';
 import { ConnectComponent } from './connect/connect.component.js';
 import { DateComponent } from './date/date.component.js';
+import { LabelComponent } from './label/label.component.js';
 import { LabelsComponent } from './labels/labels.component.js';
 import { LoginComponent } from './login/login.component.js';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -21,6 +22,7 @@ export const APP_COMPONENTS = [
   ContentEditComponent,
   ConnectComponent,
   DateComponent,
+  LabelComponent,
   LabelsComponent,
   LoginComponent,
   NavbarComponent,

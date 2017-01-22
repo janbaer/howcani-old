@@ -27,6 +27,7 @@ export class SidebarComponent {
     this.authService = authService;
     this.materialize = materializeService;
     this.state = '';
+
   }
 
   onSubmitSearchValue(event, searchValue) {
@@ -35,11 +36,6 @@ export class SidebarComponent {
     }
 
     this.searchValue = searchValue;
-    this.updateSearch();
-  }
-
-  toggleLabel(event, label) {
-    label.isSelected = !label.isSelected;
     this.updateSearch();
   }
 
@@ -77,28 +73,6 @@ export class SidebarComponent {
 
   isUserAuthenticated() {
     return this.authService.isUserAuthenticated();
-  }
-
-  showActions(index) {
-    $('#labelActionsContainer' + index).addClass('hovered');
-  }
-
-  hideActions(index) {
-    $('#labelActionsContainer' + index).removeClass('hovered');
-  }
-
-  deleteLabel(label) {
-    this.materialize.showYesNo('deleteLabelDialog')
-      .then(cancel => {
-        if (cancel) {
-          return;
-        }
-        //this.labelService.deleteLabel(label);
-      });
-  }
-
-  editLabel(label) {
-    
   }
 
   get currentProject() {

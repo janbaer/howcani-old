@@ -33,38 +33,11 @@
     <li>
       <hr>
     </li>
-    <li *ngFor="let label of labelService.labels; let i = index">
-      <div class="Label-container" (mouseover)="showActions(i)" (mouseout)="hideActions(i)">
-        <input type="checkbox" id="label{{i}}" (click)="toggleLabel($event, label)" [checked]="label.isSelected" />
-        <label class="Label-text" attr.for="label{{i}}" [ngStyle]="{'color': '#' + label.color}">{{ label.name  }}</label>
-        <div id="labelActionsContainer{{i}}" class="LabelActions-container">
-          <div class="LabelEdit-button" (editLabel)="editLabel(label)">
-            <i class="material-icons tooltipped DeleteLabel" 
-               data-delay="50" data-position="bottom" data-tooltip="Edit">mode_edit</i> 
-          </div>
-          <div class="LabelEdit-button" (click)="deleteLabel(label)">
-            <i class="material-icons tooltipped DeleteLabel"
-               data-delay="50" data-position="bottom" data-tooltip="Delete">clear</i> 
-          </div>
-        </div>
-      </div>
+    <li *ngFor="let label of labelService.labels, let i=index">
+      <hci-label [index]="i"[label]="label" (onSelectionChanged)="updateSearch($event)"></hci-label>
     </li>
   </ul>
 </div>
 <div class="SidebarProject-container">
   <span class="SidebarProject-label">{{ currentProject.user }} / {{ currentProject.repository }}</span>
 </div>
-
-
-<!--<div id="deleteLabelDialog" class="modal">-->
-  <!--<div class="modal-content">-->
-    <!--<div class="modal-content">-->
-      <!--<h4>Delete label</h4>-->
-      <!--<p>Really delete this label?</p>-->
-    <!--</div>-->
-    <!--<div class="modal-footer">-->
-      <!--<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>-->
-      <!--<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Ok</a>-->
-    <!--</div>-->
-  <!--</div>-->
-<!--</div>-->

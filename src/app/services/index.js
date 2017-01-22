@@ -8,6 +8,7 @@ import { CommentService } from './comment.service';
 import { LabelService } from './label.service';
 import { MaterializeService } from './materialize.service';
 import { SearchQueryBuilderService } from './searchquerybuilder.service';
+import { MessageService } from './message.service.js';
 
 export const APP_SERVICES = [
   StorageService,
@@ -19,5 +20,6 @@ export const APP_SERVICES = [
   CommentService,
   LabelService,
   MaterializeService,
+  MessageService,
   SearchQueryBuilderService
 ];
