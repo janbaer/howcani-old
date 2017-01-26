@@ -42,9 +42,11 @@
       <h4>Delete label</h4>
       <p>Really delete this label?</p>
     </div>
-    <div class="modal-footer">
-      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
-      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Ok</a>
+    <div class="DeleteDialogFooter-container modal-footer">
+      <button class="btn modal-action waves-effect waves-green lighten-1"
+              (click)="closeDialog('deleteLabelDialog', true)">Ok</button>
+      <button class="btn modal-action waves-effect waves-green grey lighten-1"
+              (click)="closeDialog('deleteLabelDialog', false)">Cancel</button>
     </div>
   </div>
 </div>

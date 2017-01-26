@@ -92,6 +92,10 @@ export class QuestionsComponent {
       });
   }
 
+  closeDialog(dialogId, dialogResult) {
+    this.materialize.closeDialog(dialogId, dialogResult);
+  }
+
   ngOnInit() {
     this.isBusy = true;
 

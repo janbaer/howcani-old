@@ -52,13 +52,12 @@ export class LabelComponent {
     this.isEditingColor = true;
   }
 
-  deleteLabel(label) {
+  deleteLabel() {
     this.materialize.showYesNo('deleteLabelDialog')
-      .then(cancel => {
-        if (cancel) {
-          return;
+      .then(dialogResult => {
+        if (dialogResult) {
+          this.labelService.deleteLabel(this.label);
         }
-        this.labelService.deleteLabel(label);
       });
   }
 
