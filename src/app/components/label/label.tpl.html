@@ -2,7 +2,7 @@
   <input type="checkbox" id="label{{index}}" [checked]="label.isSelected" (click)="toggleLabel()" />
   <label class="Label-text" attr.for="label{{index}}" [ngStyle]="{'color': label.color}">{{ label.name  }}</label>
   <div *ngIf="canEditLabel()" id="labelActionsContainer{{index}}" class="LabelActions-container">
-    <input type="color" [value]="label.color" (change)="colorChanged($event)" (click)="startEdit()" attr.list="colors{{index}}">
+    <input *ngIf="isColorSupported" type="color" [value]="label.color" (change)="colorChanged($event)" (click)="startEdit()" attr.list="colors{{index}}">
     <datalist attr.id="colors{{index}}">
       <option>#190707</option>
       <option>#6E6E6E</option>

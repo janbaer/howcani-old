@@ -79,6 +79,12 @@ export class LabelComponent {
     }
   }
 
+  verifyIfInputTypeColorIsSupported() {
+    const input = document.createElement('input');
+    input.setAttribute('type', 'color');
+    return input.type === 'color';
+  }
+
   ngOnInit() {
     this.messageService.onNewMessage
       .subscribe((message) => {
@@ -87,5 +93,7 @@ export class LabelComponent {
           this.hideActions();
         }
       });
+
+    this.isColorSupported = this.verifyIfInputTypeColorIsSupported();
   }
 }
