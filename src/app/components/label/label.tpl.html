@@ -1,0 +1,32 @@
+<div class="Label-container" (mouseover)="showActions(index)" (mouseout)="hideActions(index)">
+  <input type="checkbox" id="label{{index}}" [checked]="label.isSelected" (click)="toggleLabel()" />
+  <label class="Label-text" attr.for="label{{index}}" [ngStyle]="{'color': label.color}">
+    {{ label.name  }}
+  </label>
+  <div *ngIf="canEditLabel()" id="labelActionsContainer{{index}}" class="LabelActions-container">
+    <input class="LabelColorEdit-input" *ngIf="isColorSupported" type="color" [value]="label.color"
+           (change)="colorChanged($event)" (click)="startEdit()" attr.list="colors{{index}}">
+    <datalist attr.id="colors{{index}}">
+      <option>#190707</option>
+      <option>#6E6E6E</option>
+      <option>#A4A4A4</option>
+      <option>#0404B4</option>
+      <option>#2E64FE</option>
+      <option>#0B3B0B</option>
+      <option>#3ADF00</option>
+      <option>#B40404</option>
+      <option>#FF0040</option>
+      <option>#F7819F</option>
+      <option>#FF8000</option>
+      <option>#8904B1</option>
+      <option>#642EFE</option>
+      <option>#D7DF01</option>
+      <option>#F4FA58</option>
+    </datalist>
+    <div class="LabelEdit-button" (click)="deleteLabel(label)">
+      <i class="material-icons tooltipped DeleteLabel"
+         data-delay="50" data-position="bottom" data-tooltip="Delete">clear</i> 
+    </div>
+  </div>
+</div>
+

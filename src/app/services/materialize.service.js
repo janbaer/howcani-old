@@ -15,8 +15,20 @@ export class MaterializeService {
     dialog.find('input').first().focus();
   }
 
-  closeDialog(dialogId) {
+  closeDialog(dialogId, dialogResult) {
     $(`#${dialogId}`).closeModal();
+
+    if (this.dialogResolve) {
+      this.dialogResolve(dialogResult);
+      this.dialogResolve = undefined;
+    }
+  }
+
+  showYesNo(dialogId) {
+    return new Promise(resolve => {
+      this.dialogResolve = resolve;
+      $(`#${dialogId}`).openModal();
+    });
   }
 
   showToastMessage(message, timeout = 4000) {

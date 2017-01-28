@@ -36,6 +36,21 @@
   </div>
 </div>
 
+<div id="deleteLabelDialog" class="modal">
+  <div class="modal-content">
+    <div class="modal-content">
+      <h4>Delete label</h4>
+      <p>Do you really want to delete this label?</p>
+    </div>
+    <div class="DeleteDialogFooter-container modal-footer">
+      <button class="btn modal-action waves-effect waves-green lighten-1"
+              (click)="closeDialog('deleteLabelDialog', true)">Ok</button>
+      <button class="btn modal-action waves-effect waves-green grey lighten-1"
+              (click)="closeDialog('deleteLabelDialog', false)">Cancel</button>
+    </div>
+  </div>
+</div>
+
 <div *ngIf="isUserAuthenticated()" class="FabButton-container">
   <a class="btn-floating btn-large waves-effect waves-light red" (click)="showNewQuestionDialog($event)"><i class="material-icons">add</i></a>
 </div>

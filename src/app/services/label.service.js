@@ -14,9 +14,29 @@ export class LabelService {
     this.labels = [];
 
     this.githubService.getLabels()
-      .subscribe((labels) => {
-        this.labels = labels ? this.restoreSelectionState(labels.sort(this.compareLabelsByName)) : [];
+      .subscribe(labels => {
+        labels = labels || [];
+        labels = this.restoreSelectionState(labels);
+        labels = this.changeColorToHex(labels);
+        this.labels = labels.sort(this.compareLabelsByName);
       });
+  }
+
+  deleteLabel(label) {
+    return this.githubService.deleteLabel(label)
+      .then(() => {
+        const index = this.labels.findIndex(l => l.name === label.name);
+        if (index >= 0) {
+          this.labels.splice(index, 1);
+        }
+      });
+  }
+
+  changeColorToHex(labels) {
+    for (const label of labels) {
+      label.color = `#${label.color}`;
+    }
+    return labels;
   }
 
   restoreSelectionState(labels) {
@@ -34,6 +54,13 @@ export class LabelService {
 
   compareLabelsByName(label1, label2) {
     return label1.name.localeCompare(label2.name);
+  }
+
+  updateLabel(label) {
+    const labelToSend = Object.assign({}, label);
+    labelToSend.color = label.color.substring(1);
+
+    return this.githubService.patchLabel(labelToSend);
   }
 
   updateLabels(labels) {
@@ -54,6 +81,7 @@ export class LabelService {
     names.forEach((name) => {
       const lowerName = name.toLowerCase();
       const label = this.labels.find((l) => l.name.toLowerCase() === lowerName);
+
       if (label) {
         selectedLabels.push(label);
       } else {

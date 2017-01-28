@@ -3,6 +3,7 @@ import { LabelService } from './../../services/label.service';
 import { ConfigurationService } from './../../services/configuration.service';
 import { AuthService } from './../../services/auth.service';
 import { QuestionService } from './../../services/question.service';
+import { MaterializeService } from './../../services/materialize.service';
 import template from './sidebar.tpl.html';
 
 @Component({
@@ -17,12 +18,16 @@ export class SidebarComponent {
   constructor(labelService: LabelService,
               configurationService: ConfigurationService,
               questionService: QuestionService,
-              authService: AuthService) {
+              authService: AuthService,
+              materializeService: MaterializeService
+             ) {
     this.labelService = labelService;
     this.configuration = configurationService;
     this.questionService = questionService;
     this.authService = authService;
+    this.materialize = materializeService;
     this.state = '';
+
   }
 
   onSubmitSearchValue(event, searchValue) {
@@ -31,11 +36,6 @@ export class SidebarComponent {
     }
 
     this.searchValue = searchValue;
-    this.updateSearch();
-  }
-
-  toggleLabel(event, label) {
-    label.isSelected = !label.isSelected;
     this.updateSearch();
   }
 

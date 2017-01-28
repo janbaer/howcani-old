@@ -33,11 +33,8 @@
     <li>
       <hr>
     </li>
-    <li *ngFor="let label of labelService.labels; let i = index">
-      <div class="Label-container">
-        <input type="checkbox" id="label{{i}}" (click)="toggleLabel($event, label)" [checked]="label.isSelected" />
-        <label attr.for="label{{i}}" [ngStyle]="{'color': '#' + label.color}">{{ label.name  }}</label>
-      </div>
+    <li *ngFor="let label of labelService.labels, let i=index">
+      <hci-label [index]="i"[label]="label" (onSelectionChanged)="updateSearch($event)"></hci-label>
     </li>
   </ul>
 </div>
