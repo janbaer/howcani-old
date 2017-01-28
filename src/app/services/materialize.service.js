@@ -1,12 +1,7 @@
 import { Injectable } from '@angular/core';
-import { MessageService } from './message.service.js';
 
 @Injectable()
 export class MaterializeService {
-  constructor(messageService: MessageService) {
-    this.messageService = messageService;
-  }
-
   updateTooltips() {
     setTimeout(() => {
       $('.tooltipped').tooltip({ delay: 50 });
