@@ -1,3 +1,11 @@
+0.59 / 2017-01-28
+==================
+
+  * Changing colors for labels or deleting them
+    (Only supported for browsers with support for input type color)
+  * Update to Angular 2.4.1 and other npm packages
+  * Update jQuery to 3.3.1 and remove it from package.json
+  * Update to materialize.css 0.97.7
 
 0.58 / 2016-09-24
 ==================
