@@ -39,7 +39,7 @@ export class LabelComponent {
 
   colorChanged(event) {
     this.isEditingColor = false;
-    this.saveChangedColor(event.srcElement.value);
+    this.saveChangedColor(event.currentTarget.value);
     this.hideActions();
   }
 
