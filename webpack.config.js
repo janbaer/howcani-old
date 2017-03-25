@@ -2,6 +2,7 @@
 
 const path = require('path');
 const webpack = require('webpack');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -19,7 +20,11 @@ module.exports = {
     ),
     new webpack.optimize.CommonsChunkPlugin({ name: "vendor", filename:"vendor.js"}),
     new webpack.DefinePlugin({ ENVIRONMENT: JSON.stringify('development') }),
-    new webpack.ProgressPlugin()
+    new webpack.ProgressPlugin(),
+    new CopyWebpackPlugin([
+      { from: './src/service-worker.js', to: path.resolve(__dirname, './build') },
+      { from: './node_modules/sw-toolbox/sw-toolbox.js', to: path.resolve(__dirname, './build/scripts/sw-toolbox.js') }
+    ])
   ],
 
   context: process.cwd(),
