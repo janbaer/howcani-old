@@ -31,7 +31,7 @@
     "spyOn": false,
     "Materialize": false,
     "async": false,
-    "ENVIRONMENT": true
+    "ENVIRONMENT": tru,
   },
 
   "ecmaFeatures": {
