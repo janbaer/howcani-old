@@ -1,7 +1,10 @@
-0.60 / 2017-xx-xx
+0.60 / 2017-03-26
 ==================
 
   * Update to webpack 2
+  * Use yarn for install npm packages
+  * Use ServiceWorker for beeing able to view the data offline when using a browser which is
+  supporting it
 
 0.59 / 2017-01-28
 ==================
