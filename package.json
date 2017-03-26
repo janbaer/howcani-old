@@ -70,7 +70,6 @@
     "gulp-changed": "2.0.0",
     "gulp-cssnano": "2.1.2",
     "gulp-eslint": "3.0.1",
-    "gulp-git": "1.12.0",
     "gulp-if": "2.0.2",
     "gulp-inject": "4.2.0",
     "gulp-less": "3.3.0",
