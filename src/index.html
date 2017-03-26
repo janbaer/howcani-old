@@ -38,6 +38,16 @@
         }
       }, false);
     }, false);
+    
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./service-worker.js')
+        .then(reg => {
+          console.log('Serviceworker registration was succeeded for scope: ', reg.scope);
+        })
+        .catch(error => {
+          console.error('Registration of serviceWorker was failed with error', error);
+        });
+    }
   </script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
