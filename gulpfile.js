@@ -20,7 +20,6 @@ const miniLr = require('mini-lr');
 const minimist = require('minimist');
 
 const karma = require('./tasks/karma.js');
-require('./tasks/deploy.js');
 
 const sourceFolder = 'src';
 const source = ['src/**/*.html', '!src/**/*.tpl.html'];

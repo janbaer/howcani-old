@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - "6.0.0"
+  - "6.10.1"
 
 branches:
   only:
@@ -8,8 +8,8 @@ branches:
     - /^\d\.\d+$/
 
 install:
+  - npm install -g yarn gulp
   - npm install
-  - npm install -g gulp
 
 before_script:
 
