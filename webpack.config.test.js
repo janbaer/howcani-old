@@ -6,7 +6,7 @@ const webpackConfig = require('./webpack.config.js');
 
 webpackConfig.plugins = [
   new webpack.ContextReplacementPlugin(
-    /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
+    /angular(\\|\/)core(\\|\/)@angular/,
     path.join(process.cwd(), 'src')
   ),
   new webpack.DefinePlugin({ ENVIRONMENT: JSON.stringify('test') })
