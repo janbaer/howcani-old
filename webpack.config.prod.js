@@ -7,7 +7,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 webpackConfig.plugins = [
   new webpack.ContextReplacementPlugin(
-    /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
+    /angular(\\|\/)core(\\|\/)@angular/,
     path.join(process.cwd(), 'src')
   ),
   new webpack.optimize.CommonsChunkPlugin({ name: "vendor", filename:"vendor.js"}),
