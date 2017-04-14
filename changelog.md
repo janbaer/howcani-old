@@ -1,3 +1,8 @@
+0.63 / 2017-04-14
+==================
+
+  * Improve the visualization of the columns for desktop and large desktops
+
 0.62 / 2017-04-10
 ==================
 
