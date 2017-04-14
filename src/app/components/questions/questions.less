@@ -1,25 +1,21 @@
 .QuestionsList-container {
-  flex: 1;
   padding: 10px;
   overflow: auto;
-  display: flex;
-  flex-wrap: wrap;
+
+  @media @screen-desktops {
+    columns: 2;
+  }
+
+  @media @screen-large-desktops {
+    columns: 3;
+  }
 }
 
 .Question-container {
   width: 100%;
-
-  @media @screen-desktops {
-    width: 50%;
-
-    &:nth-child(odd) {
-      padding-right: 5px;
-    }
-
-    &:nth-child(2n) {
-      padding-left: 5px;
-    }
-  }
+  break-inside: avoid;
+  page-break-inside: avoid;
+  -webkit-column-break-inside: avoid;
 }
 
 .Preloader-container, .LoadMoreLink-container {
