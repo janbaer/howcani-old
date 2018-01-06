@@ -1,3 +1,13 @@
+0.65 / 2018-01-06
+==================
+
+  * Securityupdate because of an security issue with moment
+
+0.64 / 2018-01-06
+==================
+
+  * Securityupdate because of an security issue with the Marked package
+
 0.63 / 2017-04-14
 ==================
 
