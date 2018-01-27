@@ -1,3 +1,8 @@
+0.67 / 2018-01-27
+=================
+
+  * Add Google Tag Manager since I would like to know if somebody else than me is using this webpage
+
 0.65 / 2018-01-06
 ==================
 
