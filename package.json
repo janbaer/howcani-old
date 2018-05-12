@@ -1,6 +1,6 @@
 {
   "name": "howcani",
-  "version": "0.67.0",
+  "version": "0.69.0",
   "main": "",
   "scripts": {
     "start": "gulp serve",
