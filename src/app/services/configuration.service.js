@@ -18,8 +18,8 @@ export class ConfigurationService {
 
   isProduction = () => ENVIRONMENT === 'production';
 
-  get webApiBaseUrl() {
-    return this.isProduction() ? 'https://howcani-api.herokuapp.com' : 'http://localhost:8080';
+  get oauthLoginUrl() {
+    return this.isProduction() ? 'https://github-oauth-bridge.now.sh/login?clientId=a2e8b31d5208fcd22172' : 'http://localhost:8080/login?clientId=22b411052b6b16a65c8d';
   }
 
   get user() {

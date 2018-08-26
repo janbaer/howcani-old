@@ -24,8 +24,7 @@ export class AuthService {
   }
 
   login() {
-    const webApiLoginUrl = `${this.configuration.webApiBaseUrl}/login`;
-    window.location.href = webApiLoginUrl;
+    window.location.href = this.configuration.oauthLoginUrl;
   }
 
   logout() {
