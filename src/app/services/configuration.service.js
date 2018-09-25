@@ -11,7 +11,7 @@ export class ConfigurationService {
     this.onProjectChanged = new EventEmitter();
 
     this.defaultProject = {
-      user: 'howcani-project',
+      user: 'janbaer',
       repository: 'howcani-data'
     };
   }
@@ -19,7 +19,8 @@ export class ConfigurationService {
   isProduction = () => ENVIRONMENT === 'production';
 
   get oauthLoginUrl() {
-    return this.isProduction() ? 'https://github-oauth-bridge.now.sh/login?clientId=a2e8b31d5208fcd22172' : 'http://localhost:8080/login?clientId=22b411052b6b16a65c8d';
+    const clientId = this.isProduction() ? '82a001ac3b1f5f2aa7ff' : 'c5571ab869190bdc5f33';
+    return `https://github-oauth-bridge.now.sh/login?clientId=${clientId}`;
   }
 
   get user() {

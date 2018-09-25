@@ -1,9 +1,5 @@
 # HowCanI
 
-[![Dependency Status](https://david-dm.org/howcani-project/howcani.svg)](https://david-dm.org/howcani-project/howcani)
-[![devDependency Status](https://david-dm.org/howcani-project/howcani/dev-status.svg)](https://david-dm.org/howcani-project/howcani#info=devDependencies)
-[![Build Status](https://travis-ci.org/howcani-project/howcani.svg?branch=master)](https://travis-ci.org/howcani-project/howcani)
-
 This repository contains the source code for our project **HowCanI**.
 It's a simple Webapplication for frequently asked questions.
 
@@ -11,7 +7,7 @@ This project is based on the [angular-es6-starter](https://github.com/blacksonic
 
 ## Gulp tasks
 
-- serve (default) - starts the local webserver on port 3000
+- serve (default) - starts the local webserver on port 4000
 - serve --port=3001 --lrport=123456 - starts the local webserver on the given port and listen on the give livereloadport
 - test - starts the karma server and stays in a watch mode
 - test-ci - starts the karma server, executes the tests and finish

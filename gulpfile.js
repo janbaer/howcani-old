@@ -8,29 +8,28 @@ const less = require('gulp-less');
 const sourcemaps = require('gulp-sourcemaps');
 const inject = require('gulp-inject');
 const webpack = require('webpack');
-const manifest = require('gulp-manifest');
 const autoprefixer = require('gulp-autoprefixer');
 const cssnano = require('gulp-cssnano');
 const plumber = require('gulp-plumber');
 const gulpif = require('gulp-if');
 const runSequence = require('run-sequence');
 const size = require('gulp-size');
-const del = require('del');
 const miniLr = require('mini-lr');
-const minimist = require('minimist');
 
 const karma = require('./tasks/karma.js');
 
 const sourceFolder = 'src';
 const source = ['src/**/*.html', '!src/**/*.tpl.html'];
-const destinationFolder = 'build';
+const buildFolderName = 'build';
 let isProduction = false;
 
-const args = minimist(process.argv.slice(2));
-const versionTag = args.tag;
-const port = args.port || 3000;
-const liveReloadPort = args.lrport || 35729;
+const port = 4000;
+const liveReloadPort = 35729;
 const liveReload = miniLr();
+
+const exec = require('execa');
+
+const packageFile = require('./package.json');
 
 function notifyChanged(files) {
   liveReload.changed({
@@ -45,9 +44,9 @@ function buildWithWebPack(configFile, singleRun, callback) {
   let firstRun = true;
 
   const callbackOnBuild = function(err, stats) {
-      if (err) {
-        throw new util.PluginError('webpack:error', err);
-      }
+    if (err) {
+      throw new util.PluginError('webpack:error', err);
+    }
 
     const statistics = stats.toJson({
       children: false,
@@ -92,19 +91,19 @@ gulp.task('copyAndWatch', () => {
 
   gulp.src(source, { base: sourceFolder })
     .pipe(clientWatch)
-    .pipe(gulp.dest(destinationFolder));
+    .pipe(gulp.dest(buildFolderName));
 });
 
 gulp.task('copy', () => {
   gulp.src(source, { base: sourceFolder })
-    .pipe(gulp.dest(destinationFolder));
+    .pipe(gulp.dest(buildFolderName));
 });
 
 gulp.task('copy:assets', () => {
   gulp.src(['assets/CNAME'])
-    .pipe(gulp.dest(destinationFolder));
+    .pipe(gulp.dest(buildFolderName));
   gulp.src(['assets/images/**/*.*'])
-    .pipe(gulp.dest(destinationFolder + '/images'));
+    .pipe(gulp.dest(buildFolderName + '/images'));
 });
 
 gulp.task('build:prod', (done) => {
@@ -144,12 +143,8 @@ gulp.task('styles', function () {
     .pipe(gulpif(isProduction, autoprefixer({ browsers: ['> 5%', 'last 2 versions'] })))
     .pipe(cssnano())
     .pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest(destinationFolder + '/styles'))
+    .pipe(gulp.dest(buildFolderName + '/styles'))
     .pipe(size());
-});
-
-gulp.task('clean', () => {
-  return del([destinationFolder]);
 });
 
 gulp.task('serve:dev', (done) => {
@@ -172,32 +167,13 @@ gulp.task('serve:prod', (done) => {
   );
 });
 
-gulp.task('buildAndDeploy', (done) => {
-  if (versionTag === undefined || versionTag.length === 0) {
-    util.log(util.colors.magenta('No tag specified, nothing will be deployed'));
-    done();
-    return;
-  }
-
-  util.log(util.colors.green(`Starting deployment for version ${versionTag}`));
-
-  isProduction = true;
-  runSequence(
-    'clean',
-    ['build:prod', 'copy', 'copy:assets', 'styles'],
-    'manifest',
-    'deploy',
-    done
-  );
-});
-
 gulp.task('live-server', () => {
   const gls = require('gulp-live-server');
 
-  const server = gls([gls.script, destinationFolder, port], undefined, liveReloadPort);
+  const server = gls([gls.script, buildFolderName, port], undefined, liveReloadPort);
   server.start();
 
-  gulp.watch([destinationFolder + '/**/*.**'], function (file) {
+  gulp.watch([buildFolderName + '/**/*.**'], function (file) {
     server.notify.apply(server, [file]);
   });
 });
@@ -207,24 +183,6 @@ gulp.task('lint', () => {
     .src([sourceFolder + '/**/*.js'])
     .pipe($.eslint())
     .pipe($.eslint.format());
-});
-
-gulp.task('manifest', () => {
-  gulp.src(['build/**/*', '!build/**/*.*.map'], { base: './build/' })
-    .pipe(manifest({
-      hash: true,
-      preferOnline: false,
-      network: ['*'],
-      cache: [
-        'https://fonts.googleapis.com/icon?family=Material+Icons',
-        'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css',
-        'https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.js',
-        'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js'
-      ],
-      filename: 'app-cache.manifest',
-      exclude: 'app-cache.manifest'
-    }))
-    .pipe(gulp.dest('build'));
 });
 
 gulp.task('watch', () => {
@@ -237,6 +195,23 @@ gulp.task('test-watch', karma(false));
 
 gulp.task('test-ci', function(done) {
   runSequence('lint', 'test-once', done);
+});
+
+gulp.task('publish', done => {
+  console.log('Deploy version', packageFile.version);
+  exec('./deploy.sh', [`${packageFile.version}`])
+    .then(() => done());
+});
+
+gulp.task('deploy', done => {
+  runSequence(
+    'build:prod',
+    'copy',
+    'copy:assets',
+    'styles',
+    'publish',
+    done
+  );
 });
 
 gulp.task('test', (done) => {

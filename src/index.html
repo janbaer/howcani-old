@@ -23,33 +23,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-113182984-1"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-
-    if (!window.location.host.startsWith('localhost')) {
-      gtag('js', new Date());
-      gtag('config', 'UA-113182984-1', { 'anonymize_ip': true });
-    }
-  </script>
 </head>
 <body>
   <howcani-app>Loading...</howcani-app>
 
   <script>
-    window.addEventListener('load', function(e) {
-      window.applicationCache.addEventListener('updateready', function(e) {
-        if (window.applicationCache.status == window.applicationCache.UPDATEREADY) {
-          // Browser downloaded a new app cache.
-          if (confirm('We have deployed a new version of HowCanI! Do you want to use it now?')) {
-            window.location.reload();
-          }
-        }
-      }, false);
-    }, false);
-    
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('./service-worker.js')
         .then(reg => {
