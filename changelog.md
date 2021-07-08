@@ -1,4 +1,8 @@
-0.80 / 2018-09-23
+0.71 / 2021-07-08
+=================
+* Change url for Oauth2 autorization
+
+0.70 / 2018-09-23
 ================
 
   * Move HowCani.eu project to my howcani.janbaer.de

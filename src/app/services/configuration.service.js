@@ -20,7 +20,7 @@ export class ConfigurationService {
 
   get oauthLoginUrl() {
     const clientId = this.isProduction() ? '82a001ac3b1f5f2aa7ff' : 'c5571ab869190bdc5f33';
-    return `https://github-oauth-bridge.now.sh/login?clientId=${clientId}`;
+    return `https://github-oauth-bridge.jan-baer.vercel.app/login?clientId=${clientId}`;
   }
 
   get user() {
